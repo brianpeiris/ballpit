@@ -88,6 +88,7 @@ class MainScene extends Scene3D {
       color: new THREE.Color('red'),
       light: null,
       palmPosition: null,
+      grabStrength: null,
       keys: {
         KeyW: false,
         KeyS: false,
@@ -102,11 +103,14 @@ class MainScene extends Scene3D {
 
   async create() {
     window.scene = this;
-    //const warp = await this.warpSpeed("-ground", "-light", "orbitControls", "-sky");
+    // const warp = await this.warpSpeed("-ground", "-light", "orbitControls", "-sky");
     this.camera.position.set(0, 0, 20);
     this.camera.rotation.set(0, 0, 0);
     //warp.orbitControls.update();
 
+    const rectLight = new THREE.RectAreaLight('white', 0.3, 3, 4)
+    rectLight.position.z = 1.5;
+    this.scene.add(rectLight);
 
     //this.scene.add(new THREE.AmbientLight('white', 0.2));
 
@@ -145,7 +149,7 @@ class MainScene extends Scene3D {
     this.state.light = pointLight;
 
     const pointSize = 0.12
-    const points = new THREE.InstancedMesh(new THREE.SphereGeometry(pointSize, 32, 16), new THREE.MeshStandardMaterial({metalness: 0, roughness: 0.3}), NUM_POINTS);
+    const points = new THREE.InstancedMesh(new THREE.SphereGeometry(pointSize, 32, 16), new THREE.MeshStandardMaterial({metalness: 0.0, roughness: 0.2}), NUM_POINTS);
     points.castShadow= true;
     points.receiveShadow= true;
     this.scene.add(points);
@@ -166,8 +170,10 @@ class MainScene extends Scene3D {
       if (frame.hands.length && frame.hands[0].valid) {
         this.state.player.body.setCollisionFlags(collisionFlags.kinematic);
         this.state.palmPosition = frame.hands[0].palmPosition;
+        this.state.grabStrength = frame.hands[0].grabStrength;
       } else {
         this.state.palmPosition = null;
+        this.state.grabStrength = null;
       }
     });
 
@@ -187,6 +193,7 @@ class MainScene extends Scene3D {
     const matrix = new THREE.Matrix4();
     const leapScale = 1/50;
     const leapOffset = [0, -5, 0];
+    const vec = new THREE.Vector3();
     return (time, delta) => {
       stats.update();
 
@@ -223,6 +230,21 @@ class MainScene extends Scene3D {
         const origin = transform.getOrigin();
         matrix.makeTranslation(origin.x(), origin.y(), origin.z());
         this.state.points.setMatrixAt(i, matrix);
+
+        const grabStrength = this.state.grabStrength;
+        const repel = 0.1;
+        const attract = 0.9;
+        if (grabStrength !== null && (grabStrength < repel || grabStrength > attract)) {
+          vec.set(origin.x(), origin.y(), origin.z());
+          vec.sub(this.state.player.position);
+          vec.normalize();
+          if (this.state.grabStrength > attract) {
+            vec.multiplyScalar(map(this.state.grabStrength, attract, 1, 0, -0.5));
+          } else if(this.state.grabStrength < repel) {
+            vec.multiplyScalar(map(this.state.grabStrength, repel, 0, 0, 0.5));
+          } 
+          this.state.pointBodies[i].applyCentralForce(vec.x, vec.y, vec.z);
+        }
       }
       this.state.points.instanceMatrix.needsUpdate = true;
 
