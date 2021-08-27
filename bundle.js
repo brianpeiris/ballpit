@@ -6,7 +6,12 @@
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
   var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
-  var __commonJS = (cb, mod) => function __require() {
+  var __require = (x) => {
+    if (typeof require !== "undefined")
+      return require(x);
+    throw new Error('Dynamic require of "' + x + '" is not supported');
+  };
+  var __commonJS = (cb, mod) => function __require2() {
     return mod || (0, cb[Object.keys(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
   var __export = (target, all) => {
@@ -602,22 +607,22 @@
             })();
           },
           function(module2, exports2) {
-            var Vector6 = {};
-            module2.exports = Vector6;
+            var Vector7 = {};
+            module2.exports = Vector7;
             (function() {
-              Vector6.create = function(x, y) {
+              Vector7.create = function(x, y) {
                 return { x: x || 0, y: y || 0 };
               };
-              Vector6.clone = function(vector) {
+              Vector7.clone = function(vector) {
                 return { x: vector.x, y: vector.y };
               };
-              Vector6.magnitude = function(vector) {
+              Vector7.magnitude = function(vector) {
                 return Math.sqrt(vector.x * vector.x + vector.y * vector.y);
               };
-              Vector6.magnitudeSquared = function(vector) {
+              Vector7.magnitudeSquared = function(vector) {
                 return vector.x * vector.x + vector.y * vector.y;
               };
-              Vector6.rotate = function(vector, angle, output) {
+              Vector7.rotate = function(vector, angle, output) {
                 var cos = Math.cos(angle), sin = Math.sin(angle);
                 if (!output)
                   output = {};
@@ -626,7 +631,7 @@
                 output.x = x;
                 return output;
               };
-              Vector6.rotateAbout = function(vector, angle, point, output) {
+              Vector7.rotateAbout = function(vector, angle, point, output) {
                 var cos = Math.cos(angle), sin = Math.sin(angle);
                 if (!output)
                   output = {};
@@ -635,65 +640,65 @@
                 output.x = x;
                 return output;
               };
-              Vector6.normalise = function(vector) {
-                var magnitude = Vector6.magnitude(vector);
+              Vector7.normalise = function(vector) {
+                var magnitude = Vector7.magnitude(vector);
                 if (magnitude === 0)
                   return { x: 0, y: 0 };
                 return { x: vector.x / magnitude, y: vector.y / magnitude };
               };
-              Vector6.dot = function(vectorA, vectorB) {
+              Vector7.dot = function(vectorA, vectorB) {
                 return vectorA.x * vectorB.x + vectorA.y * vectorB.y;
               };
-              Vector6.cross = function(vectorA, vectorB) {
+              Vector7.cross = function(vectorA, vectorB) {
                 return vectorA.x * vectorB.y - vectorA.y * vectorB.x;
               };
-              Vector6.cross3 = function(vectorA, vectorB, vectorC) {
+              Vector7.cross3 = function(vectorA, vectorB, vectorC) {
                 return (vectorB.x - vectorA.x) * (vectorC.y - vectorA.y) - (vectorB.y - vectorA.y) * (vectorC.x - vectorA.x);
               };
-              Vector6.add = function(vectorA, vectorB, output) {
+              Vector7.add = function(vectorA, vectorB, output) {
                 if (!output)
                   output = {};
                 output.x = vectorA.x + vectorB.x;
                 output.y = vectorA.y + vectorB.y;
                 return output;
               };
-              Vector6.sub = function(vectorA, vectorB, output) {
+              Vector7.sub = function(vectorA, vectorB, output) {
                 if (!output)
                   output = {};
                 output.x = vectorA.x - vectorB.x;
                 output.y = vectorA.y - vectorB.y;
                 return output;
               };
-              Vector6.mult = function(vector, scalar) {
+              Vector7.mult = function(vector, scalar) {
                 return { x: vector.x * scalar, y: vector.y * scalar };
               };
-              Vector6.div = function(vector, scalar) {
+              Vector7.div = function(vector, scalar) {
                 return { x: vector.x / scalar, y: vector.y / scalar };
               };
-              Vector6.perp = function(vector, negate) {
+              Vector7.perp = function(vector, negate) {
                 negate = negate === true ? -1 : 1;
                 return { x: negate * -vector.y, y: negate * vector.x };
               };
-              Vector6.neg = function(vector) {
+              Vector7.neg = function(vector) {
                 return { x: -vector.x, y: -vector.y };
               };
-              Vector6.angle = function(vectorA, vectorB) {
+              Vector7.angle = function(vectorA, vectorB) {
                 return Math.atan2(vectorB.y - vectorA.y, vectorB.x - vectorA.x);
               };
-              Vector6._temp = [
-                Vector6.create(),
-                Vector6.create(),
-                Vector6.create(),
-                Vector6.create(),
-                Vector6.create(),
-                Vector6.create()
+              Vector7._temp = [
+                Vector7.create(),
+                Vector7.create(),
+                Vector7.create(),
+                Vector7.create(),
+                Vector7.create(),
+                Vector7.create()
               ];
             })();
           },
           function(module2, exports2, __webpack_require__) {
             var Vertices2 = {};
             module2.exports = Vertices2;
-            var Vector6 = __webpack_require__(2);
+            var Vector7 = __webpack_require__(2);
             var Common = __webpack_require__(0);
             (function() {
               Vertices2.create = function(points, body) {
@@ -721,11 +726,11 @@
                 var area2 = Vertices2.area(vertices, true), centre = { x: 0, y: 0 }, cross, temp, j;
                 for (var i = 0; i < vertices.length; i++) {
                   j = (i + 1) % vertices.length;
-                  cross = Vector6.cross(vertices[i], vertices[j]);
-                  temp = Vector6.mult(Vector6.add(vertices[i], vertices[j]), cross);
-                  centre = Vector6.add(centre, temp);
+                  cross = Vector7.cross(vertices[i], vertices[j]);
+                  temp = Vector7.mult(Vector7.add(vertices[i], vertices[j]), cross);
+                  centre = Vector7.add(centre, temp);
                 }
-                return Vector6.div(centre, 6 * area2);
+                return Vector7.div(centre, 6 * area2);
               };
               Vertices2.mean = function(vertices) {
                 var average = { x: 0, y: 0 };
@@ -733,7 +738,7 @@
                   average.x += vertices[i].x;
                   average.y += vertices[i].y;
                 }
-                return Vector6.div(average, vertices.length);
+                return Vector7.div(average, vertices.length);
               };
               Vertices2.area = function(vertices, signed) {
                 var area2 = 0, j = vertices.length - 1;
@@ -749,8 +754,8 @@
                 var numerator = 0, denominator = 0, v = vertices, cross, j;
                 for (var n = 0; n < v.length; n++) {
                   j = (n + 1) % v.length;
-                  cross = Math.abs(Vector6.cross(v[j], v[n]));
-                  numerator += cross * (Vector6.dot(v[j], v[j]) + Vector6.dot(v[j], v[n]) + Vector6.dot(v[n], v[n]));
+                  cross = Math.abs(Vector7.cross(v[j], v[n]));
+                  numerator += cross * (Vector7.dot(v[j], v[j]) + Vector7.dot(v[j], v[n]) + Vector7.dot(v[n], v[n]));
                   denominator += cross;
                 }
                 return mass / 6 * (numerator / denominator);
@@ -797,7 +802,7 @@
                 var vertex, delta;
                 for (var i = 0; i < vertices.length; i++) {
                   vertex = vertices[i];
-                  delta = Vector6.sub(vertex, point);
+                  delta = Vector7.sub(vertex, point);
                   vertices[i].x = point.x + delta.x * scaleX;
                   vertices[i].y = point.y + delta.y * scaleY;
                 }
@@ -819,15 +824,15 @@
                     newVertices.push(vertex);
                     continue;
                   }
-                  var prevNormal = Vector6.normalise({
+                  var prevNormal = Vector7.normalise({
                     x: vertex.y - prevVertex.y,
                     y: prevVertex.x - vertex.x
                   });
-                  var nextNormal = Vector6.normalise({
+                  var nextNormal = Vector7.normalise({
                     x: nextVertex.y - vertex.y,
                     y: vertex.x - nextVertex.x
                   });
-                  var diagonalRadius = Math.sqrt(2 * Math.pow(currentRadius, 2)), radiusVector = Vector6.mult(Common.clone(prevNormal), currentRadius), midNormal = Vector6.normalise(Vector6.mult(Vector6.add(prevNormal, nextNormal), 0.5)), scaledVertex = Vector6.sub(vertex, Vector6.mult(midNormal, diagonalRadius));
+                  var diagonalRadius = Math.sqrt(2 * Math.pow(currentRadius, 2)), radiusVector = Vector7.mult(Common.clone(prevNormal), currentRadius), midNormal = Vector7.normalise(Vector7.mult(Vector7.add(prevNormal, nextNormal), 0.5)), scaledVertex = Vector7.sub(vertex, Vector7.mult(midNormal, diagonalRadius));
                   var precision = quality;
                   if (quality === -1) {
                     precision = Math.pow(currentRadius, 0.32) * 1.75;
@@ -835,9 +840,9 @@
                   precision = Common.clamp(precision, qualityMin, qualityMax);
                   if (precision % 2 === 1)
                     precision += 1;
-                  var alpha = Math.acos(Vector6.dot(prevNormal, nextNormal)), theta = alpha / precision;
+                  var alpha = Math.acos(Vector7.dot(prevNormal, nextNormal)), theta = alpha / precision;
                   for (var j = 0; j < precision; j++) {
-                    newVertices.push(Vector6.add(Vector6.rotate(radiusVector, theta * j), scaledVertex));
+                    newVertices.push(Vector7.add(Vector7.rotate(radiusVector, theta * j), scaledVertex));
                   }
                 }
                 return newVertices;
@@ -845,7 +850,7 @@
               Vertices2.clockwiseSort = function(vertices) {
                 var centre = Vertices2.mean(vertices);
                 vertices.sort(function(vertexA, vertexB) {
-                  return Vector6.angle(centre, vertexA) - Vector6.angle(centre, vertexB);
+                  return Vector7.angle(centre, vertexA) - Vector7.angle(centre, vertexB);
                 });
                 return vertices;
               };
@@ -882,14 +887,14 @@
                 });
                 for (i = 0; i < vertices.length; i += 1) {
                   vertex = vertices[i];
-                  while (lower.length >= 2 && Vector6.cross3(lower[lower.length - 2], lower[lower.length - 1], vertex) <= 0) {
+                  while (lower.length >= 2 && Vector7.cross3(lower[lower.length - 2], lower[lower.length - 1], vertex) <= 0) {
                     lower.pop();
                   }
                   lower.push(vertex);
                 }
                 for (i = vertices.length - 1; i >= 0; i -= 1) {
                   vertex = vertices[i];
-                  while (upper.length >= 2 && Vector6.cross3(upper[upper.length - 2], upper[upper.length - 1], vertex) <= 0) {
+                  while (upper.length >= 2 && Vector7.cross3(upper[upper.length - 2], upper[upper.length - 1], vertex) <= 0) {
                     upper.pop();
                   }
                   upper.push(vertex);
@@ -1228,7 +1233,7 @@
             var Body2 = {};
             module2.exports = Body2;
             var Vertices2 = __webpack_require__(3);
-            var Vector6 = __webpack_require__(2);
+            var Vector7 = __webpack_require__(2);
             var Sleeping = __webpack_require__(7);
             var Render2 = __webpack_require__(16);
             var Common = __webpack_require__(0);
@@ -1318,7 +1323,7 @@
                 options = options || {};
                 Body2.set(body, {
                   bounds: body.bounds || Bounds.create(body.vertices),
-                  positionPrev: body.positionPrev || Vector6.clone(body.position),
+                  positionPrev: body.positionPrev || Vector7.clone(body.position),
                   anglePrev: body.anglePrev || body.angle,
                   vertices: body.vertices,
                   parts: body.parts || [body],
@@ -1514,7 +1519,7 @@
                 }
               };
               Body2.setPosition = function(body, position) {
-                var delta = Vector6.sub(position, body.position);
+                var delta = Vector7.sub(position, body.position);
                 body.positionPrev.x += delta.x;
                 body.positionPrev.y += delta.y;
                 for (var i = 0; i < body.parts.length; i++) {
@@ -1535,7 +1540,7 @@
                   Axes.rotate(part.axes, delta);
                   Bounds.update(part.bounds, part.vertices, body.velocity);
                   if (i > 0) {
-                    Vector6.rotateAbout(part.position, delta, body.position, part.position);
+                    Vector7.rotateAbout(part.position, delta, body.position, part.position);
                   }
                 }
               };
@@ -1544,7 +1549,7 @@
                 body.positionPrev.y = body.position.y - velocity.y;
                 body.velocity.x = velocity.x;
                 body.velocity.y = velocity.y;
-                body.speed = Vector6.magnitude(body.velocity);
+                body.speed = Vector7.magnitude(body.velocity);
               };
               Body2.setAngularVelocity = function(body, velocity) {
                 body.anglePrev = body.angle - velocity;
@@ -1552,7 +1557,7 @@
                 body.angularSpeed = Math.abs(body.angularVelocity);
               };
               Body2.translate = function(body, translation) {
-                Body2.setPosition(body, Vector6.add(body.position, translation));
+                Body2.setPosition(body, Vector7.add(body.position, translation));
               };
               Body2.rotate = function(body, rotation, point) {
                 if (!point) {
@@ -1613,7 +1618,7 @@
                 body.angularVelocity = (body.angle - body.anglePrev) * frictionAir * correction + body.torque / body.inertia * deltaTimeSquared;
                 body.anglePrev = body.angle;
                 body.angle += body.angularVelocity;
-                body.speed = Vector6.magnitude(body.velocity);
+                body.speed = Vector7.magnitude(body.velocity);
                 body.angularSpeed = Math.abs(body.angularVelocity);
                 for (var i = 0; i < body.parts.length; i++) {
                   var part = body.parts[i];
@@ -1626,7 +1631,7 @@
                     Vertices2.rotate(part.vertices, body.angularVelocity, body.position);
                     Axes.rotate(part.axes, body.angularVelocity);
                     if (i > 0) {
-                      Vector6.rotateAbout(part.position, body.angularVelocity, body.position, part.position);
+                      Vector7.rotateAbout(part.position, body.angularVelocity, body.position, part.position);
                     }
                   }
                   Bounds.update(part.bounds, part.vertices, body.velocity);
@@ -1650,9 +1655,9 @@
                   properties.mass += mass;
                   properties.area += part.area;
                   properties.inertia += part.inertia;
-                  properties.centre = Vector6.add(properties.centre, Vector6.mult(part.position, mass));
+                  properties.centre = Vector7.add(properties.centre, Vector7.mult(part.position, mass));
                 }
-                properties.centre = Vector6.div(properties.centre, properties.mass);
+                properties.centre = Vector7.div(properties.centre, properties.mass);
                 return properties;
               };
             })();
@@ -1731,7 +1736,7 @@
             var Constraint = {};
             module2.exports = Constraint;
             var Vertices2 = __webpack_require__(3);
-            var Vector6 = __webpack_require__(2);
+            var Vector7 = __webpack_require__(2);
             var Sleeping = __webpack_require__(7);
             var Bounds = __webpack_require__(1);
             var Axes = __webpack_require__(10);
@@ -1746,7 +1751,7 @@
                   constraint.pointA = { x: 0, y: 0 };
                 if (constraint.bodyB && !constraint.pointB)
                   constraint.pointB = { x: 0, y: 0 };
-                var initialPointA = constraint.bodyA ? Vector6.add(constraint.bodyA.position, constraint.pointA) : constraint.pointA, initialPointB = constraint.bodyB ? Vector6.add(constraint.bodyB.position, constraint.pointB) : constraint.pointB, length = Vector6.magnitude(Vector6.sub(initialPointA, initialPointB));
+                var initialPointA = constraint.bodyA ? Vector7.add(constraint.bodyA.position, constraint.pointA) : constraint.pointA, initialPointB = constraint.bodyB ? Vector7.add(constraint.bodyB.position, constraint.pointB) : constraint.pointB, length = Vector7.magnitude(Vector7.sub(initialPointA, initialPointB));
                 constraint.length = typeof constraint.length !== "undefined" ? constraint.length : length;
                 constraint.id = constraint.id || Common.nextId();
                 constraint.label = constraint.label || "Constraint";
@@ -1805,30 +1810,30 @@
                 if (!bodyA && !bodyB)
                   return;
                 if (bodyA && !bodyA.isStatic) {
-                  Vector6.rotate(pointA, bodyA.angle - constraint.angleA, pointA);
+                  Vector7.rotate(pointA, bodyA.angle - constraint.angleA, pointA);
                   constraint.angleA = bodyA.angle;
                 }
                 if (bodyB && !bodyB.isStatic) {
-                  Vector6.rotate(pointB, bodyB.angle - constraint.angleB, pointB);
+                  Vector7.rotate(pointB, bodyB.angle - constraint.angleB, pointB);
                   constraint.angleB = bodyB.angle;
                 }
                 var pointAWorld = pointA, pointBWorld = pointB;
                 if (bodyA)
-                  pointAWorld = Vector6.add(bodyA.position, pointA);
+                  pointAWorld = Vector7.add(bodyA.position, pointA);
                 if (bodyB)
-                  pointBWorld = Vector6.add(bodyB.position, pointB);
+                  pointBWorld = Vector7.add(bodyB.position, pointB);
                 if (!pointAWorld || !pointBWorld)
                   return;
-                var delta = Vector6.sub(pointAWorld, pointBWorld), currentLength = Vector6.magnitude(delta);
+                var delta = Vector7.sub(pointAWorld, pointBWorld), currentLength = Vector7.magnitude(delta);
                 if (currentLength < Constraint._minLength) {
                   currentLength = Constraint._minLength;
                 }
-                var difference = (currentLength - constraint.length) / currentLength, stiffness = constraint.stiffness < 1 ? constraint.stiffness * timeScale : constraint.stiffness, force = Vector6.mult(delta, difference * stiffness), massTotal = (bodyA ? bodyA.inverseMass : 0) + (bodyB ? bodyB.inverseMass : 0), inertiaTotal = (bodyA ? bodyA.inverseInertia : 0) + (bodyB ? bodyB.inverseInertia : 0), resistanceTotal = massTotal + inertiaTotal, torque, share, normal, normalVelocity, relativeVelocity;
+                var difference = (currentLength - constraint.length) / currentLength, stiffness = constraint.stiffness < 1 ? constraint.stiffness * timeScale : constraint.stiffness, force = Vector7.mult(delta, difference * stiffness), massTotal = (bodyA ? bodyA.inverseMass : 0) + (bodyB ? bodyB.inverseMass : 0), inertiaTotal = (bodyA ? bodyA.inverseInertia : 0) + (bodyB ? bodyB.inverseInertia : 0), resistanceTotal = massTotal + inertiaTotal, torque, share, normal, normalVelocity, relativeVelocity;
                 if (constraint.damping) {
-                  var zero = Vector6.create();
-                  normal = Vector6.div(delta, currentLength);
-                  relativeVelocity = Vector6.sub(bodyB && Vector6.sub(bodyB.position, bodyB.positionPrev) || zero, bodyA && Vector6.sub(bodyA.position, bodyA.positionPrev) || zero);
-                  normalVelocity = Vector6.dot(normal, relativeVelocity);
+                  var zero = Vector7.create();
+                  normal = Vector7.div(delta, currentLength);
+                  relativeVelocity = Vector7.sub(bodyB && Vector7.sub(bodyB.position, bodyB.positionPrev) || zero, bodyA && Vector7.sub(bodyA.position, bodyA.positionPrev) || zero);
+                  normalVelocity = Vector7.dot(normal, relativeVelocity);
                 }
                 if (bodyA && !bodyA.isStatic) {
                   share = bodyA.inverseMass / massTotal;
@@ -1840,7 +1845,7 @@
                     bodyA.positionPrev.x -= constraint.damping * normal.x * normalVelocity * share;
                     bodyA.positionPrev.y -= constraint.damping * normal.y * normalVelocity * share;
                   }
-                  torque = Vector6.cross(pointA, force) / resistanceTotal * Constraint._torqueDampen * bodyA.inverseInertia * (1 - constraint.angularStiffness);
+                  torque = Vector7.cross(pointA, force) / resistanceTotal * Constraint._torqueDampen * bodyA.inverseInertia * (1 - constraint.angularStiffness);
                   bodyA.constraintImpulse.angle -= torque;
                   bodyA.angle -= torque;
                 }
@@ -1854,7 +1859,7 @@
                     bodyB.positionPrev.x += constraint.damping * normal.x * normalVelocity * share;
                     bodyB.positionPrev.y += constraint.damping * normal.y * normalVelocity * share;
                   }
-                  torque = Vector6.cross(pointB, force) / resistanceTotal * Constraint._torqueDampen * bodyB.inverseInertia * (1 - constraint.angularStiffness);
+                  torque = Vector7.cross(pointB, force) / resistanceTotal * Constraint._torqueDampen * bodyB.inverseInertia * (1 - constraint.angularStiffness);
                   bodyB.constraintImpulse.angle += torque;
                   bodyB.angle += torque;
                 }
@@ -1877,7 +1882,7 @@
                       Vertices2.rotate(part.vertices, impulse.angle, body.position);
                       Axes.rotate(part.axes, impulse.angle);
                       if (j > 0) {
-                        Vector6.rotateAbout(part.position, impulse.angle, body.position, part.position);
+                        Vector7.rotateAbout(part.position, impulse.angle, body.position, part.position);
                       }
                     }
                     Bounds.update(part.bounds, part.vertices, body.velocity);
@@ -1975,13 +1980,13 @@
           function(module2, exports2, __webpack_require__) {
             var Axes = {};
             module2.exports = Axes;
-            var Vector6 = __webpack_require__(2);
+            var Vector7 = __webpack_require__(2);
             var Common = __webpack_require__(0);
             (function() {
               Axes.fromVertices = function(vertices) {
                 var axes = {};
                 for (var i = 0; i < vertices.length; i++) {
-                  var j = (i + 1) % vertices.length, normal = Vector6.normalise({
+                  var j = (i + 1) % vertices.length, normal = Vector7.normalise({
                     x: vertices[j].y - vertices[i].y,
                     y: vertices[i].x - vertices[j].x
                   }), gradient = normal.y === 0 ? Infinity : normal.x / normal.y;
@@ -2010,7 +2015,7 @@
             var Common = __webpack_require__(0);
             var Body2 = __webpack_require__(6);
             var Bounds = __webpack_require__(1);
-            var Vector6 = __webpack_require__(2);
+            var Vector7 = __webpack_require__(2);
             (function() {
               Bodies2.rectangle = function(x, y, width, height, options) {
                 options = options || {};
@@ -2150,7 +2155,7 @@
                         var pav = partA.vertices, pbv = partB.vertices;
                         for (k = 0; k < partA.vertices.length; k++) {
                           for (z = 0; z < partB.vertices.length; z++) {
-                            var da = Vector6.magnitudeSquared(Vector6.sub(pav[(k + 1) % pav.length], pbv[z])), db = Vector6.magnitudeSquared(Vector6.sub(pav[k], pbv[(z + 1) % pbv.length]));
+                            var da = Vector7.magnitudeSquared(Vector7.sub(pav[(k + 1) % pav.length], pbv[z])), db = Vector7.magnitudeSquared(Vector7.sub(pav[k], pbv[(z + 1) % pbv.length]));
                             if (da < coincident_max_dist && db < coincident_max_dist) {
                               pav[k].isInternal = true;
                               pbv[z].isInternal = true;
@@ -2341,7 +2346,7 @@
             var SAT = {};
             module2.exports = SAT;
             var Vertices2 = __webpack_require__(3);
-            var Vector6 = __webpack_require__(2);
+            var Vector7 = __webpack_require__(2);
             (function() {
               SAT.collides = function(bodyA, bodyB, previousCollision) {
                 var overlapAB, overlapBA, minOverlap, collision, canReusePrevCol = false;
@@ -2388,7 +2393,7 @@
                 collision.parentB = collision.bodyB.parent;
                 bodyA = collision.bodyA;
                 bodyB = collision.bodyB;
-                if (Vector6.dot(minOverlap.axis, Vector6.sub(bodyB.position, bodyA.position)) < 0) {
+                if (Vector7.dot(minOverlap.axis, Vector7.sub(bodyB.position, bodyA.position)) < 0) {
                   collision.normal = {
                     x: minOverlap.axis.x,
                     y: minOverlap.axis.y
@@ -2399,7 +2404,7 @@
                     y: -minOverlap.axis.y
                   };
                 }
-                collision.tangent = Vector6.perp(collision.normal);
+                collision.tangent = Vector7.perp(collision.normal);
                 collision.penetration = collision.penetration || {};
                 collision.penetration.x = collision.normal.x * collision.depth;
                 collision.penetration.y = collision.normal.y * collision.depth;
@@ -2409,7 +2414,7 @@
                 if (Vertices2.contains(bodyA.vertices, verticesB[1]))
                   supports.push(verticesB[1]);
                 if (supports.length < 2) {
-                  var verticesA = SAT._findSupports(bodyB, bodyA, Vector6.neg(collision.normal));
+                  var verticesA = SAT._findSupports(bodyB, bodyA, Vector7.neg(collision.normal));
                   if (Vertices2.contains(bodyB.vertices, verticesA[0]))
                     supports.push(verticesA[0]);
                   if (supports.length < 2 && Vertices2.contains(bodyB.vertices, verticesA[1]))
@@ -2421,7 +2426,7 @@
                 return collision;
               };
               SAT._overlapAxes = function(verticesA, verticesB, axes) {
-                var projectionA = Vector6._temp[0], projectionB = Vector6._temp[1], result = { overlap: Number.MAX_VALUE }, overlap, axis;
+                var projectionA = Vector7._temp[0], projectionB = Vector7._temp[1], result = { overlap: Number.MAX_VALUE }, overlap, axis;
                 for (var i = 0; i < axes.length; i++) {
                   axis = axes[i];
                   SAT._projectToAxis(projectionA, verticesA, axis);
@@ -2440,9 +2445,9 @@
                 return result;
               };
               SAT._projectToAxis = function(projection, vertices, axis) {
-                var min = Vector6.dot(vertices[0], axis), max2 = min;
+                var min = Vector7.dot(vertices[0], axis), max2 = min;
                 for (var i = 1; i < vertices.length; i += 1) {
-                  var dot = Vector6.dot(vertices[i], axis);
+                  var dot = Vector7.dot(vertices[i], axis);
                   if (dot > max2) {
                     max2 = dot;
                   } else if (dot < min) {
@@ -2453,12 +2458,12 @@
                 projection.max = max2;
               };
               SAT._findSupports = function(bodyA, bodyB, normal) {
-                var nearestDistance = Number.MAX_VALUE, vertexToBody = Vector6._temp[0], vertices = bodyB.vertices, bodyAPosition = bodyA.position, distance, vertex, vertexA, vertexB;
+                var nearestDistance = Number.MAX_VALUE, vertexToBody = Vector7._temp[0], vertices = bodyB.vertices, bodyAPosition = bodyA.position, distance, vertex, vertexA, vertexB;
                 for (var i = 0; i < vertices.length; i++) {
                   vertex = vertices[i];
                   vertexToBody.x = vertex.x - bodyAPosition.x;
                   vertexToBody.y = vertex.y - bodyAPosition.y;
-                  distance = -Vector6.dot(normal, vertexToBody);
+                  distance = -Vector7.dot(normal, vertexToBody);
                   if (distance < nearestDistance) {
                     nearestDistance = distance;
                     vertexA = vertex;
@@ -2468,13 +2473,13 @@
                 vertex = vertices[prevIndex];
                 vertexToBody.x = vertex.x - bodyAPosition.x;
                 vertexToBody.y = vertex.y - bodyAPosition.y;
-                nearestDistance = -Vector6.dot(normal, vertexToBody);
+                nearestDistance = -Vector7.dot(normal, vertexToBody);
                 vertexB = vertex;
                 var nextIndex = (vertexA.index + 1) % vertices.length;
                 vertex = vertices[nextIndex];
                 vertexToBody.x = vertex.x - bodyAPosition.x;
                 vertexToBody.y = vertex.y - bodyAPosition.y;
-                distance = -Vector6.dot(normal, vertexToBody);
+                distance = -Vector7.dot(normal, vertexToBody);
                 if (distance < nearestDistance) {
                   vertexB = vertex;
                 }
@@ -2666,7 +2671,7 @@
             var Composite2 = __webpack_require__(5);
             var Bounds = __webpack_require__(1);
             var Events8 = __webpack_require__(4);
-            var Vector6 = __webpack_require__(2);
+            var Vector7 = __webpack_require__(2);
             var Mouse = __webpack_require__(12);
             (function() {
               var _requestAnimationFrame, _cancelAnimationFrame;
@@ -2870,9 +2875,9 @@
                   for (i = 0; i < allConstraints.length; i++) {
                     var constraint = allConstraints[i], bodyA = constraint.bodyA, bodyB = constraint.bodyB, pointAWorld = constraint.pointA, pointBWorld = constraint.pointB;
                     if (bodyA)
-                      pointAWorld = Vector6.add(bodyA.position, constraint.pointA);
+                      pointAWorld = Vector7.add(bodyA.position, constraint.pointA);
                     if (bodyB)
-                      pointBWorld = Vector6.add(bodyB.position, constraint.pointB);
+                      pointBWorld = Vector7.add(bodyB.position, constraint.pointB);
                     if (!pointAWorld || !pointBWorld)
                       continue;
                     if (Bounds.contains(render.bounds, pointAWorld) || Bounds.contains(render.bounds, pointBWorld))
@@ -3002,7 +3007,7 @@
                     continue;
                   var bodyA = constraint.bodyA, bodyB = constraint.bodyB, start, end;
                   if (bodyA) {
-                    start = Vector6.add(bodyA.position, constraint.pointA);
+                    start = Vector7.add(bodyA.position, constraint.pointA);
                   } else {
                     start = constraint.pointA;
                   }
@@ -3012,14 +3017,14 @@
                     c.closePath();
                   } else {
                     if (bodyB) {
-                      end = Vector6.add(bodyB.position, constraint.pointB);
+                      end = Vector7.add(bodyB.position, constraint.pointB);
                     } else {
                       end = constraint.pointB;
                     }
                     c.beginPath();
                     c.moveTo(start.x, start.y);
                     if (constraint.render.type === "spring") {
-                      var delta = Vector6.sub(end, start), normal = Vector6.perp(Vector6.normalise(delta)), coils = Math.ceil(Common.clamp(constraint.length / 5, 12, 20)), offset;
+                      var delta = Vector7.sub(end, start), normal = Vector7.perp(Vector7.normalise(delta)), coils = Math.ceil(Common.clamp(constraint.length / 5, 12, 20)), offset;
                       for (var j = 1; j < coils; j += 1) {
                         offset = j % 2 === 0 ? 1 : -1;
                         c.lineTo(start.x + delta.x * (j / coils) + normal.x * offset * 4, start.y + delta.y * (j / coils) + normal.y * offset * 4);
@@ -3661,7 +3666,7 @@
             var Resolver = {};
             module2.exports = Resolver;
             var Vertices2 = __webpack_require__(3);
-            var Vector6 = __webpack_require__(2);
+            var Vector7 = __webpack_require__(2);
             var Common = __webpack_require__(0);
             var Bounds = __webpack_require__(1);
             (function() {
@@ -3682,7 +3687,7 @@
                 }
               };
               Resolver.solvePosition = function(pairs, timeScale) {
-                var i, pair, collision, bodyA, bodyB, normal, bodyBtoA, contactShare, positionImpulse, contactCount = {}, tempA = Vector6._temp[0], tempB = Vector6._temp[1], tempC = Vector6._temp[2], tempD = Vector6._temp[3];
+                var i, pair, collision, bodyA, bodyB, normal, bodyBtoA, contactShare, positionImpulse, contactCount = {}, tempA = Vector7._temp[0], tempB = Vector7._temp[1], tempC = Vector7._temp[2], tempD = Vector7._temp[3];
                 for (i = 0; i < pairs.length; i++) {
                   pair = pairs[i];
                   if (!pair.isActive || pair.isSensor)
@@ -3691,8 +3696,8 @@
                   bodyA = collision.parentA;
                   bodyB = collision.parentB;
                   normal = collision.normal;
-                  bodyBtoA = Vector6.sub(Vector6.add(bodyB.positionImpulse, bodyB.position, tempA), Vector6.add(bodyA.positionImpulse, Vector6.sub(bodyB.position, collision.penetration, tempB), tempC), tempD);
-                  pair.separation = Vector6.dot(normal, bodyBtoA);
+                  bodyBtoA = Vector7.sub(Vector7.add(bodyB.positionImpulse, bodyB.position, tempA), Vector7.add(bodyA.positionImpulse, Vector7.sub(bodyB.position, collision.penetration, tempB), tempC), tempD);
+                  pair.separation = Vector7.dot(normal, bodyBtoA);
                 }
                 for (i = 0; i < pairs.length; i++) {
                   pair = pairs[i];
@@ -3731,7 +3736,7 @@
                     }
                     body.positionPrev.x += body.positionImpulse.x;
                     body.positionPrev.y += body.positionImpulse.y;
-                    if (Vector6.dot(body.positionImpulse, body.velocity) < 0) {
+                    if (Vector7.dot(body.positionImpulse, body.velocity) < 0) {
                       body.positionImpulse.x = 0;
                       body.positionImpulse.y = 0;
                     } else {
@@ -3742,7 +3747,7 @@
                 }
               };
               Resolver.preSolveVelocity = function(pairs) {
-                var i, j, pair, contacts, collision, bodyA, bodyB, normal, tangent, contact, contactVertex, normalImpulse, tangentImpulse, offset, impulse = Vector6._temp[0], tempA = Vector6._temp[1];
+                var i, j, pair, contacts, collision, bodyA, bodyB, normal, tangent, contact, contactVertex, normalImpulse, tangentImpulse, offset, impulse = Vector7._temp[0], tempA = Vector7._temp[1];
                 for (i = 0; i < pairs.length; i++) {
                   pair = pairs[i];
                   if (!pair.isActive || pair.isSensor)
@@ -3762,23 +3767,23 @@
                       impulse.x = normal.x * normalImpulse + tangent.x * tangentImpulse;
                       impulse.y = normal.y * normalImpulse + tangent.y * tangentImpulse;
                       if (!(bodyA.isStatic || bodyA.isSleeping)) {
-                        offset = Vector6.sub(contactVertex, bodyA.position, tempA);
+                        offset = Vector7.sub(contactVertex, bodyA.position, tempA);
                         bodyA.positionPrev.x += impulse.x * bodyA.inverseMass;
                         bodyA.positionPrev.y += impulse.y * bodyA.inverseMass;
-                        bodyA.anglePrev += Vector6.cross(offset, impulse) * bodyA.inverseInertia;
+                        bodyA.anglePrev += Vector7.cross(offset, impulse) * bodyA.inverseInertia;
                       }
                       if (!(bodyB.isStatic || bodyB.isSleeping)) {
-                        offset = Vector6.sub(contactVertex, bodyB.position, tempA);
+                        offset = Vector7.sub(contactVertex, bodyB.position, tempA);
                         bodyB.positionPrev.x -= impulse.x * bodyB.inverseMass;
                         bodyB.positionPrev.y -= impulse.y * bodyB.inverseMass;
-                        bodyB.anglePrev -= Vector6.cross(offset, impulse) * bodyB.inverseInertia;
+                        bodyB.anglePrev -= Vector7.cross(offset, impulse) * bodyB.inverseInertia;
                       }
                     }
                   }
                 }
               };
               Resolver.solveVelocity = function(pairs, timeScale) {
-                var timeScaleSquared = timeScale * timeScale, impulse = Vector6._temp[0], tempA = Vector6._temp[1], tempB = Vector6._temp[2], tempC = Vector6._temp[3], tempD = Vector6._temp[4], tempE = Vector6._temp[5];
+                var timeScaleSquared = timeScale * timeScale, impulse = Vector7._temp[0], tempA = Vector7._temp[1], tempB = Vector7._temp[2], tempC = Vector7._temp[3], tempD = Vector7._temp[4], tempE = Vector7._temp[5];
                 for (var i = 0; i < pairs.length; i++) {
                   var pair = pairs[i];
                   if (!pair.isActive || pair.isSensor)
@@ -3791,15 +3796,15 @@
                   bodyA.angularVelocity = bodyA.angle - bodyA.anglePrev;
                   bodyB.angularVelocity = bodyB.angle - bodyB.anglePrev;
                   for (var j = 0; j < contacts.length; j++) {
-                    var contact = contacts[j], contactVertex = contact.vertex, offsetA = Vector6.sub(contactVertex, bodyA.position, tempA), offsetB = Vector6.sub(contactVertex, bodyB.position, tempB), velocityPointA = Vector6.add(bodyA.velocity, Vector6.mult(Vector6.perp(offsetA), bodyA.angularVelocity), tempC), velocityPointB = Vector6.add(bodyB.velocity, Vector6.mult(Vector6.perp(offsetB), bodyB.angularVelocity), tempD), relativeVelocity = Vector6.sub(velocityPointA, velocityPointB, tempE), normalVelocity = Vector6.dot(normal, relativeVelocity);
-                    var tangentVelocity = Vector6.dot(tangent, relativeVelocity), tangentSpeed = Math.abs(tangentVelocity), tangentVelocityDirection = Common.sign(tangentVelocity);
+                    var contact = contacts[j], contactVertex = contact.vertex, offsetA = Vector7.sub(contactVertex, bodyA.position, tempA), offsetB = Vector7.sub(contactVertex, bodyB.position, tempB), velocityPointA = Vector7.add(bodyA.velocity, Vector7.mult(Vector7.perp(offsetA), bodyA.angularVelocity), tempC), velocityPointB = Vector7.add(bodyB.velocity, Vector7.mult(Vector7.perp(offsetB), bodyB.angularVelocity), tempD), relativeVelocity = Vector7.sub(velocityPointA, velocityPointB, tempE), normalVelocity = Vector7.dot(normal, relativeVelocity);
+                    var tangentVelocity = Vector7.dot(tangent, relativeVelocity), tangentSpeed = Math.abs(tangentVelocity), tangentVelocityDirection = Common.sign(tangentVelocity);
                     var normalImpulse = (1 + pair.restitution) * normalVelocity, normalForce = Common.clamp(pair.separation + normalVelocity, 0, 1) * Resolver._frictionNormalMultiplier;
                     var tangentImpulse = tangentVelocity, maxFriction = Infinity;
                     if (tangentSpeed > pair.friction * pair.frictionStatic * normalForce * timeScaleSquared) {
                       maxFriction = tangentSpeed;
                       tangentImpulse = Common.clamp(pair.friction * tangentVelocityDirection * timeScaleSquared, -maxFriction, maxFriction);
                     }
-                    var oAcN = Vector6.cross(offsetA, normal), oBcN = Vector6.cross(offsetB, normal), share = contactShare / (bodyA.inverseMass + bodyB.inverseMass + bodyA.inverseInertia * oAcN * oAcN + bodyB.inverseInertia * oBcN * oBcN);
+                    var oAcN = Vector7.cross(offsetA, normal), oBcN = Vector7.cross(offsetB, normal), share = contactShare / (bodyA.inverseMass + bodyB.inverseMass + bodyA.inverseInertia * oAcN * oAcN + bodyB.inverseInertia * oBcN * oBcN);
                     normalImpulse *= share;
                     tangentImpulse *= share;
                     if (normalVelocity < 0 && normalVelocity * normalVelocity > Resolver._restingThresh * timeScaleSquared) {
@@ -3821,12 +3826,12 @@
                     if (!(bodyA.isStatic || bodyA.isSleeping)) {
                       bodyA.positionPrev.x += impulse.x * bodyA.inverseMass;
                       bodyA.positionPrev.y += impulse.y * bodyA.inverseMass;
-                      bodyA.anglePrev += Vector6.cross(offsetA, impulse) * bodyA.inverseInertia;
+                      bodyA.anglePrev += Vector7.cross(offsetA, impulse) * bodyA.inverseInertia;
                     }
                     if (!(bodyB.isStatic || bodyB.isSleeping)) {
                       bodyB.positionPrev.x -= impulse.x * bodyB.inverseMass;
                       bodyB.positionPrev.y -= impulse.y * bodyB.inverseMass;
-                      bodyB.anglePrev -= Vector6.cross(offsetB, impulse) * bodyB.inverseInertia;
+                      bodyB.anglePrev -= Vector7.cross(offsetB, impulse) * bodyB.inverseInertia;
                     }
                   }
                 }
@@ -4358,7 +4363,7 @@
           function(module2, exports2, __webpack_require__) {
             var Query = {};
             module2.exports = Query;
-            var Vector6 = __webpack_require__(2);
+            var Vector7 = __webpack_require__(2);
             var SAT = __webpack_require__(14);
             var Bounds = __webpack_require__(1);
             var Bodies2 = __webpack_require__(11);
@@ -4385,7 +4390,7 @@
               };
               Query.ray = function(bodies, startPoint, endPoint, rayWidth) {
                 rayWidth = rayWidth || 1e-100;
-                var rayAngle = Vector6.angle(startPoint, endPoint), rayLength = Vector6.magnitude(Vector6.sub(startPoint, endPoint)), rayX = (endPoint.x + startPoint.x) * 0.5, rayY = (endPoint.y + startPoint.y) * 0.5, ray = Bodies2.rectangle(rayX, rayY, rayLength, rayWidth, { angle: rayAngle }), collisions = Query.collides(ray, bodies);
+                var rayAngle = Vector7.angle(startPoint, endPoint), rayLength = Vector7.magnitude(Vector7.sub(startPoint, endPoint)), rayX = (endPoint.x + startPoint.x) * 0.5, rayY = (endPoint.y + startPoint.y) * 0.5, ray = Bodies2.rectangle(rayX, rayY, rayLength, rayWidth, { angle: rayAngle }), collisions = Query.collides(ray, bodies);
                 for (var i = 0; i < collisions.length; i += 1) {
                   var collision = collisions[i];
                   collision.body = collision.bodyB = collision.bodyA;
@@ -36249,7 +36254,7 @@
     }
   };
   CSG._tmpm3 = new Matrix3();
-  var Vector = class extends Vector3 {
+  var Vector5 = class extends Vector3 {
     constructor(x, y, z) {
       if (arguments.length === 3) {
         super(x, y, z);
@@ -36262,7 +36267,7 @@
       }
     }
     clone() {
-      return new Vector(this.x, this.y, this.z);
+      return new Vector5(this.x, this.y, this.z);
     }
     negated() {
       return this.clone().multiplyScalar(-1);
@@ -36291,10 +36296,10 @@
   };
   var Vertex2 = class {
     constructor(pos2, normal, uv) {
-      this.pos = new Vector(pos2.x, pos2.y, pos2.z);
-      this.normal = new Vector(normal.x, normal.y, normal.z);
+      this.pos = new Vector5(pos2.x, pos2.y, pos2.z);
+      this.normal = new Vector5(normal.x, normal.y, normal.z);
       if (uv)
-        this.uv = new Vector(uv.x, uv.y, uv.z);
+        this.uv = new Vector5(uv.x, uv.y, uv.z);
     }
     clone() {
       return new Vertex2(this.pos.clone(), this.normal.clone(), this.uv ? this.uv.clone() : void 0);
@@ -49646,7 +49651,7 @@
         global2.CBOR = obj;
     })(commonjsGlobal);
   });
-  var WebSocket = typeof window === "undefined" ? require_browser() : window.WebSocket;
+  var WebSocket2 = typeof window === "undefined" ? require_browser() : window.WebSocket;
   var Client = class {
     constructor(initCallback, errCallback, closeCallback, debug = false, appId, isGreedy, oncloseBehavior) {
       this.reqs = [];
@@ -49679,7 +49684,7 @@
       this.ws.close();
     }
     openWebsocket(firstCmd = null, initCallback = null) {
-      this.ws = new WebSocket("ws://localhost:11222/driver", ["rep.sp.nanomsg.org"]);
+      this.ws = new WebSocket2("ws://localhost:11222/driver", ["rep.sp.nanomsg.org"]);
       this.ws.parent = this;
       this.ws.binaryType = "arraybuffer";
       this.ws.onmessage = this.messageHandler;
@@ -50400,6 +50405,6452 @@
     }
   };
 
+  // node_modules/leapjs/leap-1.1.1.js
+  (function() {
+    function r(e, n, t) {
+      function o(i2, f) {
+        if (!n[i2]) {
+          if (!e[i2]) {
+            var c = typeof __require == "function" && __require;
+            if (!f && c)
+              return c(i2, true);
+            if (u)
+              return u(i2, true);
+            var a = new Error("Cannot find module '" + i2 + "'");
+            throw a.code = "MODULE_NOT_FOUND", a;
+          }
+          var p = n[i2] = { exports: {} };
+          e[i2][0].call(p.exports, function(r2) {
+            var n2 = e[i2][1][r2];
+            return o(n2 || r2);
+          }, p, p.exports, r, e, n, t);
+        }
+        return n[i2].exports;
+      }
+      for (var u = typeof __require == "function" && __require, i = 0; i < t.length; i++)
+        o(t[i]);
+      return o;
+    }
+    return r;
+  })()({ 1: [function(require2, module, exports) {
+    var Pointable = require2("./pointable"), glMatrix = require2("gl-matrix"), vec3 = glMatrix.vec3, mat3 = glMatrix.mat3, mat4 = glMatrix.mat4;
+    var Bone2 = module.exports = function(finger, data) {
+      this.finger = finger;
+      this._center = null, this._matrix = null;
+      this.type = data.type;
+      this.prevJoint = data.prevJoint;
+      this.nextJoint = data.nextJoint;
+      this.width = data.width;
+      var displacement = new Array(3);
+      vec3.sub(displacement, data.nextJoint, data.prevJoint);
+      this.length = vec3.length(displacement);
+      this.basis = data.basis;
+    };
+    Bone2.prototype.left = function() {
+      if (this._left)
+        return this._left;
+      this._left = mat3.determinant(this.basis[0].concat(this.basis[1]).concat(this.basis[2])) < 0;
+      return this._left;
+    };
+    Bone2.prototype.matrix = function() {
+      if (this._matrix)
+        return this._matrix;
+      var b = this.basis, t = this._matrix = mat4.create();
+      t[0] = b[0][0], t[1] = b[0][1], t[2] = b[0][2];
+      t[4] = b[1][0], t[5] = b[1][1], t[6] = b[1][2];
+      t[8] = b[2][0], t[9] = b[2][1], t[10] = b[2][2];
+      t[3] = this.center()[0];
+      t[7] = this.center()[1];
+      t[11] = this.center()[2];
+      if (this.left()) {
+        t[0] *= -1;
+        t[1] *= -1;
+        t[2] *= -1;
+      }
+      return this._matrix;
+    };
+    Bone2.prototype.lerp = function(out, t) {
+      vec3.lerp(out, this.prevJoint, this.nextJoint, t);
+    };
+    Bone2.prototype.center = function() {
+      if (this._center)
+        return this._center;
+      var center = vec3.create();
+      this.lerp(center, 0.5);
+      this._center = center;
+      return center;
+    };
+    Bone2.prototype.direction = function() {
+      return [
+        this.basis[2][0] * -1,
+        this.basis[2][1] * -1,
+        this.basis[2][2] * -1
+      ];
+    };
+  }, { "./pointable": 14, "gl-matrix": 21 }], 2: [function(require2, module, exports) {
+    var CircularBuffer = module.exports = function(size2) {
+      this.pos = 0;
+      this._buf = [];
+      this.size = size2;
+    };
+    CircularBuffer.prototype.get = function(i) {
+      if (i == void 0)
+        i = 0;
+      if (i >= this.size)
+        return void 0;
+      if (i >= this._buf.length)
+        return void 0;
+      return this._buf[(this.pos - i - 1) % this.size];
+    };
+    CircularBuffer.prototype.push = function(o) {
+      this._buf[this.pos % this.size] = o;
+      return this.pos++;
+    };
+  }, {}], 3: [function(require2, module, exports) {
+    var chooseProtocol = require2("../protocol").chooseProtocol, EventEmitter = require2("events").EventEmitter;
+    var BaseConnection = module.exports = function(opts) {
+      this.opts = Object.assign({
+        host: "127.0.0.1",
+        scheme: this.getScheme(),
+        port: this.getPort(),
+        background: false,
+        optimizeHMD: false,
+        requestProtocolVersion: BaseConnection.defaultProtocolVersion
+      }, opts || {});
+      this.host = this.opts.host;
+      this.port = this.opts.port;
+      this.scheme = this.opts.scheme;
+      this.protocolVersionVerified = false;
+      this.background = null;
+      this.optimizeHMD = null;
+      this.on("ready", function() {
+        this.setBackground(this.opts.background);
+        this.setOptimizeHMD(this.opts.optimizeHMD);
+        if (this.opts.optimizeHMD) {
+          console.log("Optimized for head mounted display usage.");
+        } else {
+          console.log("Optimized for desktop usage.");
+        }
+      });
+    };
+    BaseConnection.defaultProtocolVersion = 6;
+    BaseConnection.prototype.getUrl = function() {
+      return this.scheme + "//" + this.host + ":" + this.port + "/v" + this.opts.requestProtocolVersion + ".json";
+    };
+    BaseConnection.prototype.getScheme = function() {
+      return "ws:";
+    };
+    BaseConnection.prototype.getPort = function() {
+      return 6437;
+    };
+    BaseConnection.prototype.setBackground = function(state) {
+      this.opts.background = state;
+      if (this.protocol && this.protocol.sendBackground && this.background !== this.opts.background) {
+        this.background = this.opts.background;
+        this.protocol.sendBackground(this, this.opts.background);
+      }
+    };
+    BaseConnection.prototype.setOptimizeHMD = function(state) {
+      this.opts.optimizeHMD = state;
+      if (this.protocol && this.protocol.sendOptimizeHMD && this.optimizeHMD !== this.opts.optimizeHMD) {
+        this.optimizeHMD = this.opts.optimizeHMD;
+        this.protocol.sendOptimizeHMD(this, this.opts.optimizeHMD);
+      }
+    };
+    BaseConnection.prototype.handleOpen = function() {
+      if (!this.connected) {
+        this.connected = true;
+        this.emit("connect");
+      }
+    };
+    BaseConnection.prototype.handleClose = function(code, reason) {
+      if (!this.connected)
+        return;
+      this.disconnect();
+      if (code === 1001 && this.opts.requestProtocolVersion > 1) {
+        if (this.protocolVersionVerified) {
+          this.protocolVersionVerified = false;
+        } else {
+          this.opts.requestProtocolVersion--;
+        }
+      }
+      this.startReconnection();
+    };
+    BaseConnection.prototype.startReconnection = function() {
+      var connection = this;
+      if (!this.reconnectionTimer) {
+        this.reconnectionTimer = setInterval(function() {
+          connection.reconnect();
+        }, 500);
+      }
+    };
+    BaseConnection.prototype.stopReconnection = function() {
+      this.reconnectionTimer = clearInterval(this.reconnectionTimer);
+    };
+    BaseConnection.prototype.disconnect = function(allowReconnect) {
+      if (!allowReconnect)
+        this.stopReconnection();
+      if (!this.socket)
+        return;
+      this.socket.close();
+      delete this.socket;
+      delete this.protocol;
+      delete this.background;
+      delete this.optimizeHMD;
+      delete this.focusedState;
+      if (this.connected) {
+        this.connected = false;
+        this.emit("disconnect");
+      }
+      return true;
+    };
+    BaseConnection.prototype.reconnect = function() {
+      if (this.connected) {
+        this.stopReconnection();
+      } else {
+        this.disconnect(true);
+        this.connect();
+      }
+    };
+    BaseConnection.prototype.handleData = function(data) {
+      var message = JSON.parse(data);
+      var messageEvent;
+      if (this.protocol === void 0) {
+        messageEvent = this.protocol = chooseProtocol(message);
+        this.protocolVersionVerified = true;
+        this.emit("ready");
+      } else {
+        messageEvent = this.protocol(message);
+      }
+      this.emit(messageEvent.type, messageEvent);
+    };
+    BaseConnection.prototype.connect = function() {
+      if (this.socket)
+        return;
+      this.socket = this.setupSocket();
+      return true;
+    };
+    BaseConnection.prototype.send = function(data) {
+      this.socket.send(data);
+    };
+    BaseConnection.prototype.reportFocus = function(state) {
+      if (!this.connected || this.focusedState === state)
+        return;
+      this.focusedState = state;
+      this.emit(this.focusedState ? "focus" : "blur");
+      if (this.protocol && this.protocol.sendFocused) {
+        this.protocol.sendFocused(this, this.focusedState);
+      }
+    };
+    Object.assign(BaseConnection.prototype, EventEmitter.prototype);
+  }, { "../protocol": 15, "events": 31 }], 4: [function(require2, module, exports) {
+    var BaseConnection = module.exports = require2("./base");
+    var BrowserConnection = module.exports = function(opts) {
+      BaseConnection.call(this, opts);
+      var connection = this;
+      this.on("ready", function() {
+        connection.startFocusLoop();
+      });
+      this.on("disconnect", function() {
+        connection.stopFocusLoop();
+      });
+    };
+    Object.assign(BrowserConnection.prototype, BaseConnection.prototype);
+    BrowserConnection.__proto__ = BaseConnection;
+    BrowserConnection.prototype.useSecure = function() {
+      return location.protocol === "https:";
+    };
+    BrowserConnection.prototype.getScheme = function() {
+      return this.useSecure() ? "wss:" : "ws:";
+    };
+    BrowserConnection.prototype.getPort = function() {
+      return this.useSecure() ? 6436 : 6437;
+    };
+    BrowserConnection.prototype.setupSocket = function() {
+      var connection = this;
+      var socket = new WebSocket(this.getUrl());
+      socket.onopen = function() {
+        connection.handleOpen();
+      };
+      socket.onclose = function(data) {
+        connection.handleClose(data["code"], data["reason"]);
+      };
+      socket.onmessage = function(message) {
+        connection.handleData(message.data);
+      };
+      socket.onerror = function(error) {
+        if (connection.useSecure() && connection.scheme === "wss:") {
+          connection.scheme = "ws:";
+          connection.port = 6437;
+          connection.disconnect();
+          connection.connect();
+        }
+      };
+      return socket;
+    };
+    BrowserConnection.prototype.startFocusLoop = function() {
+      if (this.focusDetectorTimer)
+        return;
+      var connection = this;
+      var propertyName = null;
+      if (typeof document.hidden !== "undefined") {
+        propertyName = "hidden";
+      } else if (typeof document.mozHidden !== "undefined") {
+        propertyName = "mozHidden";
+      } else if (typeof document.msHidden !== "undefined") {
+        propertyName = "msHidden";
+      } else if (typeof document.webkitHidden !== "undefined") {
+        propertyName = "webkitHidden";
+      } else {
+        propertyName = void 0;
+      }
+      if (connection.windowVisible === void 0) {
+        connection.windowVisible = propertyName === void 0 ? true : document[propertyName] === false;
+      }
+      var focusListener = window.addEventListener("focus", function(e) {
+        connection.windowVisible = true;
+        updateFocusState();
+      });
+      var blurListener = window.addEventListener("blur", function(e) {
+        connection.windowVisible = false;
+        updateFocusState();
+      });
+      this.on("disconnect", function() {
+        window.removeEventListener("focus", focusListener);
+        window.removeEventListener("blur", blurListener);
+      });
+      var updateFocusState = function() {
+        var isVisible = propertyName === void 0 ? true : document[propertyName] === false;
+        connection.reportFocus(isVisible && connection.windowVisible);
+      };
+      updateFocusState();
+      this.focusDetectorTimer = setInterval(updateFocusState, 100);
+    };
+    BrowserConnection.prototype.stopFocusLoop = function() {
+      if (!this.focusDetectorTimer)
+        return;
+      clearTimeout(this.focusDetectorTimer);
+      delete this.focusDetectorTimer;
+    };
+  }, { "./base": 3 }], 5: [function(require2, module, exports) {
+    var WebSocket3 = require2("ws"), BaseConnection = require2("./base");
+    var NodeConnection = module.exports = function(opts) {
+      BaseConnection.call(this, opts);
+      var connection = this;
+      this.on("ready", function() {
+        connection.reportFocus(true);
+      });
+    };
+    Object.assign(NodeConnection.prototype, BaseConnection.prototype);
+    NodeConnection.__proto__ = BaseConnection;
+    NodeConnection.prototype.setupSocket = function() {
+      var connection = this;
+      var socket = new WebSocket3(this.getUrl());
+      socket.on("open", function() {
+        connection.handleOpen();
+      });
+      socket.on("message", function(m) {
+        connection.handleData(m);
+      });
+      socket.on("close", function(code, reason) {
+        connection.handleClose(code, reason);
+      });
+      socket.on("error", function() {
+        connection.startReconnection();
+      });
+      return socket;
+    };
+  }, { "./base": 3, "ws": 33 }], 6: [function(require2, module, exports) {
+    (function(process) {
+      (function() {
+        var Frame = require2("./frame"), Hand = require2("./hand"), Pointable = require2("./pointable"), Finger = require2("./finger"), CircularBuffer = require2("./circular_buffer"), Pipeline = require2("./pipeline"), EventEmitter = require2("events").EventEmitter, Dialog = require2("./dialog");
+        var Controller = module.exports = function(opts) {
+          var inNode = typeof process !== "undefined" && process.versions && process.versions.node, controller = this;
+          this.inNode = inNode;
+          opts = Object.assign({
+            inNode: this.inNode,
+            frameEventName: this.useAnimationLoop() ? "animationFrame" : "deviceFrame",
+            suppressAnimationLoop: !this.useAnimationLoop(),
+            loopWhileDisconnected: true,
+            useAllPlugins: false,
+            checkVersion: true
+          }, opts || {});
+          this.animationFrameRequested = false;
+          this.onAnimationFrame = function(timestamp) {
+            if (controller.lastConnectionFrame.valid) {
+              controller.emit("animationFrame", controller.lastConnectionFrame);
+            }
+            controller.emit("frameEnd", timestamp);
+            if (controller.loopWhileDisconnected && (controller.connection.focusedState !== false || controller.connection.opts.background)) {
+              window.requestAnimationFrame(controller.onAnimationFrame);
+            } else {
+              controller.animationFrameRequested = false;
+            }
+          };
+          this.suppressAnimationLoop = opts.suppressAnimationLoop;
+          this.loopWhileDisconnected = opts.loopWhileDisconnected;
+          this.frameEventName = opts.frameEventName;
+          this.useAllPlugins = opts.useAllPlugins;
+          this.history = new CircularBuffer(200);
+          this.lastFrame = Frame.Invalid;
+          this.lastValidFrame = Frame.Invalid;
+          this.lastConnectionFrame = Frame.Invalid;
+          this.checkVersion = opts.checkVersion;
+          if (opts.connectionType === void 0) {
+            this.connectionType = this.inBrowser() ? require2("./connection/browser") : require2("./connection/node");
+          } else {
+            this.connectionType = opts.connectionType;
+          }
+          this.connection = new this.connectionType(opts);
+          this.streamingCount = 0;
+          this.devices = {};
+          this.plugins = {};
+          this._pluginPipelineSteps = {};
+          this._pluginExtendedMethods = {};
+          if (opts.useAllPlugins)
+            this.useRegisteredPlugins();
+          this.setupFrameEvents(opts);
+          this.setupConnectionEvents();
+          this.startAnimationLoop();
+        };
+        Controller.prototype.setBackground = function(state) {
+          this.connection.setBackground(state);
+          return this;
+        };
+        Controller.prototype.setOptimizeHMD = function(state) {
+          this.connection.setOptimizeHMD(state);
+          return this;
+        };
+        Controller.prototype.inBrowser = function() {
+          return !this.inNode;
+        };
+        Controller.prototype.useAnimationLoop = function() {
+          return this.inBrowser() && !this.inBackgroundPage();
+        };
+        Controller.prototype.inBackgroundPage = function() {
+          return typeof chrome !== "undefined" && chrome.extension && chrome.extension.getBackgroundPage && chrome.extension.getBackgroundPage() === window;
+        };
+        Controller.prototype.connect = function() {
+          this.connection.connect();
+          return this;
+        };
+        Controller.prototype.streaming = function() {
+          return this.streamingCount > 0;
+        };
+        Controller.prototype.connected = function() {
+          return !!this.connection.connected;
+        };
+        Controller.prototype.startAnimationLoop = function() {
+          if (!this.suppressAnimationLoop && !this.animationFrameRequested) {
+            this.animationFrameRequested = true;
+            window.requestAnimationFrame(this.onAnimationFrame);
+          }
+        };
+        Controller.prototype.disconnect = function() {
+          this.connection.disconnect();
+          return this;
+        };
+        Controller.prototype.frame = function(num) {
+          return this.history.get(num) || Frame.Invalid;
+        };
+        Controller.prototype.loop = function(callback) {
+          if (callback) {
+            if (typeof callback === "function") {
+              this.on(this.frameEventName, callback);
+            } else {
+              this.setupFrameEvents(callback);
+            }
+          }
+          return this.connect();
+        };
+        Controller.prototype.addStep = function(step) {
+          if (!this.pipeline)
+            this.pipeline = new Pipeline(this);
+          this.pipeline.addStep(step);
+        };
+        Controller.prototype.processFrame = function(frame) {
+          this.lastConnectionFrame = frame;
+          this.startAnimationLoop();
+          this.emit("deviceFrame", frame);
+        };
+        Controller.prototype.processFinishedFrame = function(frame) {
+          this.lastFrame = frame;
+          if (frame.valid) {
+            this.lastValidFrame = frame;
+          }
+          frame.controller = this;
+          frame.historyIdx = this.history.push(frame);
+          if (this.pipeline) {
+            frame = this.pipeline.run(frame);
+            if (!frame)
+              frame = Frame.Invalid;
+          }
+          this.emit("frame", frame);
+          this.emitHandEvents(frame);
+        };
+        Controller.prototype.emitHandEvents = function(frame) {
+          for (var i = 0; i < frame.hands.length; i++) {
+            this.emit("hand", frame.hands[i]);
+          }
+        };
+        Controller.prototype.setupFrameEvents = function(opts) {
+          if (opts.frame) {
+            this.on("frame", opts.frame);
+          }
+          if (opts.hand) {
+            this.on("hand", opts.hand);
+          }
+        };
+        Controller.prototype.setupConnectionEvents = function() {
+          var controller = this;
+          this.connection.on("frame", function(frame) {
+            controller.processFrame(frame);
+          });
+          this.on(this.frameEventName, function(frame) {
+            controller.processFinishedFrame(frame);
+          });
+          var backfillStreamingStartedEventsHandler = function() {
+            if (controller.connection.opts.requestProtocolVersion < 5 && controller.streamingCount == 0) {
+              controller.streamingCount = 1;
+              var info2 = {
+                attached: true,
+                streaming: true,
+                type: "unknown",
+                id: "Lx00000000000"
+              };
+              controller.devices[info2.id] = info2;
+              controller.emit("deviceAttached", info2);
+              controller.emit("deviceStreaming", info2);
+              controller.emit("streamingStarted", info2);
+              controller.connection.removeListener("frame", backfillStreamingStartedEventsHandler);
+            }
+          };
+          var backfillStreamingStoppedEvents = function() {
+            if (controller.streamingCount > 0) {
+              for (var deviceId in controller.devices) {
+                controller.emit("deviceStopped", controller.devices[deviceId]);
+                controller.emit("deviceRemoved", controller.devices[deviceId]);
+              }
+              controller.emit("streamingStopped", controller.devices[deviceId]);
+              controller.streamingCount = 0;
+              for (var deviceId in controller.devices) {
+                delete controller.devices[deviceId];
+              }
+            }
+          };
+          this.connection.on("focus", function() {
+            if (controller.loopWhileDisconnected) {
+              controller.startAnimationLoop();
+            }
+            controller.emit("focus");
+          });
+          this.connection.on("blur", function() {
+            controller.emit("blur");
+          });
+          this.connection.on("protocol", function(protocol) {
+            protocol.on("beforeFrameCreated", function(frameData) {
+              controller.emit("beforeFrameCreated", frameData);
+            });
+            protocol.on("afterFrameCreated", function(frame, frameData) {
+              controller.emit("afterFrameCreated", frame, frameData);
+            });
+            controller.emit("protocol", protocol);
+          });
+          this.connection.on("ready", function() {
+            if (controller.checkVersion && !controller.inNode) {
+              controller.checkOutOfDate();
+            }
+            controller.emit("ready");
+          });
+          this.connection.on("connect", function() {
+            controller.emit("connect");
+            controller.connection.removeListener("frame", backfillStreamingStartedEventsHandler);
+            controller.connection.on("frame", backfillStreamingStartedEventsHandler);
+          });
+          this.connection.on("disconnect", function() {
+            controller.emit("disconnect");
+            backfillStreamingStoppedEvents();
+          });
+          this.connection.on("deviceConnect", function(evt) {
+            if (evt.state) {
+              controller.emit("deviceConnected");
+              controller.connection.removeListener("frame", backfillStreamingStartedEventsHandler);
+              controller.connection.on("frame", backfillStreamingStartedEventsHandler);
+            } else {
+              controller.emit("deviceDisconnected");
+              backfillStreamingStoppedEvents();
+            }
+          });
+          this.connection.on("deviceEvent", function(evt) {
+            var info2 = evt.state, oldInfo = controller.devices[info2.id];
+            var changed = {};
+            for (var property in info2) {
+              if (!oldInfo || !oldInfo.hasOwnProperty(property) || oldInfo[property] != info2[property]) {
+                changed[property] = true;
+              }
+            }
+            controller.devices[info2.id] = info2;
+            if (changed.attached) {
+              controller.emit(info2.attached ? "deviceAttached" : "deviceRemoved", info2);
+            }
+            if (!changed.streaming)
+              return;
+            if (info2.streaming) {
+              controller.streamingCount++;
+              controller.emit("deviceStreaming", info2);
+              if (controller.streamingCount == 1) {
+                controller.emit("streamingStarted", info2);
+              }
+              if (!changed.attached) {
+                controller.emit("deviceConnected");
+              }
+            } else if (!(changed.attached && info2.attached)) {
+              controller.streamingCount--;
+              controller.emit("deviceStopped", info2);
+              if (controller.streamingCount == 0) {
+                controller.emit("streamingStopped", info2);
+              }
+              controller.emit("deviceDisconnected");
+            }
+          });
+          this.on("newListener", function(event, listener) {
+            if (event == "deviceConnected" || event == "deviceDisconnected") {
+              console.warn(event + " events are deprecated.  Consider using 'streamingStarted/streamingStopped' or 'deviceStreaming/deviceStopped' instead");
+            }
+          });
+        };
+        Controller.prototype.checkOutOfDate = function() {
+          console.assert(this.connection && this.connection.protocol);
+          var serviceVersion = this.connection.protocol.serviceVersion;
+          var protocolVersion = this.connection.protocol.version;
+          var defaultProtocolVersion = this.connectionType.defaultProtocolVersion;
+          if (defaultProtocolVersion > protocolVersion) {
+            console.warn("Your Protocol Version is v" + protocolVersion + ", this app was designed for v" + defaultProtocolVersion);
+            Dialog.warnOutOfDate({
+              sV: serviceVersion,
+              pV: protocolVersion
+            });
+            return true;
+          } else {
+            return false;
+          }
+        };
+        Controller._pluginFactories = {};
+        Controller.plugin = function(pluginName, factory) {
+          if (this._pluginFactories[pluginName]) {
+            console.warn('Plugin "' + pluginName + '" already registered');
+          }
+          return this._pluginFactories[pluginName] = factory;
+        };
+        Controller.plugins = function() {
+          return Object.keys(this._pluginFactories);
+        };
+        var setPluginCallbacks = function(pluginName, type, callback) {
+          if (["beforeFrameCreated", "afterFrameCreated"].indexOf(type) != -1) {
+            this.on(type, callback);
+          } else {
+            if (!this.pipeline)
+              this.pipeline = new Pipeline(this);
+            if (!this._pluginPipelineSteps[pluginName])
+              this._pluginPipelineSteps[pluginName] = [];
+            this._pluginPipelineSteps[pluginName].push(this.pipeline.addWrappedStep(type, callback));
+          }
+        };
+        var setPluginMethods = function(pluginName, type, hash) {
+          var klass;
+          if (!this._pluginExtendedMethods[pluginName])
+            this._pluginExtendedMethods[pluginName] = [];
+          switch (type) {
+            case "frame":
+              klass = Frame;
+              break;
+            case "hand":
+              klass = Hand;
+              break;
+            case "pointable":
+              klass = Pointable;
+              Object.assign(Finger.prototype, hash);
+              Object.assign(Finger.Invalid, hash);
+              break;
+            case "finger":
+              klass = Finger;
+              break;
+            default:
+              throw pluginName + ' specifies invalid object type "' + type + '" for prototypical extension';
+          }
+          Object.assign(klass.prototype, hash);
+          Object.assign(klass.Invalid, hash);
+          this._pluginExtendedMethods[pluginName].push([klass, hash]);
+        };
+        Controller.prototype.use = function(pluginName, options) {
+          var functionOrHash, pluginFactory, key, pluginInstance;
+          pluginFactory = typeof pluginName == "function" ? pluginName : Controller._pluginFactories[pluginName];
+          if (!pluginFactory) {
+            throw "Leap Plugin " + pluginName + " not found.";
+          }
+          options || (options = {});
+          if (this.plugins[pluginName]) {
+            Object.assign(this.plugins[pluginName], options);
+            return this;
+          }
+          this.plugins[pluginName] = options;
+          pluginInstance = pluginFactory.call(this, options);
+          for (key in pluginInstance) {
+            functionOrHash = pluginInstance[key];
+            if (typeof functionOrHash === "function") {
+              setPluginCallbacks.call(this, pluginName, key, functionOrHash);
+            } else {
+              setPluginMethods.call(this, pluginName, key, functionOrHash);
+            }
+          }
+          return this;
+        };
+        Controller.prototype.stopUsing = function(pluginName) {
+          var steps = this._pluginPipelineSteps[pluginName], extMethodHashes = this._pluginExtendedMethods[pluginName], i = 0, klass, extMethodHash;
+          if (!this.plugins[pluginName])
+            return;
+          if (steps) {
+            for (i = 0; i < steps.length; i++) {
+              this.pipeline.removeStep(steps[i]);
+            }
+          }
+          if (extMethodHashes) {
+            for (i = 0; i < extMethodHashes.length; i++) {
+              klass = extMethodHashes[i][0];
+              extMethodHash = extMethodHashes[i][1];
+              for (var methodName in extMethodHash) {
+                delete klass.prototype[methodName];
+                delete klass.Invalid[methodName];
+              }
+            }
+          }
+          delete this.plugins[pluginName];
+          return this;
+        };
+        Controller.prototype.useRegisteredPlugins = function() {
+          for (var plugin in Controller._pluginFactories) {
+            this.use(plugin);
+          }
+        };
+        Object.assign(Controller.prototype, EventEmitter.prototype);
+      }).call(this);
+    }).call(this, require2("_process"));
+  }, { "./circular_buffer": 2, "./connection/browser": 4, "./connection/node": 5, "./dialog": 7, "./finger": 8, "./frame": 9, "./hand": 10, "./pipeline": 13, "./pointable": 14, "_process": 32, "events": 31 }], 7: [function(require2, module, exports) {
+    (function(process) {
+      (function() {
+        var Dialog = module.exports = function(message, options) {
+          this.options = options || {};
+          this.message = message;
+          this.createElement();
+        };
+        Dialog.prototype.createElement = function() {
+          this.element = document.createElement("div");
+          this.element.className = "leapjs-dialog";
+          this.element.style.position = "fixed";
+          this.element.style.top = "8px";
+          this.element.style.left = 0;
+          this.element.style.right = 0;
+          this.element.style.textAlign = "center";
+          this.element.style.zIndex = 1e3;
+          var dialog = document.createElement("div");
+          this.element.appendChild(dialog);
+          dialog.style.className = "leapjs-dialog";
+          dialog.style.display = "inline-block";
+          dialog.style.margin = "auto";
+          dialog.style.padding = "8px";
+          dialog.style.color = "#222";
+          dialog.style.background = "#eee";
+          dialog.style.borderRadius = "4px";
+          dialog.style.border = "1px solid #999";
+          dialog.style.textAlign = "left";
+          dialog.style.cursor = "pointer";
+          dialog.style.whiteSpace = "nowrap";
+          dialog.style.transition = "box-shadow 1s linear";
+          dialog.innerHTML = this.message;
+          if (this.options.onclick) {
+            dialog.addEventListener("click", this.options.onclick);
+          }
+          if (this.options.onmouseover) {
+            dialog.addEventListener("mouseover", this.options.onmouseover);
+          }
+          if (this.options.onmouseout) {
+            dialog.addEventListener("mouseout", this.options.onmouseout);
+          }
+          if (this.options.onmousemove) {
+            dialog.addEventListener("mousemove", this.options.onmousemove);
+          }
+        };
+        Dialog.prototype.show = function() {
+          document.body.appendChild(this.element);
+          return this;
+        };
+        Dialog.prototype.hide = function() {
+          document.body.removeChild(this.element);
+          return this;
+        };
+        Dialog.warnOutOfDate = function(params) {
+          params || (params = {});
+          var url = "http://developer.leapmotion.com?";
+          params.returnTo = window.location.href;
+          for (var key in params) {
+            url += key + "=" + encodeURIComponent(params[key]) + "&";
+          }
+          var dialog, onclick = function(event) {
+            if (event.target.id != "leapjs-decline-upgrade") {
+              var popup = window.open(url, "_blank", "height=800,width=1000,location=1,menubar=1,resizable=1,status=1,toolbar=1,scrollbars=1");
+              if (window.focus) {
+                popup.focus();
+              }
+            }
+            dialog.hide();
+            return true;
+          }, message = "This site requires Leap Motion Tracking V2.<button id='leapjs-accept-upgrade'  style='color: #444; transition: box-shadow 100ms linear; cursor: pointer; vertical-align: baseline; margin-left: 16px;'>Upgrade</button><button id='leapjs-decline-upgrade' style='color: #444; transition: box-shadow 100ms linear; cursor: pointer; vertical-align: baseline; margin-left: 8px; '>Not Now</button>";
+          dialog = new Dialog(message, {
+            onclick,
+            onmousemove: function(e) {
+              if (e.target == document.getElementById("leapjs-decline-upgrade")) {
+                document.getElementById("leapjs-decline-upgrade").style.color = "#000";
+                document.getElementById("leapjs-decline-upgrade").style.boxShadow = "0px 0px 2px #5daa00";
+                document.getElementById("leapjs-accept-upgrade").style.color = "#444";
+                document.getElementById("leapjs-accept-upgrade").style.boxShadow = "none";
+              } else {
+                document.getElementById("leapjs-accept-upgrade").style.color = "#000";
+                document.getElementById("leapjs-accept-upgrade").style.boxShadow = "0px 0px 2px #5daa00";
+                document.getElementById("leapjs-decline-upgrade").style.color = "#444";
+                document.getElementById("leapjs-decline-upgrade").style.boxShadow = "none";
+              }
+            },
+            onmouseout: function() {
+              document.getElementById("leapjs-decline-upgrade").style.color = "#444";
+              document.getElementById("leapjs-decline-upgrade").style.boxShadow = "none";
+              document.getElementById("leapjs-accept-upgrade").style.color = "#444";
+              document.getElementById("leapjs-accept-upgrade").style.boxShadow = "none";
+            }
+          });
+          return dialog.show();
+        };
+        Dialog.hasWarnedBones = false;
+        Dialog.warnBones = function() {
+          if (this.hasWarnedBones)
+            return;
+          this.hasWarnedBones = true;
+          console.warn("Your Leap Service is out of date");
+          if (!(typeof process !== "undefined" && process.versions && process.versions.node)) {
+            this.warnOutOfDate({ reason: "bones" });
+          }
+        };
+      }).call(this);
+    }).call(this, require2("_process"));
+  }, { "_process": 32 }], 8: [function(require2, module, exports) {
+    var Pointable = require2("./pointable"), Bone2 = require2("./bone"), Dialog = require2("./dialog");
+    var Finger = module.exports = function(data) {
+      Pointable.call(this, data);
+      this.dipPosition = data.dipPosition;
+      this.pipPosition = data.pipPosition;
+      this.mcpPosition = data.mcpPosition;
+      this.carpPosition = data.carpPosition;
+      this.extended = data.extended;
+      this.type = data.type;
+      this.finger = true;
+      this.positions = [this.carpPosition, this.mcpPosition, this.pipPosition, this.dipPosition, this.tipPosition];
+      if (data.bases) {
+        this.addBones(data);
+      } else {
+        Dialog.warnBones();
+      }
+    };
+    Object.assign(Finger.prototype, Pointable.prototype);
+    Finger.prototype.addBones = function(data) {
+      this.metacarpal = new Bone2(this, {
+        type: 0,
+        width: this.width,
+        prevJoint: this.carpPosition,
+        nextJoint: this.mcpPosition,
+        basis: data.bases[0]
+      });
+      this.proximal = new Bone2(this, {
+        type: 1,
+        width: this.width,
+        prevJoint: this.mcpPosition,
+        nextJoint: this.pipPosition,
+        basis: data.bases[1]
+      });
+      this.medial = new Bone2(this, {
+        type: 2,
+        width: this.width,
+        prevJoint: this.pipPosition,
+        nextJoint: this.dipPosition,
+        basis: data.bases[2]
+      });
+      this.distal = new Bone2(this, {
+        type: 3,
+        width: this.width,
+        prevJoint: this.dipPosition,
+        nextJoint: data.btipPosition,
+        basis: data.bases[3]
+      });
+      this.bones = [this.metacarpal, this.proximal, this.medial, this.distal];
+    };
+    Finger.prototype.toString = function() {
+      return "Finger [ id:" + this.id + " " + this.length + "mmx | width:" + this.width + "mm | direction:" + this.direction + " ]";
+    };
+    Finger.Invalid = { valid: false };
+  }, { "./bone": 1, "./dialog": 7, "./pointable": 14 }], 9: [function(require2, module, exports) {
+    var Hand = require2("./hand"), Pointable = require2("./pointable"), glMatrix = require2("gl-matrix"), mat3 = glMatrix.mat3, vec3 = glMatrix.vec3, InteractionBox = require2("./interaction_box"), Finger = require2("./finger");
+    var Frame = module.exports = function(data) {
+      this.valid = true;
+      this.id = data.id;
+      this.timestamp = data.timestamp;
+      this.hands = [];
+      this.handsMap = {};
+      this.pointables = [];
+      this.fingers = [];
+      if (data.interactionBox) {
+        this.interactionBox = new InteractionBox(data.interactionBox);
+      }
+      this.pointablesMap = {};
+      this._translation = data.t;
+      function flattenDeep(arr) {
+        return Array.isArray(arr) ? arr.reduce(function(a, b) {
+          return a.concat(flattenDeep(b));
+        }, []) : [arr];
+      }
+      this._rotation = flattenDeep(data.r);
+      this._scaleFactor = data.s;
+      this.data = data;
+      this.type = "frame";
+      this.currentFrameRate = data.currentFrameRate;
+      this.postprocessData(data);
+    };
+    Frame.prototype.postprocessData = function(data) {
+      if (!data) {
+        data = this.data;
+      }
+      for (var handIdx = 0, handCount = data.hands.length; handIdx != handCount; handIdx++) {
+        var hand = new Hand(data.hands[handIdx]);
+        hand.frame = this;
+        this.hands.push(hand);
+        this.handsMap[hand.id] = hand;
+      }
+      var sortBy = function(key) {
+        return function(a, b) {
+          return a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0;
+        };
+      };
+      data.pointables.sort(sortBy("id"));
+      for (var pointableIdx = 0, pointableCount = data.pointables.length; pointableIdx != pointableCount; pointableIdx++) {
+        var pointableData = data.pointables[pointableIdx];
+        var pointable = pointableData.dipPosition ? new Finger(pointableData) : new Pointable(pointableData);
+        pointable.frame = this;
+        this.addPointable(pointable);
+      }
+    };
+    Frame.prototype.addPointable = function(pointable) {
+      this.pointables.push(pointable);
+      this.pointablesMap[pointable.id] = pointable;
+      this.fingers.push(pointable);
+      if (pointable.handId !== void 0 && this.handsMap.hasOwnProperty(pointable.handId)) {
+        var hand = this.handsMap[pointable.handId];
+        hand.pointables.push(pointable);
+        hand.fingers.push(pointable);
+        switch (pointable.type) {
+          case 0:
+            hand.thumb = pointable;
+            break;
+          case 1:
+            hand.indexFinger = pointable;
+            break;
+          case 2:
+            hand.middleFinger = pointable;
+            break;
+          case 3:
+            hand.ringFinger = pointable;
+            break;
+          case 4:
+            hand.pinky = pointable;
+            break;
+        }
+      }
+    };
+    Frame.prototype.pointable = function(id) {
+      return this.pointablesMap[id] || Pointable.Invalid;
+    };
+    Frame.prototype.finger = function(id) {
+      return this.pointable(id);
+    };
+    Frame.prototype.hand = function(id) {
+      return this.handsMap[id] || Hand.Invalid;
+    };
+    Frame.prototype.rotationAngle = function(sinceFrame, axis) {
+      if (!this.valid || !sinceFrame.valid)
+        return 0;
+      var rot = this.rotationMatrix(sinceFrame);
+      var cs = (rot[0] + rot[4] + rot[8] - 1) * 0.5;
+      var angle = Math.acos(cs);
+      angle = isNaN(angle) ? 0 : angle;
+      if (axis !== void 0) {
+        var rotAxis = this.rotationAxis(sinceFrame);
+        angle *= vec3.dot(rotAxis, vec3.normalize(vec3.create(), axis));
+      }
+      return angle;
+    };
+    Frame.prototype.rotationAxis = function(sinceFrame) {
+      if (!this.valid || !sinceFrame.valid)
+        return vec3.create();
+      return vec3.normalize(vec3.create(), [
+        this._rotation[7] - sinceFrame._rotation[5],
+        this._rotation[2] - sinceFrame._rotation[6],
+        this._rotation[3] - sinceFrame._rotation[1]
+      ]);
+    };
+    Frame.prototype.rotationMatrix = function(sinceFrame) {
+      if (!this.valid || !sinceFrame.valid)
+        return mat3.create();
+      var transpose = mat3.transpose(mat3.create(), this._rotation);
+      return mat3.multiply(mat3.create(), sinceFrame._rotation, transpose);
+    };
+    Frame.prototype.scaleFactor = function(sinceFrame) {
+      if (!this.valid || !sinceFrame.valid)
+        return 1;
+      return Math.exp(this._scaleFactor - sinceFrame._scaleFactor);
+    };
+    Frame.prototype.translation = function(sinceFrame) {
+      if (!this.valid || !sinceFrame.valid)
+        return vec3.create();
+      return vec3.subtract(vec3.create(), this._translation, sinceFrame._translation);
+    };
+    Frame.prototype.toString = function() {
+      var str = "Frame [ id:" + this.id + " | timestamp:" + this.timestamp + " | Hand count:(" + this.hands.length + ") | Pointable count:(" + this.pointables.length + ")";
+      str += " ]";
+      return str;
+    };
+    Frame.prototype.dump = function() {
+      var out = "";
+      out += "Frame Info:<br/>";
+      out += this.toString();
+      out += "<br/><br/>Hands:<br/>";
+      for (var handIdx = 0, handCount = this.hands.length; handIdx != handCount; handIdx++) {
+        out += "  " + this.hands[handIdx].toString() + "<br/>";
+      }
+      out += "<br/><br/>Pointables:<br/>";
+      for (var pointableIdx = 0, pointableCount = this.pointables.length; pointableIdx != pointableCount; pointableIdx++) {
+        out += "  " + this.pointables[pointableIdx].toString() + "<br/>";
+      }
+      out += "<br/><br/>Raw JSON:<br/>";
+      out += JSON.stringify(this.data);
+      return out;
+    };
+    Frame.Invalid = {
+      valid: false,
+      hands: [],
+      fingers: [],
+      pointables: [],
+      pointable: function() {
+        return Pointable.Invalid;
+      },
+      finger: function() {
+        return Pointable.Invalid;
+      },
+      hand: function() {
+        return Hand.Invalid;
+      },
+      toString: function() {
+        return "invalid frame";
+      },
+      dump: function() {
+        return this.toString();
+      },
+      rotationAngle: function() {
+        return 0;
+      },
+      rotationMatrix: function() {
+        return mat3.create();
+      },
+      rotationAxis: function() {
+        return vec3.create();
+      },
+      scaleFactor: function() {
+        return 1;
+      },
+      translation: function() {
+        return vec3.create();
+      }
+    };
+  }, { "./finger": 8, "./hand": 10, "./interaction_box": 12, "./pointable": 14, "gl-matrix": 21 }], 10: [function(require2, module, exports) {
+    var Pointable = require2("./pointable"), Bone2 = require2("./bone"), glMatrix = require2("gl-matrix"), mat3 = glMatrix.mat3, vec3 = glMatrix.vec3;
+    var Hand = module.exports = function(data) {
+      this.id = data.id;
+      this.palmPosition = data.palmPosition;
+      this.direction = data.direction;
+      this.palmVelocity = data.palmVelocity;
+      this.palmNormal = data.palmNormal;
+      this.sphereCenter = data.sphereCenter;
+      this.sphereRadius = data.sphereRadius;
+      this.valid = true;
+      this.pointables = [];
+      this.fingers = [];
+      if (data.armBasis) {
+        this.arm = new Bone2(this, {
+          type: 4,
+          width: data.armWidth,
+          prevJoint: data.elbow,
+          nextJoint: data.wrist,
+          basis: data.armBasis
+        });
+      } else {
+        this.arm = null;
+      }
+      this._translation = data.t;
+      function flattenDeep(arr) {
+        return Array.isArray(arr) ? arr.reduce(function(a, b) {
+          return a.concat(flattenDeep(b));
+        }, []) : [arr];
+      }
+      this._rotation = flattenDeep(data.r);
+      this._scaleFactor = data.s;
+      this.timeVisible = data.timeVisible;
+      this.stabilizedPalmPosition = data.stabilizedPalmPosition;
+      this.type = data.type;
+      this.grabStrength = data.grabStrength;
+      this.pinchStrength = data.pinchStrength;
+      this.confidence = data.confidence;
+    };
+    Hand.prototype.finger = function(id) {
+      var finger = this.frame.finger(id);
+      return finger && finger.handId == this.id ? finger : Pointable.Invalid;
+    };
+    Hand.prototype.rotationAngle = function(sinceFrame, axis) {
+      if (!this.valid || !sinceFrame.valid)
+        return 0;
+      var sinceHand = sinceFrame.hand(this.id);
+      if (!sinceHand.valid)
+        return 0;
+      var rot = this.rotationMatrix(sinceFrame);
+      var cs = (rot[0] + rot[4] + rot[8] - 1) * 0.5;
+      var angle = Math.acos(cs);
+      angle = isNaN(angle) ? 0 : angle;
+      if (axis !== void 0) {
+        var rotAxis = this.rotationAxis(sinceFrame);
+        angle *= vec3.dot(rotAxis, vec3.normalize(vec3.create(), axis));
+      }
+      return angle;
+    };
+    Hand.prototype.rotationAxis = function(sinceFrame) {
+      if (!this.valid || !sinceFrame.valid)
+        return vec3.create();
+      var sinceHand = sinceFrame.hand(this.id);
+      if (!sinceHand.valid)
+        return vec3.create();
+      return vec3.normalize(vec3.create(), [
+        this._rotation[7] - sinceHand._rotation[5],
+        this._rotation[2] - sinceHand._rotation[6],
+        this._rotation[3] - sinceHand._rotation[1]
+      ]);
+    };
+    Hand.prototype.rotationMatrix = function(sinceFrame) {
+      if (!this.valid || !sinceFrame.valid)
+        return mat3.create();
+      var sinceHand = sinceFrame.hand(this.id);
+      if (!sinceHand.valid)
+        return mat3.create();
+      var transpose = mat3.transpose(mat3.create(), this._rotation);
+      var m = mat3.multiply(mat3.create(), sinceHand._rotation, transpose);
+      return m;
+    };
+    Hand.prototype.scaleFactor = function(sinceFrame) {
+      if (!this.valid || !sinceFrame.valid)
+        return 1;
+      var sinceHand = sinceFrame.hand(this.id);
+      if (!sinceHand.valid)
+        return 1;
+      return Math.exp(this._scaleFactor - sinceHand._scaleFactor);
+    };
+    Hand.prototype.translation = function(sinceFrame) {
+      if (!this.valid || !sinceFrame.valid)
+        return vec3.create();
+      var sinceHand = sinceFrame.hand(this.id);
+      if (!sinceHand.valid)
+        return vec3.create();
+      return [
+        this._translation[0] - sinceHand._translation[0],
+        this._translation[1] - sinceHand._translation[1],
+        this._translation[2] - sinceHand._translation[2]
+      ];
+    };
+    Hand.prototype.toString = function() {
+      return "Hand (" + this.type + ") [ id: " + this.id + " | palm velocity:" + this.palmVelocity + " | sphere center:" + this.sphereCenter + " ] ";
+    };
+    Hand.prototype.pitch = function() {
+      return Math.atan2(this.direction[1], -this.direction[2]);
+    };
+    Hand.prototype.yaw = function() {
+      return Math.atan2(this.direction[0], -this.direction[2]);
+    };
+    Hand.prototype.roll = function() {
+      return Math.atan2(this.palmNormal[0], -this.palmNormal[1]);
+    };
+    Hand.Invalid = {
+      valid: false,
+      fingers: [],
+      pointables: [],
+      left: false,
+      pointable: function() {
+        return Pointable.Invalid;
+      },
+      finger: function() {
+        return Pointable.Invalid;
+      },
+      toString: function() {
+        return "invalid frame";
+      },
+      dump: function() {
+        return this.toString();
+      },
+      rotationAngle: function() {
+        return 0;
+      },
+      rotationMatrix: function() {
+        return mat3.create();
+      },
+      rotationAxis: function() {
+        return vec3.create();
+      },
+      scaleFactor: function() {
+        return 1;
+      },
+      translation: function() {
+        return vec3.create();
+      }
+    };
+  }, { "./bone": 1, "./pointable": 14, "gl-matrix": 21 }], 11: [function(require2, module, exports) {
+    module.exports = {
+      Controller: require2("./controller"),
+      Frame: require2("./frame"),
+      Hand: require2("./hand"),
+      Pointable: require2("./pointable"),
+      Finger: require2("./finger"),
+      InteractionBox: require2("./interaction_box"),
+      CircularBuffer: require2("./circular_buffer"),
+      UI: require2("./ui"),
+      JSONProtocol: require2("./protocol").JSONProtocol,
+      glMatrix: require2("gl-matrix"),
+      mat3: require2("gl-matrix").mat3,
+      vec3: require2("gl-matrix").vec3,
+      loopController: void 0,
+      version: require2("./version.js"),
+      EventEmitter: require2("events").EventEmitter,
+      loop: function(opts, callback) {
+        if (opts && callback === void 0 && {}.toString.call(opts) === "[object Function]") {
+          callback = opts;
+          opts = {};
+        }
+        if (this.loopController) {
+          if (opts) {
+            this.loopController.setupFrameEvents(opts);
+          }
+        } else {
+          this.loopController = new this.Controller(opts);
+        }
+        this.loopController.loop(callback);
+        return this.loopController;
+      },
+      plugin: function(name, options) {
+        this.Controller.plugin(name, options);
+      }
+    };
+  }, { "./circular_buffer": 2, "./controller": 6, "./finger": 8, "./frame": 9, "./hand": 10, "./interaction_box": 12, "./pointable": 14, "./protocol": 15, "./ui": 16, "./version.js": 19, "events": 31, "gl-matrix": 21 }], 12: [function(require2, module, exports) {
+    var glMatrix = require2("gl-matrix"), vec3 = glMatrix.vec3;
+    var InteractionBox = module.exports = function(data) {
+      this.valid = true;
+      this.center = data.center;
+      this.size = data.size;
+      this.width = data.size[0];
+      this.height = data.size[1];
+      this.depth = data.size[2];
+    };
+    InteractionBox.prototype.denormalizePoint = function(normalizedPosition) {
+      return vec3.fromValues((normalizedPosition[0] - 0.5) * this.size[0] + this.center[0], (normalizedPosition[1] - 0.5) * this.size[1] + this.center[1], (normalizedPosition[2] - 0.5) * this.size[2] + this.center[2]);
+    };
+    InteractionBox.prototype.normalizePoint = function(position, clamp2) {
+      var vec = vec3.fromValues((position[0] - this.center[0]) / this.size[0] + 0.5, (position[1] - this.center[1]) / this.size[1] + 0.5, (position[2] - this.center[2]) / this.size[2] + 0.5);
+      if (clamp2) {
+        vec[0] = Math.min(Math.max(vec[0], 0), 1);
+        vec[1] = Math.min(Math.max(vec[1], 0), 1);
+        vec[2] = Math.min(Math.max(vec[2], 0), 1);
+      }
+      return vec;
+    };
+    InteractionBox.prototype.toString = function() {
+      return "InteractionBox [ width:" + this.width + " | height:" + this.height + " | depth:" + this.depth + " ]";
+    };
+    InteractionBox.Invalid = { valid: false };
+  }, { "gl-matrix": 21 }], 13: [function(require2, module, exports) {
+    var Pipeline = module.exports = function(controller) {
+      this.steps = [];
+      this.controller = controller;
+    };
+    Pipeline.prototype.addStep = function(step) {
+      this.steps.push(step);
+    };
+    Pipeline.prototype.run = function(frame) {
+      var stepsLength = this.steps.length;
+      for (var i = 0; i != stepsLength; i++) {
+        if (!frame)
+          break;
+        frame = this.steps[i](frame);
+      }
+      return frame;
+    };
+    Pipeline.prototype.removeStep = function(step) {
+      var index = this.steps.indexOf(step);
+      if (index === -1)
+        throw "Step not found in pipeline";
+      this.steps.splice(index, 1);
+    };
+    Pipeline.prototype.addWrappedStep = function(type, callback) {
+      var controller = this.controller, step = function(frame) {
+        var dependencies, i, len;
+        dependencies = type == "frame" ? [frame] : frame[type + "s"] || [];
+        for (i = 0, len = dependencies.length; i < len; i++) {
+          callback.call(controller, dependencies[i]);
+        }
+        return frame;
+      };
+      this.addStep(step);
+      return step;
+    };
+  }, {}], 14: [function(require2, module, exports) {
+    var glMatrix = require2("gl-matrix"), vec3 = glMatrix.vec3;
+    var Pointable = module.exports = function(data) {
+      this.valid = true;
+      this.id = data.id;
+      this.handId = data.handId;
+      this.length = data.length;
+      this.tool = data.tool;
+      this.width = data.width;
+      this.direction = data.direction;
+      this.stabilizedTipPosition = data.stabilizedTipPosition;
+      this.tipPosition = data.tipPosition;
+      this.tipVelocity = data.tipVelocity;
+      this.touchZone = data.touchZone;
+      this.touchDistance = data.touchDistance;
+      this.timeVisible = data.timeVisible;
+    };
+    Pointable.prototype.toString = function() {
+      return "Pointable [ id:" + this.id + " " + this.length + "mmx | width:" + this.width + "mm | direction:" + this.direction + " ]";
+    };
+    Pointable.prototype.hand = function() {
+      return this.frame.hand(this.handId);
+    };
+    Pointable.Invalid = { valid: false };
+  }, { "gl-matrix": 21 }], 15: [function(require2, module, exports) {
+    var Frame = require2("./frame"), EventEmitter = require2("events").EventEmitter;
+    var Event2 = function(data) {
+      this.type = data.type;
+      this.state = data.state;
+    };
+    exports.chooseProtocol = function(header) {
+      var protocol;
+      switch (header.version) {
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+          protocol = JSONProtocol(header);
+          protocol.sendBackground = function(connection, state) {
+            connection.send(protocol.encode({ background: state }));
+          };
+          protocol.sendFocused = function(connection, state) {
+            connection.send(protocol.encode({ focused: state }));
+          };
+          protocol.sendOptimizeHMD = function(connection, state) {
+            connection.send(protocol.encode({ optimizeHMD: state }));
+          };
+          break;
+        default:
+          throw "unrecognized version";
+      }
+      return protocol;
+    };
+    var JSONProtocol = exports.JSONProtocol = function(header) {
+      var protocol = function(frameData) {
+        if (frameData.event) {
+          return new Event2(frameData.event);
+        } else {
+          protocol.emit("beforeFrameCreated", frameData);
+          var frame = new Frame(frameData);
+          protocol.emit("afterFrameCreated", frame, frameData);
+          return frame;
+        }
+      };
+      protocol.encode = function(message) {
+        return JSON.stringify(message);
+      };
+      protocol.version = header.version;
+      protocol.serviceVersion = header.serviceVersion;
+      protocol.versionLong = "Version " + header.version;
+      protocol.type = "protocol";
+      Object.assign(protocol, EventEmitter.prototype);
+      return protocol;
+    };
+  }, { "./frame": 9, "events": 31 }], 16: [function(require2, module, exports) {
+    exports.UI = {
+      Region: require2("./ui/region"),
+      Cursor: require2("./ui/cursor")
+    };
+  }, { "./ui/cursor": 17, "./ui/region": 18 }], 17: [function(require2, module, exports) {
+    var Cursor = module.exports = function() {
+      return function(frame) {
+        var pointable = frame.pointables.sort(function(a, b) {
+          return a.z - b.z;
+        })[0];
+        if (pointable && pointable.valid) {
+          frame.cursorPosition = pointable.tipPosition;
+        }
+        return frame;
+      };
+    };
+  }, {}], 18: [function(require2, module, exports) {
+    var EventEmitter = require2("events").EventEmitter;
+    var Region = module.exports = function(start, end) {
+      this.start = new Vector(start);
+      this.end = new Vector(end);
+      this.enteredFrame = null;
+    };
+    Region.prototype.hasPointables = function(frame) {
+      for (var i = 0; i != frame.pointables.length; i++) {
+        var position = frame.pointables[i].tipPosition;
+        if (position.x >= this.start.x && position.x <= this.end.x && position.y >= this.start.y && position.y <= this.end.y && position.z >= this.start.z && position.z <= this.end.z) {
+          return true;
+        }
+      }
+      return false;
+    };
+    Region.prototype.listener = function(opts) {
+      var region = this;
+      if (opts && opts.nearThreshold)
+        this.setupNearRegion(opts.nearThreshold);
+      return function(frame) {
+        return region.updatePosition(frame);
+      };
+    };
+    Region.prototype.clipper = function() {
+      var region = this;
+      return function(frame) {
+        region.updatePosition(frame);
+        return region.enteredFrame ? frame : null;
+      };
+    };
+    Region.prototype.setupNearRegion = function(distance) {
+      var nearRegion = this.nearRegion = new Region([this.start.x - distance, this.start.y - distance, this.start.z - distance], [this.end.x + distance, this.end.y + distance, this.end.z + distance]);
+      var region = this;
+      nearRegion.on("enter", function(frame) {
+        region.emit("near", frame);
+      });
+      nearRegion.on("exit", function(frame) {
+        region.emit("far", frame);
+      });
+      region.on("exit", function(frame) {
+        region.emit("near", frame);
+      });
+    };
+    Region.prototype.updatePosition = function(frame) {
+      if (this.nearRegion)
+        this.nearRegion.updatePosition(frame);
+      if (this.hasPointables(frame) && this.enteredFrame == null) {
+        this.enteredFrame = frame;
+        this.emit("enter", this.enteredFrame);
+      } else if (!this.hasPointables(frame) && this.enteredFrame != null) {
+        this.enteredFrame = null;
+        this.emit("exit", this.enteredFrame);
+      }
+      return frame;
+    };
+    Region.prototype.normalize = function(position) {
+      return new Vector([
+        (position.x - this.start.x) / (this.end.x - this.start.x),
+        (position.y - this.start.y) / (this.end.y - this.start.y),
+        (position.z - this.start.z) / (this.end.z - this.start.z)
+      ]);
+    };
+    Region.prototype.mapToXY = function(position, width, height) {
+      var normalized = this.normalize(position);
+      var x = normalized.x, y = normalized.y;
+      if (x > 1)
+        x = 1;
+      else if (x < -1)
+        x = -1;
+      if (y > 1)
+        y = 1;
+      else if (y < -1)
+        y = -1;
+      return [
+        (x + 1) / 2 * width,
+        (1 - y) / 2 * height,
+        normalized.z
+      ];
+    };
+    Object.assign(Region.prototype, EventEmitter.prototype);
+  }, { "events": 31 }], 19: [function(require2, module, exports) {
+    module.exports = {
+      full: "1.1.1",
+      major: 1,
+      minor: 1,
+      dot: 1
+    };
+  }, {}], 20: [function(require2, module, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.setMatrixArrayType = setMatrixArrayType;
+    exports.toRadian = toRadian;
+    exports.equals = equals2;
+    exports.RANDOM = exports.ARRAY_TYPE = exports.EPSILON = void 0;
+    var EPSILON = 1e-6;
+    exports.EPSILON = EPSILON;
+    var ARRAY_TYPE = typeof Float32Array !== "undefined" ? Float32Array : Array;
+    exports.ARRAY_TYPE = ARRAY_TYPE;
+    var RANDOM = Math.random;
+    exports.RANDOM = RANDOM;
+    function setMatrixArrayType(type) {
+      exports.ARRAY_TYPE = ARRAY_TYPE = type;
+    }
+    var degree = Math.PI / 180;
+    function toRadian(a) {
+      return a * degree;
+    }
+    function equals2(a, b) {
+      return Math.abs(a - b) <= EPSILON * Math.max(1, Math.abs(a), Math.abs(b));
+    }
+    if (!Math.hypot)
+      Math.hypot = function() {
+        var y = 0, i = arguments.length;
+        while (i--) {
+          y += arguments[i] * arguments[i];
+        }
+        return Math.sqrt(y);
+      };
+  }, {}], 21: [function(require2, module, exports) {
+    "use strict";
+    function _typeof(obj) {
+      "@babel/helpers - typeof";
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        _typeof = function _typeof2(obj2) {
+          return typeof obj2;
+        };
+      } else {
+        _typeof = function _typeof2(obj2) {
+          return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+        };
+      }
+      return _typeof(obj);
+    }
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.vec4 = exports.vec3 = exports.vec2 = exports.quat2 = exports.quat = exports.mat4 = exports.mat3 = exports.mat2d = exports.mat2 = exports.glMatrix = void 0;
+    var glMatrix = _interopRequireWildcard(require2("./common.js"));
+    exports.glMatrix = glMatrix;
+    var mat2 = _interopRequireWildcard(require2("./mat2.js"));
+    exports.mat2 = mat2;
+    var mat2d = _interopRequireWildcard(require2("./mat2d.js"));
+    exports.mat2d = mat2d;
+    var mat3 = _interopRequireWildcard(require2("./mat3.js"));
+    exports.mat3 = mat3;
+    var mat4 = _interopRequireWildcard(require2("./mat4.js"));
+    exports.mat4 = mat4;
+    var quat = _interopRequireWildcard(require2("./quat.js"));
+    exports.quat = quat;
+    var quat2 = _interopRequireWildcard(require2("./quat2.js"));
+    exports.quat2 = quat2;
+    var vec2 = _interopRequireWildcard(require2("./vec2.js"));
+    exports.vec2 = vec2;
+    var vec3 = _interopRequireWildcard(require2("./vec3.js"));
+    exports.vec3 = vec3;
+    var vec4 = _interopRequireWildcard(require2("./vec4.js"));
+    exports.vec4 = vec4;
+    function _getRequireWildcardCache() {
+      if (typeof WeakMap !== "function")
+        return null;
+      var cache = new WeakMap();
+      _getRequireWildcardCache = function _getRequireWildcardCache2() {
+        return cache;
+      };
+      return cache;
+    }
+    function _interopRequireWildcard(obj) {
+      if (obj && obj.__esModule) {
+        return obj;
+      }
+      if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") {
+        return { "default": obj };
+      }
+      var cache = _getRequireWildcardCache();
+      if (cache && cache.has(obj)) {
+        return cache.get(obj);
+      }
+      var newObj = {};
+      var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+          if (desc && (desc.get || desc.set)) {
+            Object.defineProperty(newObj, key, desc);
+          } else {
+            newObj[key] = obj[key];
+          }
+        }
+      }
+      newObj["default"] = obj;
+      if (cache) {
+        cache.set(obj, newObj);
+      }
+      return newObj;
+    }
+  }, { "./common.js": 20, "./mat2.js": 22, "./mat2d.js": 23, "./mat3.js": 24, "./mat4.js": 25, "./quat.js": 26, "./quat2.js": 27, "./vec2.js": 28, "./vec3.js": 29, "./vec4.js": 30 }], 22: [function(require2, module, exports) {
+    "use strict";
+    function _typeof(obj) {
+      "@babel/helpers - typeof";
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        _typeof = function _typeof2(obj2) {
+          return typeof obj2;
+        };
+      } else {
+        _typeof = function _typeof2(obj2) {
+          return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+        };
+      }
+      return _typeof(obj);
+    }
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.create = create;
+    exports.clone = clone;
+    exports.copy = copy;
+    exports.identity = identity;
+    exports.fromValues = fromValues;
+    exports.set = set;
+    exports.transpose = transpose;
+    exports.invert = invert;
+    exports.adjoint = adjoint;
+    exports.determinant = determinant;
+    exports.multiply = multiply;
+    exports.rotate = rotate;
+    exports.scale = scale;
+    exports.fromRotation = fromRotation;
+    exports.fromScaling = fromScaling;
+    exports.str = str;
+    exports.frob = frob;
+    exports.LDU = LDU;
+    exports.add = add;
+    exports.subtract = subtract;
+    exports.exactEquals = exactEquals;
+    exports.equals = equals2;
+    exports.multiplyScalar = multiplyScalar;
+    exports.multiplyScalarAndAdd = multiplyScalarAndAdd;
+    exports.sub = exports.mul = void 0;
+    var glMatrix = _interopRequireWildcard(require2("./common.js"));
+    function _getRequireWildcardCache() {
+      if (typeof WeakMap !== "function")
+        return null;
+      var cache = new WeakMap();
+      _getRequireWildcardCache = function _getRequireWildcardCache2() {
+        return cache;
+      };
+      return cache;
+    }
+    function _interopRequireWildcard(obj) {
+      if (obj && obj.__esModule) {
+        return obj;
+      }
+      if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") {
+        return { "default": obj };
+      }
+      var cache = _getRequireWildcardCache();
+      if (cache && cache.has(obj)) {
+        return cache.get(obj);
+      }
+      var newObj = {};
+      var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+          if (desc && (desc.get || desc.set)) {
+            Object.defineProperty(newObj, key, desc);
+          } else {
+            newObj[key] = obj[key];
+          }
+        }
+      }
+      newObj["default"] = obj;
+      if (cache) {
+        cache.set(obj, newObj);
+      }
+      return newObj;
+    }
+    function create() {
+      var out = new glMatrix.ARRAY_TYPE(4);
+      if (glMatrix.ARRAY_TYPE != Float32Array) {
+        out[1] = 0;
+        out[2] = 0;
+      }
+      out[0] = 1;
+      out[3] = 1;
+      return out;
+    }
+    function clone(a) {
+      var out = new glMatrix.ARRAY_TYPE(4);
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = a[2];
+      out[3] = a[3];
+      return out;
+    }
+    function copy(out, a) {
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = a[2];
+      out[3] = a[3];
+      return out;
+    }
+    function identity(out) {
+      out[0] = 1;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 1;
+      return out;
+    }
+    function fromValues(m00, m01, m10, m11) {
+      var out = new glMatrix.ARRAY_TYPE(4);
+      out[0] = m00;
+      out[1] = m01;
+      out[2] = m10;
+      out[3] = m11;
+      return out;
+    }
+    function set(out, m00, m01, m10, m11) {
+      out[0] = m00;
+      out[1] = m01;
+      out[2] = m10;
+      out[3] = m11;
+      return out;
+    }
+    function transpose(out, a) {
+      if (out === a) {
+        var a1 = a[1];
+        out[1] = a[2];
+        out[2] = a1;
+      } else {
+        out[0] = a[0];
+        out[1] = a[2];
+        out[2] = a[1];
+        out[3] = a[3];
+      }
+      return out;
+    }
+    function invert(out, a) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
+      var det = a0 * a3 - a2 * a1;
+      if (!det) {
+        return null;
+      }
+      det = 1 / det;
+      out[0] = a3 * det;
+      out[1] = -a1 * det;
+      out[2] = -a2 * det;
+      out[3] = a0 * det;
+      return out;
+    }
+    function adjoint(out, a) {
+      var a0 = a[0];
+      out[0] = a[3];
+      out[1] = -a[1];
+      out[2] = -a[2];
+      out[3] = a0;
+      return out;
+    }
+    function determinant(a) {
+      return a[0] * a[3] - a[2] * a[1];
+    }
+    function multiply(out, a, b) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
+      var b0 = b[0], b1 = b[1], b22 = b[2], b3 = b[3];
+      out[0] = a0 * b0 + a2 * b1;
+      out[1] = a1 * b0 + a3 * b1;
+      out[2] = a0 * b22 + a2 * b3;
+      out[3] = a1 * b22 + a3 * b3;
+      return out;
+    }
+    function rotate(out, a, rad) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
+      var s = Math.sin(rad);
+      var c = Math.cos(rad);
+      out[0] = a0 * c + a2 * s;
+      out[1] = a1 * c + a3 * s;
+      out[2] = a0 * -s + a2 * c;
+      out[3] = a1 * -s + a3 * c;
+      return out;
+    }
+    function scale(out, a, v) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
+      var v0 = v[0], v1 = v[1];
+      out[0] = a0 * v0;
+      out[1] = a1 * v0;
+      out[2] = a2 * v1;
+      out[3] = a3 * v1;
+      return out;
+    }
+    function fromRotation(out, rad) {
+      var s = Math.sin(rad);
+      var c = Math.cos(rad);
+      out[0] = c;
+      out[1] = s;
+      out[2] = -s;
+      out[3] = c;
+      return out;
+    }
+    function fromScaling(out, v) {
+      out[0] = v[0];
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = v[1];
+      return out;
+    }
+    function str(a) {
+      return "mat2(" + a[0] + ", " + a[1] + ", " + a[2] + ", " + a[3] + ")";
+    }
+    function frob(a) {
+      return Math.hypot(a[0], a[1], a[2], a[3]);
+    }
+    function LDU(L, D, U, a) {
+      L[2] = a[2] / a[0];
+      U[0] = a[0];
+      U[1] = a[1];
+      U[3] = a[3] - L[2] * U[1];
+      return [L, D, U];
+    }
+    function add(out, a, b) {
+      out[0] = a[0] + b[0];
+      out[1] = a[1] + b[1];
+      out[2] = a[2] + b[2];
+      out[3] = a[3] + b[3];
+      return out;
+    }
+    function subtract(out, a, b) {
+      out[0] = a[0] - b[0];
+      out[1] = a[1] - b[1];
+      out[2] = a[2] - b[2];
+      out[3] = a[3] - b[3];
+      return out;
+    }
+    function exactEquals(a, b) {
+      return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3];
+    }
+    function equals2(a, b) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
+      var b0 = b[0], b1 = b[1], b22 = b[2], b3 = b[3];
+      return Math.abs(a0 - b0) <= glMatrix.EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a1 - b1) <= glMatrix.EPSILON * Math.max(1, Math.abs(a1), Math.abs(b1)) && Math.abs(a2 - b22) <= glMatrix.EPSILON * Math.max(1, Math.abs(a2), Math.abs(b22)) && Math.abs(a3 - b3) <= glMatrix.EPSILON * Math.max(1, Math.abs(a3), Math.abs(b3));
+    }
+    function multiplyScalar(out, a, b) {
+      out[0] = a[0] * b;
+      out[1] = a[1] * b;
+      out[2] = a[2] * b;
+      out[3] = a[3] * b;
+      return out;
+    }
+    function multiplyScalarAndAdd(out, a, b, scale2) {
+      out[0] = a[0] + b[0] * scale2;
+      out[1] = a[1] + b[1] * scale2;
+      out[2] = a[2] + b[2] * scale2;
+      out[3] = a[3] + b[3] * scale2;
+      return out;
+    }
+    var mul = multiply;
+    exports.mul = mul;
+    var sub = subtract;
+    exports.sub = sub;
+  }, { "./common.js": 20 }], 23: [function(require2, module, exports) {
+    "use strict";
+    function _typeof(obj) {
+      "@babel/helpers - typeof";
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        _typeof = function _typeof2(obj2) {
+          return typeof obj2;
+        };
+      } else {
+        _typeof = function _typeof2(obj2) {
+          return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+        };
+      }
+      return _typeof(obj);
+    }
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.create = create;
+    exports.clone = clone;
+    exports.copy = copy;
+    exports.identity = identity;
+    exports.fromValues = fromValues;
+    exports.set = set;
+    exports.invert = invert;
+    exports.determinant = determinant;
+    exports.multiply = multiply;
+    exports.rotate = rotate;
+    exports.scale = scale;
+    exports.translate = translate;
+    exports.fromRotation = fromRotation;
+    exports.fromScaling = fromScaling;
+    exports.fromTranslation = fromTranslation;
+    exports.str = str;
+    exports.frob = frob;
+    exports.add = add;
+    exports.subtract = subtract;
+    exports.multiplyScalar = multiplyScalar;
+    exports.multiplyScalarAndAdd = multiplyScalarAndAdd;
+    exports.exactEquals = exactEquals;
+    exports.equals = equals2;
+    exports.sub = exports.mul = void 0;
+    var glMatrix = _interopRequireWildcard(require2("./common.js"));
+    function _getRequireWildcardCache() {
+      if (typeof WeakMap !== "function")
+        return null;
+      var cache = new WeakMap();
+      _getRequireWildcardCache = function _getRequireWildcardCache2() {
+        return cache;
+      };
+      return cache;
+    }
+    function _interopRequireWildcard(obj) {
+      if (obj && obj.__esModule) {
+        return obj;
+      }
+      if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") {
+        return { "default": obj };
+      }
+      var cache = _getRequireWildcardCache();
+      if (cache && cache.has(obj)) {
+        return cache.get(obj);
+      }
+      var newObj = {};
+      var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+          if (desc && (desc.get || desc.set)) {
+            Object.defineProperty(newObj, key, desc);
+          } else {
+            newObj[key] = obj[key];
+          }
+        }
+      }
+      newObj["default"] = obj;
+      if (cache) {
+        cache.set(obj, newObj);
+      }
+      return newObj;
+    }
+    function create() {
+      var out = new glMatrix.ARRAY_TYPE(6);
+      if (glMatrix.ARRAY_TYPE != Float32Array) {
+        out[1] = 0;
+        out[2] = 0;
+        out[4] = 0;
+        out[5] = 0;
+      }
+      out[0] = 1;
+      out[3] = 1;
+      return out;
+    }
+    function clone(a) {
+      var out = new glMatrix.ARRAY_TYPE(6);
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = a[2];
+      out[3] = a[3];
+      out[4] = a[4];
+      out[5] = a[5];
+      return out;
+    }
+    function copy(out, a) {
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = a[2];
+      out[3] = a[3];
+      out[4] = a[4];
+      out[5] = a[5];
+      return out;
+    }
+    function identity(out) {
+      out[0] = 1;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 1;
+      out[4] = 0;
+      out[5] = 0;
+      return out;
+    }
+    function fromValues(a, b, c, d, tx, ty) {
+      var out = new glMatrix.ARRAY_TYPE(6);
+      out[0] = a;
+      out[1] = b;
+      out[2] = c;
+      out[3] = d;
+      out[4] = tx;
+      out[5] = ty;
+      return out;
+    }
+    function set(out, a, b, c, d, tx, ty) {
+      out[0] = a;
+      out[1] = b;
+      out[2] = c;
+      out[3] = d;
+      out[4] = tx;
+      out[5] = ty;
+      return out;
+    }
+    function invert(out, a) {
+      var aa = a[0], ab = a[1], ac = a[2], ad = a[3];
+      var atx = a[4], aty = a[5];
+      var det = aa * ad - ab * ac;
+      if (!det) {
+        return null;
+      }
+      det = 1 / det;
+      out[0] = ad * det;
+      out[1] = -ab * det;
+      out[2] = -ac * det;
+      out[3] = aa * det;
+      out[4] = (ac * aty - ad * atx) * det;
+      out[5] = (ab * atx - aa * aty) * det;
+      return out;
+    }
+    function determinant(a) {
+      return a[0] * a[3] - a[1] * a[2];
+    }
+    function multiply(out, a, b) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3], a4 = a[4], a5 = a[5];
+      var b0 = b[0], b1 = b[1], b22 = b[2], b3 = b[3], b42 = b[4], b5 = b[5];
+      out[0] = a0 * b0 + a2 * b1;
+      out[1] = a1 * b0 + a3 * b1;
+      out[2] = a0 * b22 + a2 * b3;
+      out[3] = a1 * b22 + a3 * b3;
+      out[4] = a0 * b42 + a2 * b5 + a4;
+      out[5] = a1 * b42 + a3 * b5 + a5;
+      return out;
+    }
+    function rotate(out, a, rad) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3], a4 = a[4], a5 = a[5];
+      var s = Math.sin(rad);
+      var c = Math.cos(rad);
+      out[0] = a0 * c + a2 * s;
+      out[1] = a1 * c + a3 * s;
+      out[2] = a0 * -s + a2 * c;
+      out[3] = a1 * -s + a3 * c;
+      out[4] = a4;
+      out[5] = a5;
+      return out;
+    }
+    function scale(out, a, v) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3], a4 = a[4], a5 = a[5];
+      var v0 = v[0], v1 = v[1];
+      out[0] = a0 * v0;
+      out[1] = a1 * v0;
+      out[2] = a2 * v1;
+      out[3] = a3 * v1;
+      out[4] = a4;
+      out[5] = a5;
+      return out;
+    }
+    function translate(out, a, v) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3], a4 = a[4], a5 = a[5];
+      var v0 = v[0], v1 = v[1];
+      out[0] = a0;
+      out[1] = a1;
+      out[2] = a2;
+      out[3] = a3;
+      out[4] = a0 * v0 + a2 * v1 + a4;
+      out[5] = a1 * v0 + a3 * v1 + a5;
+      return out;
+    }
+    function fromRotation(out, rad) {
+      var s = Math.sin(rad), c = Math.cos(rad);
+      out[0] = c;
+      out[1] = s;
+      out[2] = -s;
+      out[3] = c;
+      out[4] = 0;
+      out[5] = 0;
+      return out;
+    }
+    function fromScaling(out, v) {
+      out[0] = v[0];
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = v[1];
+      out[4] = 0;
+      out[5] = 0;
+      return out;
+    }
+    function fromTranslation(out, v) {
+      out[0] = 1;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 1;
+      out[4] = v[0];
+      out[5] = v[1];
+      return out;
+    }
+    function str(a) {
+      return "mat2d(" + a[0] + ", " + a[1] + ", " + a[2] + ", " + a[3] + ", " + a[4] + ", " + a[5] + ")";
+    }
+    function frob(a) {
+      return Math.hypot(a[0], a[1], a[2], a[3], a[4], a[5], 1);
+    }
+    function add(out, a, b) {
+      out[0] = a[0] + b[0];
+      out[1] = a[1] + b[1];
+      out[2] = a[2] + b[2];
+      out[3] = a[3] + b[3];
+      out[4] = a[4] + b[4];
+      out[5] = a[5] + b[5];
+      return out;
+    }
+    function subtract(out, a, b) {
+      out[0] = a[0] - b[0];
+      out[1] = a[1] - b[1];
+      out[2] = a[2] - b[2];
+      out[3] = a[3] - b[3];
+      out[4] = a[4] - b[4];
+      out[5] = a[5] - b[5];
+      return out;
+    }
+    function multiplyScalar(out, a, b) {
+      out[0] = a[0] * b;
+      out[1] = a[1] * b;
+      out[2] = a[2] * b;
+      out[3] = a[3] * b;
+      out[4] = a[4] * b;
+      out[5] = a[5] * b;
+      return out;
+    }
+    function multiplyScalarAndAdd(out, a, b, scale2) {
+      out[0] = a[0] + b[0] * scale2;
+      out[1] = a[1] + b[1] * scale2;
+      out[2] = a[2] + b[2] * scale2;
+      out[3] = a[3] + b[3] * scale2;
+      out[4] = a[4] + b[4] * scale2;
+      out[5] = a[5] + b[5] * scale2;
+      return out;
+    }
+    function exactEquals(a, b) {
+      return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3] && a[4] === b[4] && a[5] === b[5];
+    }
+    function equals2(a, b) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3], a4 = a[4], a5 = a[5];
+      var b0 = b[0], b1 = b[1], b22 = b[2], b3 = b[3], b42 = b[4], b5 = b[5];
+      return Math.abs(a0 - b0) <= glMatrix.EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a1 - b1) <= glMatrix.EPSILON * Math.max(1, Math.abs(a1), Math.abs(b1)) && Math.abs(a2 - b22) <= glMatrix.EPSILON * Math.max(1, Math.abs(a2), Math.abs(b22)) && Math.abs(a3 - b3) <= glMatrix.EPSILON * Math.max(1, Math.abs(a3), Math.abs(b3)) && Math.abs(a4 - b42) <= glMatrix.EPSILON * Math.max(1, Math.abs(a4), Math.abs(b42)) && Math.abs(a5 - b5) <= glMatrix.EPSILON * Math.max(1, Math.abs(a5), Math.abs(b5));
+    }
+    var mul = multiply;
+    exports.mul = mul;
+    var sub = subtract;
+    exports.sub = sub;
+  }, { "./common.js": 20 }], 24: [function(require2, module, exports) {
+    "use strict";
+    function _typeof(obj) {
+      "@babel/helpers - typeof";
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        _typeof = function _typeof2(obj2) {
+          return typeof obj2;
+        };
+      } else {
+        _typeof = function _typeof2(obj2) {
+          return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+        };
+      }
+      return _typeof(obj);
+    }
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.create = create;
+    exports.fromMat4 = fromMat4;
+    exports.clone = clone;
+    exports.copy = copy;
+    exports.fromValues = fromValues;
+    exports.set = set;
+    exports.identity = identity;
+    exports.transpose = transpose;
+    exports.invert = invert;
+    exports.adjoint = adjoint;
+    exports.determinant = determinant;
+    exports.multiply = multiply;
+    exports.translate = translate;
+    exports.rotate = rotate;
+    exports.scale = scale;
+    exports.fromTranslation = fromTranslation;
+    exports.fromRotation = fromRotation;
+    exports.fromScaling = fromScaling;
+    exports.fromMat2d = fromMat2d;
+    exports.fromQuat = fromQuat;
+    exports.normalFromMat4 = normalFromMat4;
+    exports.projection = projection;
+    exports.str = str;
+    exports.frob = frob;
+    exports.add = add;
+    exports.subtract = subtract;
+    exports.multiplyScalar = multiplyScalar;
+    exports.multiplyScalarAndAdd = multiplyScalarAndAdd;
+    exports.exactEquals = exactEquals;
+    exports.equals = equals2;
+    exports.sub = exports.mul = void 0;
+    var glMatrix = _interopRequireWildcard(require2("./common.js"));
+    function _getRequireWildcardCache() {
+      if (typeof WeakMap !== "function")
+        return null;
+      var cache = new WeakMap();
+      _getRequireWildcardCache = function _getRequireWildcardCache2() {
+        return cache;
+      };
+      return cache;
+    }
+    function _interopRequireWildcard(obj) {
+      if (obj && obj.__esModule) {
+        return obj;
+      }
+      if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") {
+        return { "default": obj };
+      }
+      var cache = _getRequireWildcardCache();
+      if (cache && cache.has(obj)) {
+        return cache.get(obj);
+      }
+      var newObj = {};
+      var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+          if (desc && (desc.get || desc.set)) {
+            Object.defineProperty(newObj, key, desc);
+          } else {
+            newObj[key] = obj[key];
+          }
+        }
+      }
+      newObj["default"] = obj;
+      if (cache) {
+        cache.set(obj, newObj);
+      }
+      return newObj;
+    }
+    function create() {
+      var out = new glMatrix.ARRAY_TYPE(9);
+      if (glMatrix.ARRAY_TYPE != Float32Array) {
+        out[1] = 0;
+        out[2] = 0;
+        out[3] = 0;
+        out[5] = 0;
+        out[6] = 0;
+        out[7] = 0;
+      }
+      out[0] = 1;
+      out[4] = 1;
+      out[8] = 1;
+      return out;
+    }
+    function fromMat4(out, a) {
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = a[2];
+      out[3] = a[4];
+      out[4] = a[5];
+      out[5] = a[6];
+      out[6] = a[8];
+      out[7] = a[9];
+      out[8] = a[10];
+      return out;
+    }
+    function clone(a) {
+      var out = new glMatrix.ARRAY_TYPE(9);
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = a[2];
+      out[3] = a[3];
+      out[4] = a[4];
+      out[5] = a[5];
+      out[6] = a[6];
+      out[7] = a[7];
+      out[8] = a[8];
+      return out;
+    }
+    function copy(out, a) {
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = a[2];
+      out[3] = a[3];
+      out[4] = a[4];
+      out[5] = a[5];
+      out[6] = a[6];
+      out[7] = a[7];
+      out[8] = a[8];
+      return out;
+    }
+    function fromValues(m00, m01, m02, m10, m11, m12, m20, m21, m22) {
+      var out = new glMatrix.ARRAY_TYPE(9);
+      out[0] = m00;
+      out[1] = m01;
+      out[2] = m02;
+      out[3] = m10;
+      out[4] = m11;
+      out[5] = m12;
+      out[6] = m20;
+      out[7] = m21;
+      out[8] = m22;
+      return out;
+    }
+    function set(out, m00, m01, m02, m10, m11, m12, m20, m21, m22) {
+      out[0] = m00;
+      out[1] = m01;
+      out[2] = m02;
+      out[3] = m10;
+      out[4] = m11;
+      out[5] = m12;
+      out[6] = m20;
+      out[7] = m21;
+      out[8] = m22;
+      return out;
+    }
+    function identity(out) {
+      out[0] = 1;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 0;
+      out[4] = 1;
+      out[5] = 0;
+      out[6] = 0;
+      out[7] = 0;
+      out[8] = 1;
+      return out;
+    }
+    function transpose(out, a) {
+      if (out === a) {
+        var a01 = a[1], a02 = a[2], a12 = a[5];
+        out[1] = a[3];
+        out[2] = a[6];
+        out[3] = a01;
+        out[5] = a[7];
+        out[6] = a02;
+        out[7] = a12;
+      } else {
+        out[0] = a[0];
+        out[1] = a[3];
+        out[2] = a[6];
+        out[3] = a[1];
+        out[4] = a[4];
+        out[5] = a[7];
+        out[6] = a[2];
+        out[7] = a[5];
+        out[8] = a[8];
+      }
+      return out;
+    }
+    function invert(out, a) {
+      var a00 = a[0], a01 = a[1], a02 = a[2];
+      var a10 = a[3], a11 = a[4], a12 = a[5];
+      var a20 = a[6], a21 = a[7], a22 = a[8];
+      var b01 = a22 * a11 - a12 * a21;
+      var b11 = -a22 * a10 + a12 * a20;
+      var b21 = a21 * a10 - a11 * a20;
+      var det = a00 * b01 + a01 * b11 + a02 * b21;
+      if (!det) {
+        return null;
+      }
+      det = 1 / det;
+      out[0] = b01 * det;
+      out[1] = (-a22 * a01 + a02 * a21) * det;
+      out[2] = (a12 * a01 - a02 * a11) * det;
+      out[3] = b11 * det;
+      out[4] = (a22 * a00 - a02 * a20) * det;
+      out[5] = (-a12 * a00 + a02 * a10) * det;
+      out[6] = b21 * det;
+      out[7] = (-a21 * a00 + a01 * a20) * det;
+      out[8] = (a11 * a00 - a01 * a10) * det;
+      return out;
+    }
+    function adjoint(out, a) {
+      var a00 = a[0], a01 = a[1], a02 = a[2];
+      var a10 = a[3], a11 = a[4], a12 = a[5];
+      var a20 = a[6], a21 = a[7], a22 = a[8];
+      out[0] = a11 * a22 - a12 * a21;
+      out[1] = a02 * a21 - a01 * a22;
+      out[2] = a01 * a12 - a02 * a11;
+      out[3] = a12 * a20 - a10 * a22;
+      out[4] = a00 * a22 - a02 * a20;
+      out[5] = a02 * a10 - a00 * a12;
+      out[6] = a10 * a21 - a11 * a20;
+      out[7] = a01 * a20 - a00 * a21;
+      out[8] = a00 * a11 - a01 * a10;
+      return out;
+    }
+    function determinant(a) {
+      var a00 = a[0], a01 = a[1], a02 = a[2];
+      var a10 = a[3], a11 = a[4], a12 = a[5];
+      var a20 = a[6], a21 = a[7], a22 = a[8];
+      return a00 * (a22 * a11 - a12 * a21) + a01 * (-a22 * a10 + a12 * a20) + a02 * (a21 * a10 - a11 * a20);
+    }
+    function multiply(out, a, b) {
+      var a00 = a[0], a01 = a[1], a02 = a[2];
+      var a10 = a[3], a11 = a[4], a12 = a[5];
+      var a20 = a[6], a21 = a[7], a22 = a[8];
+      var b00 = b[0], b01 = b[1], b02 = b[2];
+      var b10 = b[3], b11 = b[4], b12 = b[5];
+      var b20 = b[6], b21 = b[7], b22 = b[8];
+      out[0] = b00 * a00 + b01 * a10 + b02 * a20;
+      out[1] = b00 * a01 + b01 * a11 + b02 * a21;
+      out[2] = b00 * a02 + b01 * a12 + b02 * a22;
+      out[3] = b10 * a00 + b11 * a10 + b12 * a20;
+      out[4] = b10 * a01 + b11 * a11 + b12 * a21;
+      out[5] = b10 * a02 + b11 * a12 + b12 * a22;
+      out[6] = b20 * a00 + b21 * a10 + b22 * a20;
+      out[7] = b20 * a01 + b21 * a11 + b22 * a21;
+      out[8] = b20 * a02 + b21 * a12 + b22 * a22;
+      return out;
+    }
+    function translate(out, a, v) {
+      var a00 = a[0], a01 = a[1], a02 = a[2], a10 = a[3], a11 = a[4], a12 = a[5], a20 = a[6], a21 = a[7], a22 = a[8], x = v[0], y = v[1];
+      out[0] = a00;
+      out[1] = a01;
+      out[2] = a02;
+      out[3] = a10;
+      out[4] = a11;
+      out[5] = a12;
+      out[6] = x * a00 + y * a10 + a20;
+      out[7] = x * a01 + y * a11 + a21;
+      out[8] = x * a02 + y * a12 + a22;
+      return out;
+    }
+    function rotate(out, a, rad) {
+      var a00 = a[0], a01 = a[1], a02 = a[2], a10 = a[3], a11 = a[4], a12 = a[5], a20 = a[6], a21 = a[7], a22 = a[8], s = Math.sin(rad), c = Math.cos(rad);
+      out[0] = c * a00 + s * a10;
+      out[1] = c * a01 + s * a11;
+      out[2] = c * a02 + s * a12;
+      out[3] = c * a10 - s * a00;
+      out[4] = c * a11 - s * a01;
+      out[5] = c * a12 - s * a02;
+      out[6] = a20;
+      out[7] = a21;
+      out[8] = a22;
+      return out;
+    }
+    function scale(out, a, v) {
+      var x = v[0], y = v[1];
+      out[0] = x * a[0];
+      out[1] = x * a[1];
+      out[2] = x * a[2];
+      out[3] = y * a[3];
+      out[4] = y * a[4];
+      out[5] = y * a[5];
+      out[6] = a[6];
+      out[7] = a[7];
+      out[8] = a[8];
+      return out;
+    }
+    function fromTranslation(out, v) {
+      out[0] = 1;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 0;
+      out[4] = 1;
+      out[5] = 0;
+      out[6] = v[0];
+      out[7] = v[1];
+      out[8] = 1;
+      return out;
+    }
+    function fromRotation(out, rad) {
+      var s = Math.sin(rad), c = Math.cos(rad);
+      out[0] = c;
+      out[1] = s;
+      out[2] = 0;
+      out[3] = -s;
+      out[4] = c;
+      out[5] = 0;
+      out[6] = 0;
+      out[7] = 0;
+      out[8] = 1;
+      return out;
+    }
+    function fromScaling(out, v) {
+      out[0] = v[0];
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 0;
+      out[4] = v[1];
+      out[5] = 0;
+      out[6] = 0;
+      out[7] = 0;
+      out[8] = 1;
+      return out;
+    }
+    function fromMat2d(out, a) {
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = 0;
+      out[3] = a[2];
+      out[4] = a[3];
+      out[5] = 0;
+      out[6] = a[4];
+      out[7] = a[5];
+      out[8] = 1;
+      return out;
+    }
+    function fromQuat(out, q) {
+      var x = q[0], y = q[1], z = q[2], w = q[3];
+      var x2 = x + x;
+      var y2 = y + y;
+      var z2 = z + z;
+      var xx = x * x2;
+      var yx = y * x2;
+      var yy = y * y2;
+      var zx = z * x2;
+      var zy = z * y2;
+      var zz = z * z2;
+      var wx = w * x2;
+      var wy = w * y2;
+      var wz = w * z2;
+      out[0] = 1 - yy - zz;
+      out[3] = yx - wz;
+      out[6] = zx + wy;
+      out[1] = yx + wz;
+      out[4] = 1 - xx - zz;
+      out[7] = zy - wx;
+      out[2] = zx - wy;
+      out[5] = zy + wx;
+      out[8] = 1 - xx - yy;
+      return out;
+    }
+    function normalFromMat4(out, a) {
+      var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3];
+      var a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7];
+      var a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11];
+      var a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
+      var b00 = a00 * a11 - a01 * a10;
+      var b01 = a00 * a12 - a02 * a10;
+      var b02 = a00 * a13 - a03 * a10;
+      var b03 = a01 * a12 - a02 * a11;
+      var b04 = a01 * a13 - a03 * a11;
+      var b05 = a02 * a13 - a03 * a12;
+      var b06 = a20 * a31 - a21 * a30;
+      var b07 = a20 * a32 - a22 * a30;
+      var b08 = a20 * a33 - a23 * a30;
+      var b09 = a21 * a32 - a22 * a31;
+      var b10 = a21 * a33 - a23 * a31;
+      var b11 = a22 * a33 - a23 * a32;
+      var det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
+      if (!det) {
+        return null;
+      }
+      det = 1 / det;
+      out[0] = (a11 * b11 - a12 * b10 + a13 * b09) * det;
+      out[1] = (a12 * b08 - a10 * b11 - a13 * b07) * det;
+      out[2] = (a10 * b10 - a11 * b08 + a13 * b06) * det;
+      out[3] = (a02 * b10 - a01 * b11 - a03 * b09) * det;
+      out[4] = (a00 * b11 - a02 * b08 + a03 * b07) * det;
+      out[5] = (a01 * b08 - a00 * b10 - a03 * b06) * det;
+      out[6] = (a31 * b05 - a32 * b04 + a33 * b03) * det;
+      out[7] = (a32 * b02 - a30 * b05 - a33 * b01) * det;
+      out[8] = (a30 * b04 - a31 * b02 + a33 * b00) * det;
+      return out;
+    }
+    function projection(out, width, height) {
+      out[0] = 2 / width;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 0;
+      out[4] = -2 / height;
+      out[5] = 0;
+      out[6] = -1;
+      out[7] = 1;
+      out[8] = 1;
+      return out;
+    }
+    function str(a) {
+      return "mat3(" + a[0] + ", " + a[1] + ", " + a[2] + ", " + a[3] + ", " + a[4] + ", " + a[5] + ", " + a[6] + ", " + a[7] + ", " + a[8] + ")";
+    }
+    function frob(a) {
+      return Math.hypot(a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8]);
+    }
+    function add(out, a, b) {
+      out[0] = a[0] + b[0];
+      out[1] = a[1] + b[1];
+      out[2] = a[2] + b[2];
+      out[3] = a[3] + b[3];
+      out[4] = a[4] + b[4];
+      out[5] = a[5] + b[5];
+      out[6] = a[6] + b[6];
+      out[7] = a[7] + b[7];
+      out[8] = a[8] + b[8];
+      return out;
+    }
+    function subtract(out, a, b) {
+      out[0] = a[0] - b[0];
+      out[1] = a[1] - b[1];
+      out[2] = a[2] - b[2];
+      out[3] = a[3] - b[3];
+      out[4] = a[4] - b[4];
+      out[5] = a[5] - b[5];
+      out[6] = a[6] - b[6];
+      out[7] = a[7] - b[7];
+      out[8] = a[8] - b[8];
+      return out;
+    }
+    function multiplyScalar(out, a, b) {
+      out[0] = a[0] * b;
+      out[1] = a[1] * b;
+      out[2] = a[2] * b;
+      out[3] = a[3] * b;
+      out[4] = a[4] * b;
+      out[5] = a[5] * b;
+      out[6] = a[6] * b;
+      out[7] = a[7] * b;
+      out[8] = a[8] * b;
+      return out;
+    }
+    function multiplyScalarAndAdd(out, a, b, scale2) {
+      out[0] = a[0] + b[0] * scale2;
+      out[1] = a[1] + b[1] * scale2;
+      out[2] = a[2] + b[2] * scale2;
+      out[3] = a[3] + b[3] * scale2;
+      out[4] = a[4] + b[4] * scale2;
+      out[5] = a[5] + b[5] * scale2;
+      out[6] = a[6] + b[6] * scale2;
+      out[7] = a[7] + b[7] * scale2;
+      out[8] = a[8] + b[8] * scale2;
+      return out;
+    }
+    function exactEquals(a, b) {
+      return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3] && a[4] === b[4] && a[5] === b[5] && a[6] === b[6] && a[7] === b[7] && a[8] === b[8];
+    }
+    function equals2(a, b) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3], a4 = a[4], a5 = a[5], a6 = a[6], a7 = a[7], a8 = a[8];
+      var b0 = b[0], b1 = b[1], b22 = b[2], b3 = b[3], b42 = b[4], b5 = b[5], b6 = b[6], b7 = b[7], b82 = b[8];
+      return Math.abs(a0 - b0) <= glMatrix.EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a1 - b1) <= glMatrix.EPSILON * Math.max(1, Math.abs(a1), Math.abs(b1)) && Math.abs(a2 - b22) <= glMatrix.EPSILON * Math.max(1, Math.abs(a2), Math.abs(b22)) && Math.abs(a3 - b3) <= glMatrix.EPSILON * Math.max(1, Math.abs(a3), Math.abs(b3)) && Math.abs(a4 - b42) <= glMatrix.EPSILON * Math.max(1, Math.abs(a4), Math.abs(b42)) && Math.abs(a5 - b5) <= glMatrix.EPSILON * Math.max(1, Math.abs(a5), Math.abs(b5)) && Math.abs(a6 - b6) <= glMatrix.EPSILON * Math.max(1, Math.abs(a6), Math.abs(b6)) && Math.abs(a7 - b7) <= glMatrix.EPSILON * Math.max(1, Math.abs(a7), Math.abs(b7)) && Math.abs(a8 - b82) <= glMatrix.EPSILON * Math.max(1, Math.abs(a8), Math.abs(b82));
+    }
+    var mul = multiply;
+    exports.mul = mul;
+    var sub = subtract;
+    exports.sub = sub;
+  }, { "./common.js": 20 }], 25: [function(require2, module, exports) {
+    "use strict";
+    function _typeof(obj) {
+      "@babel/helpers - typeof";
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        _typeof = function _typeof2(obj2) {
+          return typeof obj2;
+        };
+      } else {
+        _typeof = function _typeof2(obj2) {
+          return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+        };
+      }
+      return _typeof(obj);
+    }
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.create = create;
+    exports.clone = clone;
+    exports.copy = copy;
+    exports.fromValues = fromValues;
+    exports.set = set;
+    exports.identity = identity;
+    exports.transpose = transpose;
+    exports.invert = invert;
+    exports.adjoint = adjoint;
+    exports.determinant = determinant;
+    exports.multiply = multiply;
+    exports.translate = translate;
+    exports.scale = scale;
+    exports.rotate = rotate;
+    exports.rotateX = rotateX;
+    exports.rotateY = rotateY;
+    exports.rotateZ = rotateZ;
+    exports.fromTranslation = fromTranslation;
+    exports.fromScaling = fromScaling;
+    exports.fromRotation = fromRotation;
+    exports.fromXRotation = fromXRotation;
+    exports.fromYRotation = fromYRotation;
+    exports.fromZRotation = fromZRotation;
+    exports.fromRotationTranslation = fromRotationTranslation;
+    exports.fromQuat2 = fromQuat2;
+    exports.getTranslation = getTranslation;
+    exports.getScaling = getScaling;
+    exports.getRotation = getRotation;
+    exports.fromRotationTranslationScale = fromRotationTranslationScale;
+    exports.fromRotationTranslationScaleOrigin = fromRotationTranslationScaleOrigin;
+    exports.fromQuat = fromQuat;
+    exports.frustum = frustum;
+    exports.perspective = perspective;
+    exports.perspectiveFromFieldOfView = perspectiveFromFieldOfView;
+    exports.ortho = ortho;
+    exports.lookAt = lookAt;
+    exports.targetTo = targetTo;
+    exports.str = str;
+    exports.frob = frob;
+    exports.add = add;
+    exports.subtract = subtract;
+    exports.multiplyScalar = multiplyScalar;
+    exports.multiplyScalarAndAdd = multiplyScalarAndAdd;
+    exports.exactEquals = exactEquals;
+    exports.equals = equals2;
+    exports.sub = exports.mul = void 0;
+    var glMatrix = _interopRequireWildcard(require2("./common.js"));
+    function _getRequireWildcardCache() {
+      if (typeof WeakMap !== "function")
+        return null;
+      var cache = new WeakMap();
+      _getRequireWildcardCache = function _getRequireWildcardCache2() {
+        return cache;
+      };
+      return cache;
+    }
+    function _interopRequireWildcard(obj) {
+      if (obj && obj.__esModule) {
+        return obj;
+      }
+      if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") {
+        return { "default": obj };
+      }
+      var cache = _getRequireWildcardCache();
+      if (cache && cache.has(obj)) {
+        return cache.get(obj);
+      }
+      var newObj = {};
+      var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+          if (desc && (desc.get || desc.set)) {
+            Object.defineProperty(newObj, key, desc);
+          } else {
+            newObj[key] = obj[key];
+          }
+        }
+      }
+      newObj["default"] = obj;
+      if (cache) {
+        cache.set(obj, newObj);
+      }
+      return newObj;
+    }
+    function create() {
+      var out = new glMatrix.ARRAY_TYPE(16);
+      if (glMatrix.ARRAY_TYPE != Float32Array) {
+        out[1] = 0;
+        out[2] = 0;
+        out[3] = 0;
+        out[4] = 0;
+        out[6] = 0;
+        out[7] = 0;
+        out[8] = 0;
+        out[9] = 0;
+        out[11] = 0;
+        out[12] = 0;
+        out[13] = 0;
+        out[14] = 0;
+      }
+      out[0] = 1;
+      out[5] = 1;
+      out[10] = 1;
+      out[15] = 1;
+      return out;
+    }
+    function clone(a) {
+      var out = new glMatrix.ARRAY_TYPE(16);
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = a[2];
+      out[3] = a[3];
+      out[4] = a[4];
+      out[5] = a[5];
+      out[6] = a[6];
+      out[7] = a[7];
+      out[8] = a[8];
+      out[9] = a[9];
+      out[10] = a[10];
+      out[11] = a[11];
+      out[12] = a[12];
+      out[13] = a[13];
+      out[14] = a[14];
+      out[15] = a[15];
+      return out;
+    }
+    function copy(out, a) {
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = a[2];
+      out[3] = a[3];
+      out[4] = a[4];
+      out[5] = a[5];
+      out[6] = a[6];
+      out[7] = a[7];
+      out[8] = a[8];
+      out[9] = a[9];
+      out[10] = a[10];
+      out[11] = a[11];
+      out[12] = a[12];
+      out[13] = a[13];
+      out[14] = a[14];
+      out[15] = a[15];
+      return out;
+    }
+    function fromValues(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33) {
+      var out = new glMatrix.ARRAY_TYPE(16);
+      out[0] = m00;
+      out[1] = m01;
+      out[2] = m02;
+      out[3] = m03;
+      out[4] = m10;
+      out[5] = m11;
+      out[6] = m12;
+      out[7] = m13;
+      out[8] = m20;
+      out[9] = m21;
+      out[10] = m22;
+      out[11] = m23;
+      out[12] = m30;
+      out[13] = m31;
+      out[14] = m32;
+      out[15] = m33;
+      return out;
+    }
+    function set(out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33) {
+      out[0] = m00;
+      out[1] = m01;
+      out[2] = m02;
+      out[3] = m03;
+      out[4] = m10;
+      out[5] = m11;
+      out[6] = m12;
+      out[7] = m13;
+      out[8] = m20;
+      out[9] = m21;
+      out[10] = m22;
+      out[11] = m23;
+      out[12] = m30;
+      out[13] = m31;
+      out[14] = m32;
+      out[15] = m33;
+      return out;
+    }
+    function identity(out) {
+      out[0] = 1;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 0;
+      out[4] = 0;
+      out[5] = 1;
+      out[6] = 0;
+      out[7] = 0;
+      out[8] = 0;
+      out[9] = 0;
+      out[10] = 1;
+      out[11] = 0;
+      out[12] = 0;
+      out[13] = 0;
+      out[14] = 0;
+      out[15] = 1;
+      return out;
+    }
+    function transpose(out, a) {
+      if (out === a) {
+        var a01 = a[1], a02 = a[2], a03 = a[3];
+        var a12 = a[6], a13 = a[7];
+        var a23 = a[11];
+        out[1] = a[4];
+        out[2] = a[8];
+        out[3] = a[12];
+        out[4] = a01;
+        out[6] = a[9];
+        out[7] = a[13];
+        out[8] = a02;
+        out[9] = a12;
+        out[11] = a[14];
+        out[12] = a03;
+        out[13] = a13;
+        out[14] = a23;
+      } else {
+        out[0] = a[0];
+        out[1] = a[4];
+        out[2] = a[8];
+        out[3] = a[12];
+        out[4] = a[1];
+        out[5] = a[5];
+        out[6] = a[9];
+        out[7] = a[13];
+        out[8] = a[2];
+        out[9] = a[6];
+        out[10] = a[10];
+        out[11] = a[14];
+        out[12] = a[3];
+        out[13] = a[7];
+        out[14] = a[11];
+        out[15] = a[15];
+      }
+      return out;
+    }
+    function invert(out, a) {
+      var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3];
+      var a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7];
+      var a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11];
+      var a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
+      var b00 = a00 * a11 - a01 * a10;
+      var b01 = a00 * a12 - a02 * a10;
+      var b02 = a00 * a13 - a03 * a10;
+      var b03 = a01 * a12 - a02 * a11;
+      var b04 = a01 * a13 - a03 * a11;
+      var b05 = a02 * a13 - a03 * a12;
+      var b06 = a20 * a31 - a21 * a30;
+      var b07 = a20 * a32 - a22 * a30;
+      var b08 = a20 * a33 - a23 * a30;
+      var b09 = a21 * a32 - a22 * a31;
+      var b10 = a21 * a33 - a23 * a31;
+      var b11 = a22 * a33 - a23 * a32;
+      var det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
+      if (!det) {
+        return null;
+      }
+      det = 1 / det;
+      out[0] = (a11 * b11 - a12 * b10 + a13 * b09) * det;
+      out[1] = (a02 * b10 - a01 * b11 - a03 * b09) * det;
+      out[2] = (a31 * b05 - a32 * b04 + a33 * b03) * det;
+      out[3] = (a22 * b04 - a21 * b05 - a23 * b03) * det;
+      out[4] = (a12 * b08 - a10 * b11 - a13 * b07) * det;
+      out[5] = (a00 * b11 - a02 * b08 + a03 * b07) * det;
+      out[6] = (a32 * b02 - a30 * b05 - a33 * b01) * det;
+      out[7] = (a20 * b05 - a22 * b02 + a23 * b01) * det;
+      out[8] = (a10 * b10 - a11 * b08 + a13 * b06) * det;
+      out[9] = (a01 * b08 - a00 * b10 - a03 * b06) * det;
+      out[10] = (a30 * b04 - a31 * b02 + a33 * b00) * det;
+      out[11] = (a21 * b02 - a20 * b04 - a23 * b00) * det;
+      out[12] = (a11 * b07 - a10 * b09 - a12 * b06) * det;
+      out[13] = (a00 * b09 - a01 * b07 + a02 * b06) * det;
+      out[14] = (a31 * b01 - a30 * b03 - a32 * b00) * det;
+      out[15] = (a20 * b03 - a21 * b01 + a22 * b00) * det;
+      return out;
+    }
+    function adjoint(out, a) {
+      var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3];
+      var a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7];
+      var a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11];
+      var a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
+      out[0] = a11 * (a22 * a33 - a23 * a32) - a21 * (a12 * a33 - a13 * a32) + a31 * (a12 * a23 - a13 * a22);
+      out[1] = -(a01 * (a22 * a33 - a23 * a32) - a21 * (a02 * a33 - a03 * a32) + a31 * (a02 * a23 - a03 * a22));
+      out[2] = a01 * (a12 * a33 - a13 * a32) - a11 * (a02 * a33 - a03 * a32) + a31 * (a02 * a13 - a03 * a12);
+      out[3] = -(a01 * (a12 * a23 - a13 * a22) - a11 * (a02 * a23 - a03 * a22) + a21 * (a02 * a13 - a03 * a12));
+      out[4] = -(a10 * (a22 * a33 - a23 * a32) - a20 * (a12 * a33 - a13 * a32) + a30 * (a12 * a23 - a13 * a22));
+      out[5] = a00 * (a22 * a33 - a23 * a32) - a20 * (a02 * a33 - a03 * a32) + a30 * (a02 * a23 - a03 * a22);
+      out[6] = -(a00 * (a12 * a33 - a13 * a32) - a10 * (a02 * a33 - a03 * a32) + a30 * (a02 * a13 - a03 * a12));
+      out[7] = a00 * (a12 * a23 - a13 * a22) - a10 * (a02 * a23 - a03 * a22) + a20 * (a02 * a13 - a03 * a12);
+      out[8] = a10 * (a21 * a33 - a23 * a31) - a20 * (a11 * a33 - a13 * a31) + a30 * (a11 * a23 - a13 * a21);
+      out[9] = -(a00 * (a21 * a33 - a23 * a31) - a20 * (a01 * a33 - a03 * a31) + a30 * (a01 * a23 - a03 * a21));
+      out[10] = a00 * (a11 * a33 - a13 * a31) - a10 * (a01 * a33 - a03 * a31) + a30 * (a01 * a13 - a03 * a11);
+      out[11] = -(a00 * (a11 * a23 - a13 * a21) - a10 * (a01 * a23 - a03 * a21) + a20 * (a01 * a13 - a03 * a11));
+      out[12] = -(a10 * (a21 * a32 - a22 * a31) - a20 * (a11 * a32 - a12 * a31) + a30 * (a11 * a22 - a12 * a21));
+      out[13] = a00 * (a21 * a32 - a22 * a31) - a20 * (a01 * a32 - a02 * a31) + a30 * (a01 * a22 - a02 * a21);
+      out[14] = -(a00 * (a11 * a32 - a12 * a31) - a10 * (a01 * a32 - a02 * a31) + a30 * (a01 * a12 - a02 * a11));
+      out[15] = a00 * (a11 * a22 - a12 * a21) - a10 * (a01 * a22 - a02 * a21) + a20 * (a01 * a12 - a02 * a11);
+      return out;
+    }
+    function determinant(a) {
+      var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3];
+      var a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7];
+      var a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11];
+      var a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
+      var b00 = a00 * a11 - a01 * a10;
+      var b01 = a00 * a12 - a02 * a10;
+      var b02 = a00 * a13 - a03 * a10;
+      var b03 = a01 * a12 - a02 * a11;
+      var b04 = a01 * a13 - a03 * a11;
+      var b05 = a02 * a13 - a03 * a12;
+      var b06 = a20 * a31 - a21 * a30;
+      var b07 = a20 * a32 - a22 * a30;
+      var b08 = a20 * a33 - a23 * a30;
+      var b09 = a21 * a32 - a22 * a31;
+      var b10 = a21 * a33 - a23 * a31;
+      var b11 = a22 * a33 - a23 * a32;
+      return b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
+    }
+    function multiply(out, a, b) {
+      var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3];
+      var a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7];
+      var a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11];
+      var a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
+      var b0 = b[0], b1 = b[1], b22 = b[2], b3 = b[3];
+      out[0] = b0 * a00 + b1 * a10 + b22 * a20 + b3 * a30;
+      out[1] = b0 * a01 + b1 * a11 + b22 * a21 + b3 * a31;
+      out[2] = b0 * a02 + b1 * a12 + b22 * a22 + b3 * a32;
+      out[3] = b0 * a03 + b1 * a13 + b22 * a23 + b3 * a33;
+      b0 = b[4];
+      b1 = b[5];
+      b22 = b[6];
+      b3 = b[7];
+      out[4] = b0 * a00 + b1 * a10 + b22 * a20 + b3 * a30;
+      out[5] = b0 * a01 + b1 * a11 + b22 * a21 + b3 * a31;
+      out[6] = b0 * a02 + b1 * a12 + b22 * a22 + b3 * a32;
+      out[7] = b0 * a03 + b1 * a13 + b22 * a23 + b3 * a33;
+      b0 = b[8];
+      b1 = b[9];
+      b22 = b[10];
+      b3 = b[11];
+      out[8] = b0 * a00 + b1 * a10 + b22 * a20 + b3 * a30;
+      out[9] = b0 * a01 + b1 * a11 + b22 * a21 + b3 * a31;
+      out[10] = b0 * a02 + b1 * a12 + b22 * a22 + b3 * a32;
+      out[11] = b0 * a03 + b1 * a13 + b22 * a23 + b3 * a33;
+      b0 = b[12];
+      b1 = b[13];
+      b22 = b[14];
+      b3 = b[15];
+      out[12] = b0 * a00 + b1 * a10 + b22 * a20 + b3 * a30;
+      out[13] = b0 * a01 + b1 * a11 + b22 * a21 + b3 * a31;
+      out[14] = b0 * a02 + b1 * a12 + b22 * a22 + b3 * a32;
+      out[15] = b0 * a03 + b1 * a13 + b22 * a23 + b3 * a33;
+      return out;
+    }
+    function translate(out, a, v) {
+      var x = v[0], y = v[1], z = v[2];
+      var a00, a01, a02, a03;
+      var a10, a11, a12, a13;
+      var a20, a21, a22, a23;
+      if (a === out) {
+        out[12] = a[0] * x + a[4] * y + a[8] * z + a[12];
+        out[13] = a[1] * x + a[5] * y + a[9] * z + a[13];
+        out[14] = a[2] * x + a[6] * y + a[10] * z + a[14];
+        out[15] = a[3] * x + a[7] * y + a[11] * z + a[15];
+      } else {
+        a00 = a[0];
+        a01 = a[1];
+        a02 = a[2];
+        a03 = a[3];
+        a10 = a[4];
+        a11 = a[5];
+        a12 = a[6];
+        a13 = a[7];
+        a20 = a[8];
+        a21 = a[9];
+        a22 = a[10];
+        a23 = a[11];
+        out[0] = a00;
+        out[1] = a01;
+        out[2] = a02;
+        out[3] = a03;
+        out[4] = a10;
+        out[5] = a11;
+        out[6] = a12;
+        out[7] = a13;
+        out[8] = a20;
+        out[9] = a21;
+        out[10] = a22;
+        out[11] = a23;
+        out[12] = a00 * x + a10 * y + a20 * z + a[12];
+        out[13] = a01 * x + a11 * y + a21 * z + a[13];
+        out[14] = a02 * x + a12 * y + a22 * z + a[14];
+        out[15] = a03 * x + a13 * y + a23 * z + a[15];
+      }
+      return out;
+    }
+    function scale(out, a, v) {
+      var x = v[0], y = v[1], z = v[2];
+      out[0] = a[0] * x;
+      out[1] = a[1] * x;
+      out[2] = a[2] * x;
+      out[3] = a[3] * x;
+      out[4] = a[4] * y;
+      out[5] = a[5] * y;
+      out[6] = a[6] * y;
+      out[7] = a[7] * y;
+      out[8] = a[8] * z;
+      out[9] = a[9] * z;
+      out[10] = a[10] * z;
+      out[11] = a[11] * z;
+      out[12] = a[12];
+      out[13] = a[13];
+      out[14] = a[14];
+      out[15] = a[15];
+      return out;
+    }
+    function rotate(out, a, rad, axis) {
+      var x = axis[0], y = axis[1], z = axis[2];
+      var len = Math.hypot(x, y, z);
+      var s, c, t;
+      var a00, a01, a02, a03;
+      var a10, a11, a12, a13;
+      var a20, a21, a22, a23;
+      var b00, b01, b02;
+      var b10, b11, b12;
+      var b20, b21, b22;
+      if (len < glMatrix.EPSILON) {
+        return null;
+      }
+      len = 1 / len;
+      x *= len;
+      y *= len;
+      z *= len;
+      s = Math.sin(rad);
+      c = Math.cos(rad);
+      t = 1 - c;
+      a00 = a[0];
+      a01 = a[1];
+      a02 = a[2];
+      a03 = a[3];
+      a10 = a[4];
+      a11 = a[5];
+      a12 = a[6];
+      a13 = a[7];
+      a20 = a[8];
+      a21 = a[9];
+      a22 = a[10];
+      a23 = a[11];
+      b00 = x * x * t + c;
+      b01 = y * x * t + z * s;
+      b02 = z * x * t - y * s;
+      b10 = x * y * t - z * s;
+      b11 = y * y * t + c;
+      b12 = z * y * t + x * s;
+      b20 = x * z * t + y * s;
+      b21 = y * z * t - x * s;
+      b22 = z * z * t + c;
+      out[0] = a00 * b00 + a10 * b01 + a20 * b02;
+      out[1] = a01 * b00 + a11 * b01 + a21 * b02;
+      out[2] = a02 * b00 + a12 * b01 + a22 * b02;
+      out[3] = a03 * b00 + a13 * b01 + a23 * b02;
+      out[4] = a00 * b10 + a10 * b11 + a20 * b12;
+      out[5] = a01 * b10 + a11 * b11 + a21 * b12;
+      out[6] = a02 * b10 + a12 * b11 + a22 * b12;
+      out[7] = a03 * b10 + a13 * b11 + a23 * b12;
+      out[8] = a00 * b20 + a10 * b21 + a20 * b22;
+      out[9] = a01 * b20 + a11 * b21 + a21 * b22;
+      out[10] = a02 * b20 + a12 * b21 + a22 * b22;
+      out[11] = a03 * b20 + a13 * b21 + a23 * b22;
+      if (a !== out) {
+        out[12] = a[12];
+        out[13] = a[13];
+        out[14] = a[14];
+        out[15] = a[15];
+      }
+      return out;
+    }
+    function rotateX(out, a, rad) {
+      var s = Math.sin(rad);
+      var c = Math.cos(rad);
+      var a10 = a[4];
+      var a11 = a[5];
+      var a12 = a[6];
+      var a13 = a[7];
+      var a20 = a[8];
+      var a21 = a[9];
+      var a22 = a[10];
+      var a23 = a[11];
+      if (a !== out) {
+        out[0] = a[0];
+        out[1] = a[1];
+        out[2] = a[2];
+        out[3] = a[3];
+        out[12] = a[12];
+        out[13] = a[13];
+        out[14] = a[14];
+        out[15] = a[15];
+      }
+      out[4] = a10 * c + a20 * s;
+      out[5] = a11 * c + a21 * s;
+      out[6] = a12 * c + a22 * s;
+      out[7] = a13 * c + a23 * s;
+      out[8] = a20 * c - a10 * s;
+      out[9] = a21 * c - a11 * s;
+      out[10] = a22 * c - a12 * s;
+      out[11] = a23 * c - a13 * s;
+      return out;
+    }
+    function rotateY(out, a, rad) {
+      var s = Math.sin(rad);
+      var c = Math.cos(rad);
+      var a00 = a[0];
+      var a01 = a[1];
+      var a02 = a[2];
+      var a03 = a[3];
+      var a20 = a[8];
+      var a21 = a[9];
+      var a22 = a[10];
+      var a23 = a[11];
+      if (a !== out) {
+        out[4] = a[4];
+        out[5] = a[5];
+        out[6] = a[6];
+        out[7] = a[7];
+        out[12] = a[12];
+        out[13] = a[13];
+        out[14] = a[14];
+        out[15] = a[15];
+      }
+      out[0] = a00 * c - a20 * s;
+      out[1] = a01 * c - a21 * s;
+      out[2] = a02 * c - a22 * s;
+      out[3] = a03 * c - a23 * s;
+      out[8] = a00 * s + a20 * c;
+      out[9] = a01 * s + a21 * c;
+      out[10] = a02 * s + a22 * c;
+      out[11] = a03 * s + a23 * c;
+      return out;
+    }
+    function rotateZ(out, a, rad) {
+      var s = Math.sin(rad);
+      var c = Math.cos(rad);
+      var a00 = a[0];
+      var a01 = a[1];
+      var a02 = a[2];
+      var a03 = a[3];
+      var a10 = a[4];
+      var a11 = a[5];
+      var a12 = a[6];
+      var a13 = a[7];
+      if (a !== out) {
+        out[8] = a[8];
+        out[9] = a[9];
+        out[10] = a[10];
+        out[11] = a[11];
+        out[12] = a[12];
+        out[13] = a[13];
+        out[14] = a[14];
+        out[15] = a[15];
+      }
+      out[0] = a00 * c + a10 * s;
+      out[1] = a01 * c + a11 * s;
+      out[2] = a02 * c + a12 * s;
+      out[3] = a03 * c + a13 * s;
+      out[4] = a10 * c - a00 * s;
+      out[5] = a11 * c - a01 * s;
+      out[6] = a12 * c - a02 * s;
+      out[7] = a13 * c - a03 * s;
+      return out;
+    }
+    function fromTranslation(out, v) {
+      out[0] = 1;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 0;
+      out[4] = 0;
+      out[5] = 1;
+      out[6] = 0;
+      out[7] = 0;
+      out[8] = 0;
+      out[9] = 0;
+      out[10] = 1;
+      out[11] = 0;
+      out[12] = v[0];
+      out[13] = v[1];
+      out[14] = v[2];
+      out[15] = 1;
+      return out;
+    }
+    function fromScaling(out, v) {
+      out[0] = v[0];
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 0;
+      out[4] = 0;
+      out[5] = v[1];
+      out[6] = 0;
+      out[7] = 0;
+      out[8] = 0;
+      out[9] = 0;
+      out[10] = v[2];
+      out[11] = 0;
+      out[12] = 0;
+      out[13] = 0;
+      out[14] = 0;
+      out[15] = 1;
+      return out;
+    }
+    function fromRotation(out, rad, axis) {
+      var x = axis[0], y = axis[1], z = axis[2];
+      var len = Math.hypot(x, y, z);
+      var s, c, t;
+      if (len < glMatrix.EPSILON) {
+        return null;
+      }
+      len = 1 / len;
+      x *= len;
+      y *= len;
+      z *= len;
+      s = Math.sin(rad);
+      c = Math.cos(rad);
+      t = 1 - c;
+      out[0] = x * x * t + c;
+      out[1] = y * x * t + z * s;
+      out[2] = z * x * t - y * s;
+      out[3] = 0;
+      out[4] = x * y * t - z * s;
+      out[5] = y * y * t + c;
+      out[6] = z * y * t + x * s;
+      out[7] = 0;
+      out[8] = x * z * t + y * s;
+      out[9] = y * z * t - x * s;
+      out[10] = z * z * t + c;
+      out[11] = 0;
+      out[12] = 0;
+      out[13] = 0;
+      out[14] = 0;
+      out[15] = 1;
+      return out;
+    }
+    function fromXRotation(out, rad) {
+      var s = Math.sin(rad);
+      var c = Math.cos(rad);
+      out[0] = 1;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 0;
+      out[4] = 0;
+      out[5] = c;
+      out[6] = s;
+      out[7] = 0;
+      out[8] = 0;
+      out[9] = -s;
+      out[10] = c;
+      out[11] = 0;
+      out[12] = 0;
+      out[13] = 0;
+      out[14] = 0;
+      out[15] = 1;
+      return out;
+    }
+    function fromYRotation(out, rad) {
+      var s = Math.sin(rad);
+      var c = Math.cos(rad);
+      out[0] = c;
+      out[1] = 0;
+      out[2] = -s;
+      out[3] = 0;
+      out[4] = 0;
+      out[5] = 1;
+      out[6] = 0;
+      out[7] = 0;
+      out[8] = s;
+      out[9] = 0;
+      out[10] = c;
+      out[11] = 0;
+      out[12] = 0;
+      out[13] = 0;
+      out[14] = 0;
+      out[15] = 1;
+      return out;
+    }
+    function fromZRotation(out, rad) {
+      var s = Math.sin(rad);
+      var c = Math.cos(rad);
+      out[0] = c;
+      out[1] = s;
+      out[2] = 0;
+      out[3] = 0;
+      out[4] = -s;
+      out[5] = c;
+      out[6] = 0;
+      out[7] = 0;
+      out[8] = 0;
+      out[9] = 0;
+      out[10] = 1;
+      out[11] = 0;
+      out[12] = 0;
+      out[13] = 0;
+      out[14] = 0;
+      out[15] = 1;
+      return out;
+    }
+    function fromRotationTranslation(out, q, v) {
+      var x = q[0], y = q[1], z = q[2], w = q[3];
+      var x2 = x + x;
+      var y2 = y + y;
+      var z2 = z + z;
+      var xx = x * x2;
+      var xy = x * y2;
+      var xz = x * z2;
+      var yy = y * y2;
+      var yz = y * z2;
+      var zz = z * z2;
+      var wx = w * x2;
+      var wy = w * y2;
+      var wz = w * z2;
+      out[0] = 1 - (yy + zz);
+      out[1] = xy + wz;
+      out[2] = xz - wy;
+      out[3] = 0;
+      out[4] = xy - wz;
+      out[5] = 1 - (xx + zz);
+      out[6] = yz + wx;
+      out[7] = 0;
+      out[8] = xz + wy;
+      out[9] = yz - wx;
+      out[10] = 1 - (xx + yy);
+      out[11] = 0;
+      out[12] = v[0];
+      out[13] = v[1];
+      out[14] = v[2];
+      out[15] = 1;
+      return out;
+    }
+    function fromQuat2(out, a) {
+      var translation = new glMatrix.ARRAY_TYPE(3);
+      var bx = -a[0], by = -a[1], bz = -a[2], bw = a[3], ax = a[4], ay = a[5], az = a[6], aw = a[7];
+      var magnitude = bx * bx + by * by + bz * bz + bw * bw;
+      if (magnitude > 0) {
+        translation[0] = (ax * bw + aw * bx + ay * bz - az * by) * 2 / magnitude;
+        translation[1] = (ay * bw + aw * by + az * bx - ax * bz) * 2 / magnitude;
+        translation[2] = (az * bw + aw * bz + ax * by - ay * bx) * 2 / magnitude;
+      } else {
+        translation[0] = (ax * bw + aw * bx + ay * bz - az * by) * 2;
+        translation[1] = (ay * bw + aw * by + az * bx - ax * bz) * 2;
+        translation[2] = (az * bw + aw * bz + ax * by - ay * bx) * 2;
+      }
+      fromRotationTranslation(out, a, translation);
+      return out;
+    }
+    function getTranslation(out, mat) {
+      out[0] = mat[12];
+      out[1] = mat[13];
+      out[2] = mat[14];
+      return out;
+    }
+    function getScaling(out, mat) {
+      var m11 = mat[0];
+      var m12 = mat[1];
+      var m13 = mat[2];
+      var m21 = mat[4];
+      var m22 = mat[5];
+      var m23 = mat[6];
+      var m31 = mat[8];
+      var m32 = mat[9];
+      var m33 = mat[10];
+      out[0] = Math.hypot(m11, m12, m13);
+      out[1] = Math.hypot(m21, m22, m23);
+      out[2] = Math.hypot(m31, m32, m33);
+      return out;
+    }
+    function getRotation(out, mat) {
+      var scaling = new glMatrix.ARRAY_TYPE(3);
+      getScaling(scaling, mat);
+      var is1 = 1 / scaling[0];
+      var is2 = 1 / scaling[1];
+      var is3 = 1 / scaling[2];
+      var sm11 = mat[0] * is1;
+      var sm12 = mat[1] * is2;
+      var sm13 = mat[2] * is3;
+      var sm21 = mat[4] * is1;
+      var sm22 = mat[5] * is2;
+      var sm23 = mat[6] * is3;
+      var sm31 = mat[8] * is1;
+      var sm32 = mat[9] * is2;
+      var sm33 = mat[10] * is3;
+      var trace = sm11 + sm22 + sm33;
+      var S = 0;
+      if (trace > 0) {
+        S = Math.sqrt(trace + 1) * 2;
+        out[3] = 0.25 * S;
+        out[0] = (sm23 - sm32) / S;
+        out[1] = (sm31 - sm13) / S;
+        out[2] = (sm12 - sm21) / S;
+      } else if (sm11 > sm22 && sm11 > sm33) {
+        S = Math.sqrt(1 + sm11 - sm22 - sm33) * 2;
+        out[3] = (sm23 - sm32) / S;
+        out[0] = 0.25 * S;
+        out[1] = (sm12 + sm21) / S;
+        out[2] = (sm31 + sm13) / S;
+      } else if (sm22 > sm33) {
+        S = Math.sqrt(1 + sm22 - sm11 - sm33) * 2;
+        out[3] = (sm31 - sm13) / S;
+        out[0] = (sm12 + sm21) / S;
+        out[1] = 0.25 * S;
+        out[2] = (sm23 + sm32) / S;
+      } else {
+        S = Math.sqrt(1 + sm33 - sm11 - sm22) * 2;
+        out[3] = (sm12 - sm21) / S;
+        out[0] = (sm31 + sm13) / S;
+        out[1] = (sm23 + sm32) / S;
+        out[2] = 0.25 * S;
+      }
+      return out;
+    }
+    function fromRotationTranslationScale(out, q, v, s) {
+      var x = q[0], y = q[1], z = q[2], w = q[3];
+      var x2 = x + x;
+      var y2 = y + y;
+      var z2 = z + z;
+      var xx = x * x2;
+      var xy = x * y2;
+      var xz = x * z2;
+      var yy = y * y2;
+      var yz = y * z2;
+      var zz = z * z2;
+      var wx = w * x2;
+      var wy = w * y2;
+      var wz = w * z2;
+      var sx = s[0];
+      var sy = s[1];
+      var sz = s[2];
+      out[0] = (1 - (yy + zz)) * sx;
+      out[1] = (xy + wz) * sx;
+      out[2] = (xz - wy) * sx;
+      out[3] = 0;
+      out[4] = (xy - wz) * sy;
+      out[5] = (1 - (xx + zz)) * sy;
+      out[6] = (yz + wx) * sy;
+      out[7] = 0;
+      out[8] = (xz + wy) * sz;
+      out[9] = (yz - wx) * sz;
+      out[10] = (1 - (xx + yy)) * sz;
+      out[11] = 0;
+      out[12] = v[0];
+      out[13] = v[1];
+      out[14] = v[2];
+      out[15] = 1;
+      return out;
+    }
+    function fromRotationTranslationScaleOrigin(out, q, v, s, o) {
+      var x = q[0], y = q[1], z = q[2], w = q[3];
+      var x2 = x + x;
+      var y2 = y + y;
+      var z2 = z + z;
+      var xx = x * x2;
+      var xy = x * y2;
+      var xz = x * z2;
+      var yy = y * y2;
+      var yz = y * z2;
+      var zz = z * z2;
+      var wx = w * x2;
+      var wy = w * y2;
+      var wz = w * z2;
+      var sx = s[0];
+      var sy = s[1];
+      var sz = s[2];
+      var ox = o[0];
+      var oy = o[1];
+      var oz = o[2];
+      var out0 = (1 - (yy + zz)) * sx;
+      var out1 = (xy + wz) * sx;
+      var out2 = (xz - wy) * sx;
+      var out4 = (xy - wz) * sy;
+      var out5 = (1 - (xx + zz)) * sy;
+      var out6 = (yz + wx) * sy;
+      var out8 = (xz + wy) * sz;
+      var out9 = (yz - wx) * sz;
+      var out10 = (1 - (xx + yy)) * sz;
+      out[0] = out0;
+      out[1] = out1;
+      out[2] = out2;
+      out[3] = 0;
+      out[4] = out4;
+      out[5] = out5;
+      out[6] = out6;
+      out[7] = 0;
+      out[8] = out8;
+      out[9] = out9;
+      out[10] = out10;
+      out[11] = 0;
+      out[12] = v[0] + ox - (out0 * ox + out4 * oy + out8 * oz);
+      out[13] = v[1] + oy - (out1 * ox + out5 * oy + out9 * oz);
+      out[14] = v[2] + oz - (out2 * ox + out6 * oy + out10 * oz);
+      out[15] = 1;
+      return out;
+    }
+    function fromQuat(out, q) {
+      var x = q[0], y = q[1], z = q[2], w = q[3];
+      var x2 = x + x;
+      var y2 = y + y;
+      var z2 = z + z;
+      var xx = x * x2;
+      var yx = y * x2;
+      var yy = y * y2;
+      var zx = z * x2;
+      var zy = z * y2;
+      var zz = z * z2;
+      var wx = w * x2;
+      var wy = w * y2;
+      var wz = w * z2;
+      out[0] = 1 - yy - zz;
+      out[1] = yx + wz;
+      out[2] = zx - wy;
+      out[3] = 0;
+      out[4] = yx - wz;
+      out[5] = 1 - xx - zz;
+      out[6] = zy + wx;
+      out[7] = 0;
+      out[8] = zx + wy;
+      out[9] = zy - wx;
+      out[10] = 1 - xx - yy;
+      out[11] = 0;
+      out[12] = 0;
+      out[13] = 0;
+      out[14] = 0;
+      out[15] = 1;
+      return out;
+    }
+    function frustum(out, left, right, bottom, top, near, far) {
+      var rl = 1 / (right - left);
+      var tb = 1 / (top - bottom);
+      var nf = 1 / (near - far);
+      out[0] = near * 2 * rl;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 0;
+      out[4] = 0;
+      out[5] = near * 2 * tb;
+      out[6] = 0;
+      out[7] = 0;
+      out[8] = (right + left) * rl;
+      out[9] = (top + bottom) * tb;
+      out[10] = (far + near) * nf;
+      out[11] = -1;
+      out[12] = 0;
+      out[13] = 0;
+      out[14] = far * near * 2 * nf;
+      out[15] = 0;
+      return out;
+    }
+    function perspective(out, fovy, aspect2, near, far) {
+      var f = 1 / Math.tan(fovy / 2), nf;
+      out[0] = f / aspect2;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 0;
+      out[4] = 0;
+      out[5] = f;
+      out[6] = 0;
+      out[7] = 0;
+      out[8] = 0;
+      out[9] = 0;
+      out[11] = -1;
+      out[12] = 0;
+      out[13] = 0;
+      out[15] = 0;
+      if (far != null && far !== Infinity) {
+        nf = 1 / (near - far);
+        out[10] = (far + near) * nf;
+        out[14] = 2 * far * near * nf;
+      } else {
+        out[10] = -1;
+        out[14] = -2 * near;
+      }
+      return out;
+    }
+    function perspectiveFromFieldOfView(out, fov2, near, far) {
+      var upTan = Math.tan(fov2.upDegrees * Math.PI / 180);
+      var downTan = Math.tan(fov2.downDegrees * Math.PI / 180);
+      var leftTan = Math.tan(fov2.leftDegrees * Math.PI / 180);
+      var rightTan = Math.tan(fov2.rightDegrees * Math.PI / 180);
+      var xScale = 2 / (leftTan + rightTan);
+      var yScale = 2 / (upTan + downTan);
+      out[0] = xScale;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 0;
+      out[4] = 0;
+      out[5] = yScale;
+      out[6] = 0;
+      out[7] = 0;
+      out[8] = -((leftTan - rightTan) * xScale * 0.5);
+      out[9] = (upTan - downTan) * yScale * 0.5;
+      out[10] = far / (near - far);
+      out[11] = -1;
+      out[12] = 0;
+      out[13] = 0;
+      out[14] = far * near / (near - far);
+      out[15] = 0;
+      return out;
+    }
+    function ortho(out, left, right, bottom, top, near, far) {
+      var lr = 1 / (left - right);
+      var bt = 1 / (bottom - top);
+      var nf = 1 / (near - far);
+      out[0] = -2 * lr;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 0;
+      out[4] = 0;
+      out[5] = -2 * bt;
+      out[6] = 0;
+      out[7] = 0;
+      out[8] = 0;
+      out[9] = 0;
+      out[10] = 2 * nf;
+      out[11] = 0;
+      out[12] = (left + right) * lr;
+      out[13] = (top + bottom) * bt;
+      out[14] = (far + near) * nf;
+      out[15] = 1;
+      return out;
+    }
+    function lookAt(out, eye, center, up) {
+      var x0, x1, x2, y0, y1, y2, z0, z1, z2, len;
+      var eyex = eye[0];
+      var eyey = eye[1];
+      var eyez = eye[2];
+      var upx = up[0];
+      var upy = up[1];
+      var upz = up[2];
+      var centerx = center[0];
+      var centery = center[1];
+      var centerz = center[2];
+      if (Math.abs(eyex - centerx) < glMatrix.EPSILON && Math.abs(eyey - centery) < glMatrix.EPSILON && Math.abs(eyez - centerz) < glMatrix.EPSILON) {
+        return identity(out);
+      }
+      z0 = eyex - centerx;
+      z1 = eyey - centery;
+      z2 = eyez - centerz;
+      len = 1 / Math.hypot(z0, z1, z2);
+      z0 *= len;
+      z1 *= len;
+      z2 *= len;
+      x0 = upy * z2 - upz * z1;
+      x1 = upz * z0 - upx * z2;
+      x2 = upx * z1 - upy * z0;
+      len = Math.hypot(x0, x1, x2);
+      if (!len) {
+        x0 = 0;
+        x1 = 0;
+        x2 = 0;
+      } else {
+        len = 1 / len;
+        x0 *= len;
+        x1 *= len;
+        x2 *= len;
+      }
+      y0 = z1 * x2 - z2 * x1;
+      y1 = z2 * x0 - z0 * x2;
+      y2 = z0 * x1 - z1 * x0;
+      len = Math.hypot(y0, y1, y2);
+      if (!len) {
+        y0 = 0;
+        y1 = 0;
+        y2 = 0;
+      } else {
+        len = 1 / len;
+        y0 *= len;
+        y1 *= len;
+        y2 *= len;
+      }
+      out[0] = x0;
+      out[1] = y0;
+      out[2] = z0;
+      out[3] = 0;
+      out[4] = x1;
+      out[5] = y1;
+      out[6] = z1;
+      out[7] = 0;
+      out[8] = x2;
+      out[9] = y2;
+      out[10] = z2;
+      out[11] = 0;
+      out[12] = -(x0 * eyex + x1 * eyey + x2 * eyez);
+      out[13] = -(y0 * eyex + y1 * eyey + y2 * eyez);
+      out[14] = -(z0 * eyex + z1 * eyey + z2 * eyez);
+      out[15] = 1;
+      return out;
+    }
+    function targetTo(out, eye, target, up) {
+      var eyex = eye[0], eyey = eye[1], eyez = eye[2], upx = up[0], upy = up[1], upz = up[2];
+      var z0 = eyex - target[0], z1 = eyey - target[1], z2 = eyez - target[2];
+      var len = z0 * z0 + z1 * z1 + z2 * z2;
+      if (len > 0) {
+        len = 1 / Math.sqrt(len);
+        z0 *= len;
+        z1 *= len;
+        z2 *= len;
+      }
+      var x0 = upy * z2 - upz * z1, x1 = upz * z0 - upx * z2, x2 = upx * z1 - upy * z0;
+      len = x0 * x0 + x1 * x1 + x2 * x2;
+      if (len > 0) {
+        len = 1 / Math.sqrt(len);
+        x0 *= len;
+        x1 *= len;
+        x2 *= len;
+      }
+      out[0] = x0;
+      out[1] = x1;
+      out[2] = x2;
+      out[3] = 0;
+      out[4] = z1 * x2 - z2 * x1;
+      out[5] = z2 * x0 - z0 * x2;
+      out[6] = z0 * x1 - z1 * x0;
+      out[7] = 0;
+      out[8] = z0;
+      out[9] = z1;
+      out[10] = z2;
+      out[11] = 0;
+      out[12] = eyex;
+      out[13] = eyey;
+      out[14] = eyez;
+      out[15] = 1;
+      return out;
+    }
+    function str(a) {
+      return "mat4(" + a[0] + ", " + a[1] + ", " + a[2] + ", " + a[3] + ", " + a[4] + ", " + a[5] + ", " + a[6] + ", " + a[7] + ", " + a[8] + ", " + a[9] + ", " + a[10] + ", " + a[11] + ", " + a[12] + ", " + a[13] + ", " + a[14] + ", " + a[15] + ")";
+    }
+    function frob(a) {
+      return Math.hypot(a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9], a[10], a[11], a[12], a[13], a[14], a[15]);
+    }
+    function add(out, a, b) {
+      out[0] = a[0] + b[0];
+      out[1] = a[1] + b[1];
+      out[2] = a[2] + b[2];
+      out[3] = a[3] + b[3];
+      out[4] = a[4] + b[4];
+      out[5] = a[5] + b[5];
+      out[6] = a[6] + b[6];
+      out[7] = a[7] + b[7];
+      out[8] = a[8] + b[8];
+      out[9] = a[9] + b[9];
+      out[10] = a[10] + b[10];
+      out[11] = a[11] + b[11];
+      out[12] = a[12] + b[12];
+      out[13] = a[13] + b[13];
+      out[14] = a[14] + b[14];
+      out[15] = a[15] + b[15];
+      return out;
+    }
+    function subtract(out, a, b) {
+      out[0] = a[0] - b[0];
+      out[1] = a[1] - b[1];
+      out[2] = a[2] - b[2];
+      out[3] = a[3] - b[3];
+      out[4] = a[4] - b[4];
+      out[5] = a[5] - b[5];
+      out[6] = a[6] - b[6];
+      out[7] = a[7] - b[7];
+      out[8] = a[8] - b[8];
+      out[9] = a[9] - b[9];
+      out[10] = a[10] - b[10];
+      out[11] = a[11] - b[11];
+      out[12] = a[12] - b[12];
+      out[13] = a[13] - b[13];
+      out[14] = a[14] - b[14];
+      out[15] = a[15] - b[15];
+      return out;
+    }
+    function multiplyScalar(out, a, b) {
+      out[0] = a[0] * b;
+      out[1] = a[1] * b;
+      out[2] = a[2] * b;
+      out[3] = a[3] * b;
+      out[4] = a[4] * b;
+      out[5] = a[5] * b;
+      out[6] = a[6] * b;
+      out[7] = a[7] * b;
+      out[8] = a[8] * b;
+      out[9] = a[9] * b;
+      out[10] = a[10] * b;
+      out[11] = a[11] * b;
+      out[12] = a[12] * b;
+      out[13] = a[13] * b;
+      out[14] = a[14] * b;
+      out[15] = a[15] * b;
+      return out;
+    }
+    function multiplyScalarAndAdd(out, a, b, scale2) {
+      out[0] = a[0] + b[0] * scale2;
+      out[1] = a[1] + b[1] * scale2;
+      out[2] = a[2] + b[2] * scale2;
+      out[3] = a[3] + b[3] * scale2;
+      out[4] = a[4] + b[4] * scale2;
+      out[5] = a[5] + b[5] * scale2;
+      out[6] = a[6] + b[6] * scale2;
+      out[7] = a[7] + b[7] * scale2;
+      out[8] = a[8] + b[8] * scale2;
+      out[9] = a[9] + b[9] * scale2;
+      out[10] = a[10] + b[10] * scale2;
+      out[11] = a[11] + b[11] * scale2;
+      out[12] = a[12] + b[12] * scale2;
+      out[13] = a[13] + b[13] * scale2;
+      out[14] = a[14] + b[14] * scale2;
+      out[15] = a[15] + b[15] * scale2;
+      return out;
+    }
+    function exactEquals(a, b) {
+      return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3] && a[4] === b[4] && a[5] === b[5] && a[6] === b[6] && a[7] === b[7] && a[8] === b[8] && a[9] === b[9] && a[10] === b[10] && a[11] === b[11] && a[12] === b[12] && a[13] === b[13] && a[14] === b[14] && a[15] === b[15];
+    }
+    function equals2(a, b) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
+      var a4 = a[4], a5 = a[5], a6 = a[6], a7 = a[7];
+      var a8 = a[8], a9 = a[9], a10 = a[10], a11 = a[11];
+      var a12 = a[12], a13 = a[13], a14 = a[14], a15 = a[15];
+      var b0 = b[0], b1 = b[1], b22 = b[2], b3 = b[3];
+      var b42 = b[4], b5 = b[5], b6 = b[6], b7 = b[7];
+      var b82 = b[8], b9 = b[9], b10 = b[10], b11 = b[11];
+      var b12 = b[12], b13 = b[13], b14 = b[14], b15 = b[15];
+      return Math.abs(a0 - b0) <= glMatrix.EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a1 - b1) <= glMatrix.EPSILON * Math.max(1, Math.abs(a1), Math.abs(b1)) && Math.abs(a2 - b22) <= glMatrix.EPSILON * Math.max(1, Math.abs(a2), Math.abs(b22)) && Math.abs(a3 - b3) <= glMatrix.EPSILON * Math.max(1, Math.abs(a3), Math.abs(b3)) && Math.abs(a4 - b42) <= glMatrix.EPSILON * Math.max(1, Math.abs(a4), Math.abs(b42)) && Math.abs(a5 - b5) <= glMatrix.EPSILON * Math.max(1, Math.abs(a5), Math.abs(b5)) && Math.abs(a6 - b6) <= glMatrix.EPSILON * Math.max(1, Math.abs(a6), Math.abs(b6)) && Math.abs(a7 - b7) <= glMatrix.EPSILON * Math.max(1, Math.abs(a7), Math.abs(b7)) && Math.abs(a8 - b82) <= glMatrix.EPSILON * Math.max(1, Math.abs(a8), Math.abs(b82)) && Math.abs(a9 - b9) <= glMatrix.EPSILON * Math.max(1, Math.abs(a9), Math.abs(b9)) && Math.abs(a10 - b10) <= glMatrix.EPSILON * Math.max(1, Math.abs(a10), Math.abs(b10)) && Math.abs(a11 - b11) <= glMatrix.EPSILON * Math.max(1, Math.abs(a11), Math.abs(b11)) && Math.abs(a12 - b12) <= glMatrix.EPSILON * Math.max(1, Math.abs(a12), Math.abs(b12)) && Math.abs(a13 - b13) <= glMatrix.EPSILON * Math.max(1, Math.abs(a13), Math.abs(b13)) && Math.abs(a14 - b14) <= glMatrix.EPSILON * Math.max(1, Math.abs(a14), Math.abs(b14)) && Math.abs(a15 - b15) <= glMatrix.EPSILON * Math.max(1, Math.abs(a15), Math.abs(b15));
+    }
+    var mul = multiply;
+    exports.mul = mul;
+    var sub = subtract;
+    exports.sub = sub;
+  }, { "./common.js": 20 }], 26: [function(require2, module, exports) {
+    "use strict";
+    function _typeof(obj) {
+      "@babel/helpers - typeof";
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        _typeof = function _typeof2(obj2) {
+          return typeof obj2;
+        };
+      } else {
+        _typeof = function _typeof2(obj2) {
+          return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+        };
+      }
+      return _typeof(obj);
+    }
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.create = create;
+    exports.identity = identity;
+    exports.setAxisAngle = setAxisAngle;
+    exports.getAxisAngle = getAxisAngle;
+    exports.getAngle = getAngle;
+    exports.multiply = multiply;
+    exports.rotateX = rotateX;
+    exports.rotateY = rotateY;
+    exports.rotateZ = rotateZ;
+    exports.calculateW = calculateW;
+    exports.exp = exp;
+    exports.ln = ln2;
+    exports.pow = pow;
+    exports.slerp = slerp;
+    exports.random = random;
+    exports.invert = invert;
+    exports.conjugate = conjugate;
+    exports.fromMat3 = fromMat3;
+    exports.fromEuler = fromEuler;
+    exports.str = str;
+    exports.setAxes = exports.sqlerp = exports.rotationTo = exports.equals = exports.exactEquals = exports.normalize = exports.sqrLen = exports.squaredLength = exports.len = exports.length = exports.lerp = exports.dot = exports.scale = exports.mul = exports.add = exports.set = exports.copy = exports.fromValues = exports.clone = void 0;
+    var glMatrix = _interopRequireWildcard(require2("./common.js"));
+    var mat3 = _interopRequireWildcard(require2("./mat3.js"));
+    var vec3 = _interopRequireWildcard(require2("./vec3.js"));
+    var vec4 = _interopRequireWildcard(require2("./vec4.js"));
+    function _getRequireWildcardCache() {
+      if (typeof WeakMap !== "function")
+        return null;
+      var cache = new WeakMap();
+      _getRequireWildcardCache = function _getRequireWildcardCache2() {
+        return cache;
+      };
+      return cache;
+    }
+    function _interopRequireWildcard(obj) {
+      if (obj && obj.__esModule) {
+        return obj;
+      }
+      if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") {
+        return { "default": obj };
+      }
+      var cache = _getRequireWildcardCache();
+      if (cache && cache.has(obj)) {
+        return cache.get(obj);
+      }
+      var newObj = {};
+      var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+          if (desc && (desc.get || desc.set)) {
+            Object.defineProperty(newObj, key, desc);
+          } else {
+            newObj[key] = obj[key];
+          }
+        }
+      }
+      newObj["default"] = obj;
+      if (cache) {
+        cache.set(obj, newObj);
+      }
+      return newObj;
+    }
+    function create() {
+      var out = new glMatrix.ARRAY_TYPE(4);
+      if (glMatrix.ARRAY_TYPE != Float32Array) {
+        out[0] = 0;
+        out[1] = 0;
+        out[2] = 0;
+      }
+      out[3] = 1;
+      return out;
+    }
+    function identity(out) {
+      out[0] = 0;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 1;
+      return out;
+    }
+    function setAxisAngle(out, axis, rad) {
+      rad = rad * 0.5;
+      var s = Math.sin(rad);
+      out[0] = s * axis[0];
+      out[1] = s * axis[1];
+      out[2] = s * axis[2];
+      out[3] = Math.cos(rad);
+      return out;
+    }
+    function getAxisAngle(out_axis, q) {
+      var rad = Math.acos(q[3]) * 2;
+      var s = Math.sin(rad / 2);
+      if (s > glMatrix.EPSILON) {
+        out_axis[0] = q[0] / s;
+        out_axis[1] = q[1] / s;
+        out_axis[2] = q[2] / s;
+      } else {
+        out_axis[0] = 1;
+        out_axis[1] = 0;
+        out_axis[2] = 0;
+      }
+      return rad;
+    }
+    function getAngle(a, b) {
+      var dotproduct = dot(a, b);
+      return Math.acos(2 * dotproduct * dotproduct - 1);
+    }
+    function multiply(out, a, b) {
+      var ax = a[0], ay = a[1], az = a[2], aw = a[3];
+      var bx = b[0], by = b[1], bz = b[2], bw = b[3];
+      out[0] = ax * bw + aw * bx + ay * bz - az * by;
+      out[1] = ay * bw + aw * by + az * bx - ax * bz;
+      out[2] = az * bw + aw * bz + ax * by - ay * bx;
+      out[3] = aw * bw - ax * bx - ay * by - az * bz;
+      return out;
+    }
+    function rotateX(out, a, rad) {
+      rad *= 0.5;
+      var ax = a[0], ay = a[1], az = a[2], aw = a[3];
+      var bx = Math.sin(rad), bw = Math.cos(rad);
+      out[0] = ax * bw + aw * bx;
+      out[1] = ay * bw + az * bx;
+      out[2] = az * bw - ay * bx;
+      out[3] = aw * bw - ax * bx;
+      return out;
+    }
+    function rotateY(out, a, rad) {
+      rad *= 0.5;
+      var ax = a[0], ay = a[1], az = a[2], aw = a[3];
+      var by = Math.sin(rad), bw = Math.cos(rad);
+      out[0] = ax * bw - az * by;
+      out[1] = ay * bw + aw * by;
+      out[2] = az * bw + ax * by;
+      out[3] = aw * bw - ay * by;
+      return out;
+    }
+    function rotateZ(out, a, rad) {
+      rad *= 0.5;
+      var ax = a[0], ay = a[1], az = a[2], aw = a[3];
+      var bz = Math.sin(rad), bw = Math.cos(rad);
+      out[0] = ax * bw + ay * bz;
+      out[1] = ay * bw - ax * bz;
+      out[2] = az * bw + aw * bz;
+      out[3] = aw * bw - az * bz;
+      return out;
+    }
+    function calculateW(out, a) {
+      var x = a[0], y = a[1], z = a[2];
+      out[0] = x;
+      out[1] = y;
+      out[2] = z;
+      out[3] = Math.sqrt(Math.abs(1 - x * x - y * y - z * z));
+      return out;
+    }
+    function exp(out, a) {
+      var x = a[0], y = a[1], z = a[2], w = a[3];
+      var r = Math.sqrt(x * x + y * y + z * z);
+      var et2 = Math.exp(w);
+      var s = r > 0 ? et2 * Math.sin(r) / r : 0;
+      out[0] = x * s;
+      out[1] = y * s;
+      out[2] = z * s;
+      out[3] = et2 * Math.cos(r);
+      return out;
+    }
+    function ln2(out, a) {
+      var x = a[0], y = a[1], z = a[2], w = a[3];
+      var r = Math.sqrt(x * x + y * y + z * z);
+      var t = r > 0 ? Math.atan2(r, w) / r : 0;
+      out[0] = x * t;
+      out[1] = y * t;
+      out[2] = z * t;
+      out[3] = 0.5 * Math.log(x * x + y * y + z * z + w * w);
+      return out;
+    }
+    function pow(out, a, b) {
+      ln2(out, a);
+      scale(out, out, b);
+      exp(out, out);
+      return out;
+    }
+    function slerp(out, a, b, t) {
+      var ax = a[0], ay = a[1], az = a[2], aw = a[3];
+      var bx = b[0], by = b[1], bz = b[2], bw = b[3];
+      var omega, cosom, sinom, scale0, scale1;
+      cosom = ax * bx + ay * by + az * bz + aw * bw;
+      if (cosom < 0) {
+        cosom = -cosom;
+        bx = -bx;
+        by = -by;
+        bz = -bz;
+        bw = -bw;
+      }
+      if (1 - cosom > glMatrix.EPSILON) {
+        omega = Math.acos(cosom);
+        sinom = Math.sin(omega);
+        scale0 = Math.sin((1 - t) * omega) / sinom;
+        scale1 = Math.sin(t * omega) / sinom;
+      } else {
+        scale0 = 1 - t;
+        scale1 = t;
+      }
+      out[0] = scale0 * ax + scale1 * bx;
+      out[1] = scale0 * ay + scale1 * by;
+      out[2] = scale0 * az + scale1 * bz;
+      out[3] = scale0 * aw + scale1 * bw;
+      return out;
+    }
+    function random(out) {
+      var u1 = glMatrix.RANDOM();
+      var u2 = glMatrix.RANDOM();
+      var u3 = glMatrix.RANDOM();
+      var sqrt1MinusU1 = Math.sqrt(1 - u1);
+      var sqrtU1 = Math.sqrt(u1);
+      out[0] = sqrt1MinusU1 * Math.sin(2 * Math.PI * u2);
+      out[1] = sqrt1MinusU1 * Math.cos(2 * Math.PI * u2);
+      out[2] = sqrtU1 * Math.sin(2 * Math.PI * u3);
+      out[3] = sqrtU1 * Math.cos(2 * Math.PI * u3);
+      return out;
+    }
+    function invert(out, a) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
+      var dot2 = a0 * a0 + a1 * a1 + a2 * a2 + a3 * a3;
+      var invDot = dot2 ? 1 / dot2 : 0;
+      out[0] = -a0 * invDot;
+      out[1] = -a1 * invDot;
+      out[2] = -a2 * invDot;
+      out[3] = a3 * invDot;
+      return out;
+    }
+    function conjugate(out, a) {
+      out[0] = -a[0];
+      out[1] = -a[1];
+      out[2] = -a[2];
+      out[3] = a[3];
+      return out;
+    }
+    function fromMat3(out, m) {
+      var fTrace = m[0] + m[4] + m[8];
+      var fRoot;
+      if (fTrace > 0) {
+        fRoot = Math.sqrt(fTrace + 1);
+        out[3] = 0.5 * fRoot;
+        fRoot = 0.5 / fRoot;
+        out[0] = (m[5] - m[7]) * fRoot;
+        out[1] = (m[6] - m[2]) * fRoot;
+        out[2] = (m[1] - m[3]) * fRoot;
+      } else {
+        var i = 0;
+        if (m[4] > m[0])
+          i = 1;
+        if (m[8] > m[i * 3 + i])
+          i = 2;
+        var j = (i + 1) % 3;
+        var k = (i + 2) % 3;
+        fRoot = Math.sqrt(m[i * 3 + i] - m[j * 3 + j] - m[k * 3 + k] + 1);
+        out[i] = 0.5 * fRoot;
+        fRoot = 0.5 / fRoot;
+        out[3] = (m[j * 3 + k] - m[k * 3 + j]) * fRoot;
+        out[j] = (m[j * 3 + i] + m[i * 3 + j]) * fRoot;
+        out[k] = (m[k * 3 + i] + m[i * 3 + k]) * fRoot;
+      }
+      return out;
+    }
+    function fromEuler(out, x, y, z) {
+      var halfToRad = 0.5 * Math.PI / 180;
+      x *= halfToRad;
+      y *= halfToRad;
+      z *= halfToRad;
+      var sx = Math.sin(x);
+      var cx = Math.cos(x);
+      var sy = Math.sin(y);
+      var cy = Math.cos(y);
+      var sz = Math.sin(z);
+      var cz = Math.cos(z);
+      out[0] = sx * cy * cz - cx * sy * sz;
+      out[1] = cx * sy * cz + sx * cy * sz;
+      out[2] = cx * cy * sz - sx * sy * cz;
+      out[3] = cx * cy * cz + sx * sy * sz;
+      return out;
+    }
+    function str(a) {
+      return "quat(" + a[0] + ", " + a[1] + ", " + a[2] + ", " + a[3] + ")";
+    }
+    var clone = vec4.clone;
+    exports.clone = clone;
+    var fromValues = vec4.fromValues;
+    exports.fromValues = fromValues;
+    var copy = vec4.copy;
+    exports.copy = copy;
+    var set = vec4.set;
+    exports.set = set;
+    var add = vec4.add;
+    exports.add = add;
+    var mul = multiply;
+    exports.mul = mul;
+    var scale = vec4.scale;
+    exports.scale = scale;
+    var dot = vec4.dot;
+    exports.dot = dot;
+    var lerp2 = vec4.lerp;
+    exports.lerp = lerp2;
+    var length = vec4.length;
+    exports.length = length;
+    var len = length;
+    exports.len = len;
+    var squaredLength = vec4.squaredLength;
+    exports.squaredLength = squaredLength;
+    var sqrLen = squaredLength;
+    exports.sqrLen = sqrLen;
+    var normalize = vec4.normalize;
+    exports.normalize = normalize;
+    var exactEquals = vec4.exactEquals;
+    exports.exactEquals = exactEquals;
+    var equals2 = vec4.equals;
+    exports.equals = equals2;
+    var rotationTo = function() {
+      var tmpvec3 = vec3.create();
+      var xUnitVec3 = vec3.fromValues(1, 0, 0);
+      var yUnitVec3 = vec3.fromValues(0, 1, 0);
+      return function(out, a, b) {
+        var dot2 = vec3.dot(a, b);
+        if (dot2 < -0.999999) {
+          vec3.cross(tmpvec3, xUnitVec3, a);
+          if (vec3.len(tmpvec3) < 1e-6)
+            vec3.cross(tmpvec3, yUnitVec3, a);
+          vec3.normalize(tmpvec3, tmpvec3);
+          setAxisAngle(out, tmpvec3, Math.PI);
+          return out;
+        } else if (dot2 > 0.999999) {
+          out[0] = 0;
+          out[1] = 0;
+          out[2] = 0;
+          out[3] = 1;
+          return out;
+        } else {
+          vec3.cross(tmpvec3, a, b);
+          out[0] = tmpvec3[0];
+          out[1] = tmpvec3[1];
+          out[2] = tmpvec3[2];
+          out[3] = 1 + dot2;
+          return normalize(out, out);
+        }
+      };
+    }();
+    exports.rotationTo = rotationTo;
+    var sqlerp = function() {
+      var temp1 = create();
+      var temp2 = create();
+      return function(out, a, b, c, d, t) {
+        slerp(temp1, a, d, t);
+        slerp(temp2, b, c, t);
+        slerp(out, temp1, temp2, 2 * t * (1 - t));
+        return out;
+      };
+    }();
+    exports.sqlerp = sqlerp;
+    var setAxes = function() {
+      var matr = mat3.create();
+      return function(out, view, right, up) {
+        matr[0] = right[0];
+        matr[3] = right[1];
+        matr[6] = right[2];
+        matr[1] = up[0];
+        matr[4] = up[1];
+        matr[7] = up[2];
+        matr[2] = -view[0];
+        matr[5] = -view[1];
+        matr[8] = -view[2];
+        return normalize(out, fromMat3(out, matr));
+      };
+    }();
+    exports.setAxes = setAxes;
+  }, { "./common.js": 20, "./mat3.js": 24, "./vec3.js": 29, "./vec4.js": 30 }], 27: [function(require2, module, exports) {
+    "use strict";
+    function _typeof(obj) {
+      "@babel/helpers - typeof";
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        _typeof = function _typeof2(obj2) {
+          return typeof obj2;
+        };
+      } else {
+        _typeof = function _typeof2(obj2) {
+          return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+        };
+      }
+      return _typeof(obj);
+    }
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.create = create;
+    exports.clone = clone;
+    exports.fromValues = fromValues;
+    exports.fromRotationTranslationValues = fromRotationTranslationValues;
+    exports.fromRotationTranslation = fromRotationTranslation;
+    exports.fromTranslation = fromTranslation;
+    exports.fromRotation = fromRotation;
+    exports.fromMat4 = fromMat4;
+    exports.copy = copy;
+    exports.identity = identity;
+    exports.set = set;
+    exports.getDual = getDual;
+    exports.setDual = setDual;
+    exports.getTranslation = getTranslation;
+    exports.translate = translate;
+    exports.rotateX = rotateX;
+    exports.rotateY = rotateY;
+    exports.rotateZ = rotateZ;
+    exports.rotateByQuatAppend = rotateByQuatAppend;
+    exports.rotateByQuatPrepend = rotateByQuatPrepend;
+    exports.rotateAroundAxis = rotateAroundAxis;
+    exports.add = add;
+    exports.multiply = multiply;
+    exports.scale = scale;
+    exports.lerp = lerp2;
+    exports.invert = invert;
+    exports.conjugate = conjugate;
+    exports.normalize = normalize;
+    exports.str = str;
+    exports.exactEquals = exactEquals;
+    exports.equals = equals2;
+    exports.sqrLen = exports.squaredLength = exports.len = exports.length = exports.dot = exports.mul = exports.setReal = exports.getReal = void 0;
+    var glMatrix = _interopRequireWildcard(require2("./common.js"));
+    var quat = _interopRequireWildcard(require2("./quat.js"));
+    var mat4 = _interopRequireWildcard(require2("./mat4.js"));
+    function _getRequireWildcardCache() {
+      if (typeof WeakMap !== "function")
+        return null;
+      var cache = new WeakMap();
+      _getRequireWildcardCache = function _getRequireWildcardCache2() {
+        return cache;
+      };
+      return cache;
+    }
+    function _interopRequireWildcard(obj) {
+      if (obj && obj.__esModule) {
+        return obj;
+      }
+      if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") {
+        return { "default": obj };
+      }
+      var cache = _getRequireWildcardCache();
+      if (cache && cache.has(obj)) {
+        return cache.get(obj);
+      }
+      var newObj = {};
+      var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+          if (desc && (desc.get || desc.set)) {
+            Object.defineProperty(newObj, key, desc);
+          } else {
+            newObj[key] = obj[key];
+          }
+        }
+      }
+      newObj["default"] = obj;
+      if (cache) {
+        cache.set(obj, newObj);
+      }
+      return newObj;
+    }
+    function create() {
+      var dq = new glMatrix.ARRAY_TYPE(8);
+      if (glMatrix.ARRAY_TYPE != Float32Array) {
+        dq[0] = 0;
+        dq[1] = 0;
+        dq[2] = 0;
+        dq[4] = 0;
+        dq[5] = 0;
+        dq[6] = 0;
+        dq[7] = 0;
+      }
+      dq[3] = 1;
+      return dq;
+    }
+    function clone(a) {
+      var dq = new glMatrix.ARRAY_TYPE(8);
+      dq[0] = a[0];
+      dq[1] = a[1];
+      dq[2] = a[2];
+      dq[3] = a[3];
+      dq[4] = a[4];
+      dq[5] = a[5];
+      dq[6] = a[6];
+      dq[7] = a[7];
+      return dq;
+    }
+    function fromValues(x1, y1, z1, w1, x2, y2, z2, w2) {
+      var dq = new glMatrix.ARRAY_TYPE(8);
+      dq[0] = x1;
+      dq[1] = y1;
+      dq[2] = z1;
+      dq[3] = w1;
+      dq[4] = x2;
+      dq[5] = y2;
+      dq[6] = z2;
+      dq[7] = w2;
+      return dq;
+    }
+    function fromRotationTranslationValues(x1, y1, z1, w1, x2, y2, z2) {
+      var dq = new glMatrix.ARRAY_TYPE(8);
+      dq[0] = x1;
+      dq[1] = y1;
+      dq[2] = z1;
+      dq[3] = w1;
+      var ax = x2 * 0.5, ay = y2 * 0.5, az = z2 * 0.5;
+      dq[4] = ax * w1 + ay * z1 - az * y1;
+      dq[5] = ay * w1 + az * x1 - ax * z1;
+      dq[6] = az * w1 + ax * y1 - ay * x1;
+      dq[7] = -ax * x1 - ay * y1 - az * z1;
+      return dq;
+    }
+    function fromRotationTranslation(out, q, t) {
+      var ax = t[0] * 0.5, ay = t[1] * 0.5, az = t[2] * 0.5, bx = q[0], by = q[1], bz = q[2], bw = q[3];
+      out[0] = bx;
+      out[1] = by;
+      out[2] = bz;
+      out[3] = bw;
+      out[4] = ax * bw + ay * bz - az * by;
+      out[5] = ay * bw + az * bx - ax * bz;
+      out[6] = az * bw + ax * by - ay * bx;
+      out[7] = -ax * bx - ay * by - az * bz;
+      return out;
+    }
+    function fromTranslation(out, t) {
+      out[0] = 0;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 1;
+      out[4] = t[0] * 0.5;
+      out[5] = t[1] * 0.5;
+      out[6] = t[2] * 0.5;
+      out[7] = 0;
+      return out;
+    }
+    function fromRotation(out, q) {
+      out[0] = q[0];
+      out[1] = q[1];
+      out[2] = q[2];
+      out[3] = q[3];
+      out[4] = 0;
+      out[5] = 0;
+      out[6] = 0;
+      out[7] = 0;
+      return out;
+    }
+    function fromMat4(out, a) {
+      var outer = quat.create();
+      mat4.getRotation(outer, a);
+      var t = new glMatrix.ARRAY_TYPE(3);
+      mat4.getTranslation(t, a);
+      fromRotationTranslation(out, outer, t);
+      return out;
+    }
+    function copy(out, a) {
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = a[2];
+      out[3] = a[3];
+      out[4] = a[4];
+      out[5] = a[5];
+      out[6] = a[6];
+      out[7] = a[7];
+      return out;
+    }
+    function identity(out) {
+      out[0] = 0;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 1;
+      out[4] = 0;
+      out[5] = 0;
+      out[6] = 0;
+      out[7] = 0;
+      return out;
+    }
+    function set(out, x1, y1, z1, w1, x2, y2, z2, w2) {
+      out[0] = x1;
+      out[1] = y1;
+      out[2] = z1;
+      out[3] = w1;
+      out[4] = x2;
+      out[5] = y2;
+      out[6] = z2;
+      out[7] = w2;
+      return out;
+    }
+    var getReal = quat.copy;
+    exports.getReal = getReal;
+    function getDual(out, a) {
+      out[0] = a[4];
+      out[1] = a[5];
+      out[2] = a[6];
+      out[3] = a[7];
+      return out;
+    }
+    var setReal = quat.copy;
+    exports.setReal = setReal;
+    function setDual(out, q) {
+      out[4] = q[0];
+      out[5] = q[1];
+      out[6] = q[2];
+      out[7] = q[3];
+      return out;
+    }
+    function getTranslation(out, a) {
+      var ax = a[4], ay = a[5], az = a[6], aw = a[7], bx = -a[0], by = -a[1], bz = -a[2], bw = a[3];
+      out[0] = (ax * bw + aw * bx + ay * bz - az * by) * 2;
+      out[1] = (ay * bw + aw * by + az * bx - ax * bz) * 2;
+      out[2] = (az * bw + aw * bz + ax * by - ay * bx) * 2;
+      return out;
+    }
+    function translate(out, a, v) {
+      var ax1 = a[0], ay1 = a[1], az1 = a[2], aw1 = a[3], bx1 = v[0] * 0.5, by1 = v[1] * 0.5, bz1 = v[2] * 0.5, ax2 = a[4], ay2 = a[5], az2 = a[6], aw2 = a[7];
+      out[0] = ax1;
+      out[1] = ay1;
+      out[2] = az1;
+      out[3] = aw1;
+      out[4] = aw1 * bx1 + ay1 * bz1 - az1 * by1 + ax2;
+      out[5] = aw1 * by1 + az1 * bx1 - ax1 * bz1 + ay2;
+      out[6] = aw1 * bz1 + ax1 * by1 - ay1 * bx1 + az2;
+      out[7] = -ax1 * bx1 - ay1 * by1 - az1 * bz1 + aw2;
+      return out;
+    }
+    function rotateX(out, a, rad) {
+      var bx = -a[0], by = -a[1], bz = -a[2], bw = a[3], ax = a[4], ay = a[5], az = a[6], aw = a[7], ax1 = ax * bw + aw * bx + ay * bz - az * by, ay1 = ay * bw + aw * by + az * bx - ax * bz, az1 = az * bw + aw * bz + ax * by - ay * bx, aw1 = aw * bw - ax * bx - ay * by - az * bz;
+      quat.rotateX(out, a, rad);
+      bx = out[0];
+      by = out[1];
+      bz = out[2];
+      bw = out[3];
+      out[4] = ax1 * bw + aw1 * bx + ay1 * bz - az1 * by;
+      out[5] = ay1 * bw + aw1 * by + az1 * bx - ax1 * bz;
+      out[6] = az1 * bw + aw1 * bz + ax1 * by - ay1 * bx;
+      out[7] = aw1 * bw - ax1 * bx - ay1 * by - az1 * bz;
+      return out;
+    }
+    function rotateY(out, a, rad) {
+      var bx = -a[0], by = -a[1], bz = -a[2], bw = a[3], ax = a[4], ay = a[5], az = a[6], aw = a[7], ax1 = ax * bw + aw * bx + ay * bz - az * by, ay1 = ay * bw + aw * by + az * bx - ax * bz, az1 = az * bw + aw * bz + ax * by - ay * bx, aw1 = aw * bw - ax * bx - ay * by - az * bz;
+      quat.rotateY(out, a, rad);
+      bx = out[0];
+      by = out[1];
+      bz = out[2];
+      bw = out[3];
+      out[4] = ax1 * bw + aw1 * bx + ay1 * bz - az1 * by;
+      out[5] = ay1 * bw + aw1 * by + az1 * bx - ax1 * bz;
+      out[6] = az1 * bw + aw1 * bz + ax1 * by - ay1 * bx;
+      out[7] = aw1 * bw - ax1 * bx - ay1 * by - az1 * bz;
+      return out;
+    }
+    function rotateZ(out, a, rad) {
+      var bx = -a[0], by = -a[1], bz = -a[2], bw = a[3], ax = a[4], ay = a[5], az = a[6], aw = a[7], ax1 = ax * bw + aw * bx + ay * bz - az * by, ay1 = ay * bw + aw * by + az * bx - ax * bz, az1 = az * bw + aw * bz + ax * by - ay * bx, aw1 = aw * bw - ax * bx - ay * by - az * bz;
+      quat.rotateZ(out, a, rad);
+      bx = out[0];
+      by = out[1];
+      bz = out[2];
+      bw = out[3];
+      out[4] = ax1 * bw + aw1 * bx + ay1 * bz - az1 * by;
+      out[5] = ay1 * bw + aw1 * by + az1 * bx - ax1 * bz;
+      out[6] = az1 * bw + aw1 * bz + ax1 * by - ay1 * bx;
+      out[7] = aw1 * bw - ax1 * bx - ay1 * by - az1 * bz;
+      return out;
+    }
+    function rotateByQuatAppend(out, a, q) {
+      var qx = q[0], qy = q[1], qz = q[2], qw = q[3], ax = a[0], ay = a[1], az = a[2], aw = a[3];
+      out[0] = ax * qw + aw * qx + ay * qz - az * qy;
+      out[1] = ay * qw + aw * qy + az * qx - ax * qz;
+      out[2] = az * qw + aw * qz + ax * qy - ay * qx;
+      out[3] = aw * qw - ax * qx - ay * qy - az * qz;
+      ax = a[4];
+      ay = a[5];
+      az = a[6];
+      aw = a[7];
+      out[4] = ax * qw + aw * qx + ay * qz - az * qy;
+      out[5] = ay * qw + aw * qy + az * qx - ax * qz;
+      out[6] = az * qw + aw * qz + ax * qy - ay * qx;
+      out[7] = aw * qw - ax * qx - ay * qy - az * qz;
+      return out;
+    }
+    function rotateByQuatPrepend(out, q, a) {
+      var qx = q[0], qy = q[1], qz = q[2], qw = q[3], bx = a[0], by = a[1], bz = a[2], bw = a[3];
+      out[0] = qx * bw + qw * bx + qy * bz - qz * by;
+      out[1] = qy * bw + qw * by + qz * bx - qx * bz;
+      out[2] = qz * bw + qw * bz + qx * by - qy * bx;
+      out[3] = qw * bw - qx * bx - qy * by - qz * bz;
+      bx = a[4];
+      by = a[5];
+      bz = a[6];
+      bw = a[7];
+      out[4] = qx * bw + qw * bx + qy * bz - qz * by;
+      out[5] = qy * bw + qw * by + qz * bx - qx * bz;
+      out[6] = qz * bw + qw * bz + qx * by - qy * bx;
+      out[7] = qw * bw - qx * bx - qy * by - qz * bz;
+      return out;
+    }
+    function rotateAroundAxis(out, a, axis, rad) {
+      if (Math.abs(rad) < glMatrix.EPSILON) {
+        return copy(out, a);
+      }
+      var axisLength = Math.hypot(axis[0], axis[1], axis[2]);
+      rad = rad * 0.5;
+      var s = Math.sin(rad);
+      var bx = s * axis[0] / axisLength;
+      var by = s * axis[1] / axisLength;
+      var bz = s * axis[2] / axisLength;
+      var bw = Math.cos(rad);
+      var ax1 = a[0], ay1 = a[1], az1 = a[2], aw1 = a[3];
+      out[0] = ax1 * bw + aw1 * bx + ay1 * bz - az1 * by;
+      out[1] = ay1 * bw + aw1 * by + az1 * bx - ax1 * bz;
+      out[2] = az1 * bw + aw1 * bz + ax1 * by - ay1 * bx;
+      out[3] = aw1 * bw - ax1 * bx - ay1 * by - az1 * bz;
+      var ax = a[4], ay = a[5], az = a[6], aw = a[7];
+      out[4] = ax * bw + aw * bx + ay * bz - az * by;
+      out[5] = ay * bw + aw * by + az * bx - ax * bz;
+      out[6] = az * bw + aw * bz + ax * by - ay * bx;
+      out[7] = aw * bw - ax * bx - ay * by - az * bz;
+      return out;
+    }
+    function add(out, a, b) {
+      out[0] = a[0] + b[0];
+      out[1] = a[1] + b[1];
+      out[2] = a[2] + b[2];
+      out[3] = a[3] + b[3];
+      out[4] = a[4] + b[4];
+      out[5] = a[5] + b[5];
+      out[6] = a[6] + b[6];
+      out[7] = a[7] + b[7];
+      return out;
+    }
+    function multiply(out, a, b) {
+      var ax0 = a[0], ay0 = a[1], az0 = a[2], aw0 = a[3], bx1 = b[4], by1 = b[5], bz1 = b[6], bw1 = b[7], ax1 = a[4], ay1 = a[5], az1 = a[6], aw1 = a[7], bx0 = b[0], by0 = b[1], bz0 = b[2], bw0 = b[3];
+      out[0] = ax0 * bw0 + aw0 * bx0 + ay0 * bz0 - az0 * by0;
+      out[1] = ay0 * bw0 + aw0 * by0 + az0 * bx0 - ax0 * bz0;
+      out[2] = az0 * bw0 + aw0 * bz0 + ax0 * by0 - ay0 * bx0;
+      out[3] = aw0 * bw0 - ax0 * bx0 - ay0 * by0 - az0 * bz0;
+      out[4] = ax0 * bw1 + aw0 * bx1 + ay0 * bz1 - az0 * by1 + ax1 * bw0 + aw1 * bx0 + ay1 * bz0 - az1 * by0;
+      out[5] = ay0 * bw1 + aw0 * by1 + az0 * bx1 - ax0 * bz1 + ay1 * bw0 + aw1 * by0 + az1 * bx0 - ax1 * bz0;
+      out[6] = az0 * bw1 + aw0 * bz1 + ax0 * by1 - ay0 * bx1 + az1 * bw0 + aw1 * bz0 + ax1 * by0 - ay1 * bx0;
+      out[7] = aw0 * bw1 - ax0 * bx1 - ay0 * by1 - az0 * bz1 + aw1 * bw0 - ax1 * bx0 - ay1 * by0 - az1 * bz0;
+      return out;
+    }
+    var mul = multiply;
+    exports.mul = mul;
+    function scale(out, a, b) {
+      out[0] = a[0] * b;
+      out[1] = a[1] * b;
+      out[2] = a[2] * b;
+      out[3] = a[3] * b;
+      out[4] = a[4] * b;
+      out[5] = a[5] * b;
+      out[6] = a[6] * b;
+      out[7] = a[7] * b;
+      return out;
+    }
+    var dot = quat.dot;
+    exports.dot = dot;
+    function lerp2(out, a, b, t) {
+      var mt = 1 - t;
+      if (dot(a, b) < 0)
+        t = -t;
+      out[0] = a[0] * mt + b[0] * t;
+      out[1] = a[1] * mt + b[1] * t;
+      out[2] = a[2] * mt + b[2] * t;
+      out[3] = a[3] * mt + b[3] * t;
+      out[4] = a[4] * mt + b[4] * t;
+      out[5] = a[5] * mt + b[5] * t;
+      out[6] = a[6] * mt + b[6] * t;
+      out[7] = a[7] * mt + b[7] * t;
+      return out;
+    }
+    function invert(out, a) {
+      var sqlen = squaredLength(a);
+      out[0] = -a[0] / sqlen;
+      out[1] = -a[1] / sqlen;
+      out[2] = -a[2] / sqlen;
+      out[3] = a[3] / sqlen;
+      out[4] = -a[4] / sqlen;
+      out[5] = -a[5] / sqlen;
+      out[6] = -a[6] / sqlen;
+      out[7] = a[7] / sqlen;
+      return out;
+    }
+    function conjugate(out, a) {
+      out[0] = -a[0];
+      out[1] = -a[1];
+      out[2] = -a[2];
+      out[3] = a[3];
+      out[4] = -a[4];
+      out[5] = -a[5];
+      out[6] = -a[6];
+      out[7] = a[7];
+      return out;
+    }
+    var length = quat.length;
+    exports.length = length;
+    var len = length;
+    exports.len = len;
+    var squaredLength = quat.squaredLength;
+    exports.squaredLength = squaredLength;
+    var sqrLen = squaredLength;
+    exports.sqrLen = sqrLen;
+    function normalize(out, a) {
+      var magnitude = squaredLength(a);
+      if (magnitude > 0) {
+        magnitude = Math.sqrt(magnitude);
+        var a0 = a[0] / magnitude;
+        var a1 = a[1] / magnitude;
+        var a2 = a[2] / magnitude;
+        var a3 = a[3] / magnitude;
+        var b0 = a[4];
+        var b1 = a[5];
+        var b22 = a[6];
+        var b3 = a[7];
+        var a_dot_b = a0 * b0 + a1 * b1 + a2 * b22 + a3 * b3;
+        out[0] = a0;
+        out[1] = a1;
+        out[2] = a2;
+        out[3] = a3;
+        out[4] = (b0 - a0 * a_dot_b) / magnitude;
+        out[5] = (b1 - a1 * a_dot_b) / magnitude;
+        out[6] = (b22 - a2 * a_dot_b) / magnitude;
+        out[7] = (b3 - a3 * a_dot_b) / magnitude;
+      }
+      return out;
+    }
+    function str(a) {
+      return "quat2(" + a[0] + ", " + a[1] + ", " + a[2] + ", " + a[3] + ", " + a[4] + ", " + a[5] + ", " + a[6] + ", " + a[7] + ")";
+    }
+    function exactEquals(a, b) {
+      return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3] && a[4] === b[4] && a[5] === b[5] && a[6] === b[6] && a[7] === b[7];
+    }
+    function equals2(a, b) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3], a4 = a[4], a5 = a[5], a6 = a[6], a7 = a[7];
+      var b0 = b[0], b1 = b[1], b22 = b[2], b3 = b[3], b42 = b[4], b5 = b[5], b6 = b[6], b7 = b[7];
+      return Math.abs(a0 - b0) <= glMatrix.EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a1 - b1) <= glMatrix.EPSILON * Math.max(1, Math.abs(a1), Math.abs(b1)) && Math.abs(a2 - b22) <= glMatrix.EPSILON * Math.max(1, Math.abs(a2), Math.abs(b22)) && Math.abs(a3 - b3) <= glMatrix.EPSILON * Math.max(1, Math.abs(a3), Math.abs(b3)) && Math.abs(a4 - b42) <= glMatrix.EPSILON * Math.max(1, Math.abs(a4), Math.abs(b42)) && Math.abs(a5 - b5) <= glMatrix.EPSILON * Math.max(1, Math.abs(a5), Math.abs(b5)) && Math.abs(a6 - b6) <= glMatrix.EPSILON * Math.max(1, Math.abs(a6), Math.abs(b6)) && Math.abs(a7 - b7) <= glMatrix.EPSILON * Math.max(1, Math.abs(a7), Math.abs(b7));
+    }
+  }, { "./common.js": 20, "./mat4.js": 25, "./quat.js": 26 }], 28: [function(require2, module, exports) {
+    "use strict";
+    function _typeof(obj) {
+      "@babel/helpers - typeof";
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        _typeof = function _typeof2(obj2) {
+          return typeof obj2;
+        };
+      } else {
+        _typeof = function _typeof2(obj2) {
+          return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+        };
+      }
+      return _typeof(obj);
+    }
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.create = create;
+    exports.clone = clone;
+    exports.fromValues = fromValues;
+    exports.copy = copy;
+    exports.set = set;
+    exports.add = add;
+    exports.subtract = subtract;
+    exports.multiply = multiply;
+    exports.divide = divide;
+    exports.ceil = ceil;
+    exports.floor = floor;
+    exports.min = min;
+    exports.max = max2;
+    exports.round = round;
+    exports.scale = scale;
+    exports.scaleAndAdd = scaleAndAdd;
+    exports.distance = distance;
+    exports.squaredDistance = squaredDistance;
+    exports.length = length;
+    exports.squaredLength = squaredLength;
+    exports.negate = negate;
+    exports.inverse = inverse;
+    exports.normalize = normalize;
+    exports.dot = dot;
+    exports.cross = cross;
+    exports.lerp = lerp2;
+    exports.random = random;
+    exports.transformMat2 = transformMat2;
+    exports.transformMat2d = transformMat2d;
+    exports.transformMat3 = transformMat3;
+    exports.transformMat4 = transformMat4;
+    exports.rotate = rotate;
+    exports.angle = angle;
+    exports.zero = zero;
+    exports.str = str;
+    exports.exactEquals = exactEquals;
+    exports.equals = equals2;
+    exports.forEach = exports.sqrLen = exports.sqrDist = exports.dist = exports.div = exports.mul = exports.sub = exports.len = void 0;
+    var glMatrix = _interopRequireWildcard(require2("./common.js"));
+    function _getRequireWildcardCache() {
+      if (typeof WeakMap !== "function")
+        return null;
+      var cache = new WeakMap();
+      _getRequireWildcardCache = function _getRequireWildcardCache2() {
+        return cache;
+      };
+      return cache;
+    }
+    function _interopRequireWildcard(obj) {
+      if (obj && obj.__esModule) {
+        return obj;
+      }
+      if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") {
+        return { "default": obj };
+      }
+      var cache = _getRequireWildcardCache();
+      if (cache && cache.has(obj)) {
+        return cache.get(obj);
+      }
+      var newObj = {};
+      var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+          if (desc && (desc.get || desc.set)) {
+            Object.defineProperty(newObj, key, desc);
+          } else {
+            newObj[key] = obj[key];
+          }
+        }
+      }
+      newObj["default"] = obj;
+      if (cache) {
+        cache.set(obj, newObj);
+      }
+      return newObj;
+    }
+    function create() {
+      var out = new glMatrix.ARRAY_TYPE(2);
+      if (glMatrix.ARRAY_TYPE != Float32Array) {
+        out[0] = 0;
+        out[1] = 0;
+      }
+      return out;
+    }
+    function clone(a) {
+      var out = new glMatrix.ARRAY_TYPE(2);
+      out[0] = a[0];
+      out[1] = a[1];
+      return out;
+    }
+    function fromValues(x, y) {
+      var out = new glMatrix.ARRAY_TYPE(2);
+      out[0] = x;
+      out[1] = y;
+      return out;
+    }
+    function copy(out, a) {
+      out[0] = a[0];
+      out[1] = a[1];
+      return out;
+    }
+    function set(out, x, y) {
+      out[0] = x;
+      out[1] = y;
+      return out;
+    }
+    function add(out, a, b) {
+      out[0] = a[0] + b[0];
+      out[1] = a[1] + b[1];
+      return out;
+    }
+    function subtract(out, a, b) {
+      out[0] = a[0] - b[0];
+      out[1] = a[1] - b[1];
+      return out;
+    }
+    function multiply(out, a, b) {
+      out[0] = a[0] * b[0];
+      out[1] = a[1] * b[1];
+      return out;
+    }
+    function divide(out, a, b) {
+      out[0] = a[0] / b[0];
+      out[1] = a[1] / b[1];
+      return out;
+    }
+    function ceil(out, a) {
+      out[0] = Math.ceil(a[0]);
+      out[1] = Math.ceil(a[1]);
+      return out;
+    }
+    function floor(out, a) {
+      out[0] = Math.floor(a[0]);
+      out[1] = Math.floor(a[1]);
+      return out;
+    }
+    function min(out, a, b) {
+      out[0] = Math.min(a[0], b[0]);
+      out[1] = Math.min(a[1], b[1]);
+      return out;
+    }
+    function max2(out, a, b) {
+      out[0] = Math.max(a[0], b[0]);
+      out[1] = Math.max(a[1], b[1]);
+      return out;
+    }
+    function round(out, a) {
+      out[0] = Math.round(a[0]);
+      out[1] = Math.round(a[1]);
+      return out;
+    }
+    function scale(out, a, b) {
+      out[0] = a[0] * b;
+      out[1] = a[1] * b;
+      return out;
+    }
+    function scaleAndAdd(out, a, b, scale2) {
+      out[0] = a[0] + b[0] * scale2;
+      out[1] = a[1] + b[1] * scale2;
+      return out;
+    }
+    function distance(a, b) {
+      var x = b[0] - a[0], y = b[1] - a[1];
+      return Math.hypot(x, y);
+    }
+    function squaredDistance(a, b) {
+      var x = b[0] - a[0], y = b[1] - a[1];
+      return x * x + y * y;
+    }
+    function length(a) {
+      var x = a[0], y = a[1];
+      return Math.hypot(x, y);
+    }
+    function squaredLength(a) {
+      var x = a[0], y = a[1];
+      return x * x + y * y;
+    }
+    function negate(out, a) {
+      out[0] = -a[0];
+      out[1] = -a[1];
+      return out;
+    }
+    function inverse(out, a) {
+      out[0] = 1 / a[0];
+      out[1] = 1 / a[1];
+      return out;
+    }
+    function normalize(out, a) {
+      var x = a[0], y = a[1];
+      var len2 = x * x + y * y;
+      if (len2 > 0) {
+        len2 = 1 / Math.sqrt(len2);
+      }
+      out[0] = a[0] * len2;
+      out[1] = a[1] * len2;
+      return out;
+    }
+    function dot(a, b) {
+      return a[0] * b[0] + a[1] * b[1];
+    }
+    function cross(out, a, b) {
+      var z = a[0] * b[1] - a[1] * b[0];
+      out[0] = out[1] = 0;
+      out[2] = z;
+      return out;
+    }
+    function lerp2(out, a, b, t) {
+      var ax = a[0], ay = a[1];
+      out[0] = ax + t * (b[0] - ax);
+      out[1] = ay + t * (b[1] - ay);
+      return out;
+    }
+    function random(out, scale2) {
+      scale2 = scale2 || 1;
+      var r = glMatrix.RANDOM() * 2 * Math.PI;
+      out[0] = Math.cos(r) * scale2;
+      out[1] = Math.sin(r) * scale2;
+      return out;
+    }
+    function transformMat2(out, a, m) {
+      var x = a[0], y = a[1];
+      out[0] = m[0] * x + m[2] * y;
+      out[1] = m[1] * x + m[3] * y;
+      return out;
+    }
+    function transformMat2d(out, a, m) {
+      var x = a[0], y = a[1];
+      out[0] = m[0] * x + m[2] * y + m[4];
+      out[1] = m[1] * x + m[3] * y + m[5];
+      return out;
+    }
+    function transformMat3(out, a, m) {
+      var x = a[0], y = a[1];
+      out[0] = m[0] * x + m[3] * y + m[6];
+      out[1] = m[1] * x + m[4] * y + m[7];
+      return out;
+    }
+    function transformMat4(out, a, m) {
+      var x = a[0];
+      var y = a[1];
+      out[0] = m[0] * x + m[4] * y + m[12];
+      out[1] = m[1] * x + m[5] * y + m[13];
+      return out;
+    }
+    function rotate(out, a, b, rad) {
+      var p0 = a[0] - b[0], p1 = a[1] - b[1], sinC = Math.sin(rad), cosC = Math.cos(rad);
+      out[0] = p0 * cosC - p1 * sinC + b[0];
+      out[1] = p0 * sinC + p1 * cosC + b[1];
+      return out;
+    }
+    function angle(a, b) {
+      var x1 = a[0], y1 = a[1], x2 = b[0], y2 = b[1], mag = Math.sqrt(x1 * x1 + y1 * y1) * Math.sqrt(x2 * x2 + y2 * y2), cosine = mag && (x1 * x2 + y1 * y2) / mag;
+      return Math.acos(Math.min(Math.max(cosine, -1), 1));
+    }
+    function zero(out) {
+      out[0] = 0;
+      out[1] = 0;
+      return out;
+    }
+    function str(a) {
+      return "vec2(" + a[0] + ", " + a[1] + ")";
+    }
+    function exactEquals(a, b) {
+      return a[0] === b[0] && a[1] === b[1];
+    }
+    function equals2(a, b) {
+      var a0 = a[0], a1 = a[1];
+      var b0 = b[0], b1 = b[1];
+      return Math.abs(a0 - b0) <= glMatrix.EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a1 - b1) <= glMatrix.EPSILON * Math.max(1, Math.abs(a1), Math.abs(b1));
+    }
+    var len = length;
+    exports.len = len;
+    var sub = subtract;
+    exports.sub = sub;
+    var mul = multiply;
+    exports.mul = mul;
+    var div = divide;
+    exports.div = div;
+    var dist = distance;
+    exports.dist = dist;
+    var sqrDist = squaredDistance;
+    exports.sqrDist = sqrDist;
+    var sqrLen = squaredLength;
+    exports.sqrLen = sqrLen;
+    var forEach = function() {
+      var vec = create();
+      return function(a, stride, offset, count, fn, arg) {
+        var i, l;
+        if (!stride) {
+          stride = 2;
+        }
+        if (!offset) {
+          offset = 0;
+        }
+        if (count) {
+          l = Math.min(count * stride + offset, a.length);
+        } else {
+          l = a.length;
+        }
+        for (i = offset; i < l; i += stride) {
+          vec[0] = a[i];
+          vec[1] = a[i + 1];
+          fn(vec, vec, arg);
+          a[i] = vec[0];
+          a[i + 1] = vec[1];
+        }
+        return a;
+      };
+    }();
+    exports.forEach = forEach;
+  }, { "./common.js": 20 }], 29: [function(require2, module, exports) {
+    "use strict";
+    function _typeof(obj) {
+      "@babel/helpers - typeof";
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        _typeof = function _typeof2(obj2) {
+          return typeof obj2;
+        };
+      } else {
+        _typeof = function _typeof2(obj2) {
+          return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+        };
+      }
+      return _typeof(obj);
+    }
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.create = create;
+    exports.clone = clone;
+    exports.length = length;
+    exports.fromValues = fromValues;
+    exports.copy = copy;
+    exports.set = set;
+    exports.add = add;
+    exports.subtract = subtract;
+    exports.multiply = multiply;
+    exports.divide = divide;
+    exports.ceil = ceil;
+    exports.floor = floor;
+    exports.min = min;
+    exports.max = max2;
+    exports.round = round;
+    exports.scale = scale;
+    exports.scaleAndAdd = scaleAndAdd;
+    exports.distance = distance;
+    exports.squaredDistance = squaredDistance;
+    exports.squaredLength = squaredLength;
+    exports.negate = negate;
+    exports.inverse = inverse;
+    exports.normalize = normalize;
+    exports.dot = dot;
+    exports.cross = cross;
+    exports.lerp = lerp2;
+    exports.hermite = hermite;
+    exports.bezier = bezier;
+    exports.random = random;
+    exports.transformMat4 = transformMat4;
+    exports.transformMat3 = transformMat3;
+    exports.transformQuat = transformQuat;
+    exports.rotateX = rotateX;
+    exports.rotateY = rotateY;
+    exports.rotateZ = rotateZ;
+    exports.angle = angle;
+    exports.zero = zero;
+    exports.str = str;
+    exports.exactEquals = exactEquals;
+    exports.equals = equals2;
+    exports.forEach = exports.sqrLen = exports.len = exports.sqrDist = exports.dist = exports.div = exports.mul = exports.sub = void 0;
+    var glMatrix = _interopRequireWildcard(require2("./common.js"));
+    function _getRequireWildcardCache() {
+      if (typeof WeakMap !== "function")
+        return null;
+      var cache = new WeakMap();
+      _getRequireWildcardCache = function _getRequireWildcardCache2() {
+        return cache;
+      };
+      return cache;
+    }
+    function _interopRequireWildcard(obj) {
+      if (obj && obj.__esModule) {
+        return obj;
+      }
+      if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") {
+        return { "default": obj };
+      }
+      var cache = _getRequireWildcardCache();
+      if (cache && cache.has(obj)) {
+        return cache.get(obj);
+      }
+      var newObj = {};
+      var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+          if (desc && (desc.get || desc.set)) {
+            Object.defineProperty(newObj, key, desc);
+          } else {
+            newObj[key] = obj[key];
+          }
+        }
+      }
+      newObj["default"] = obj;
+      if (cache) {
+        cache.set(obj, newObj);
+      }
+      return newObj;
+    }
+    function create() {
+      var out = new glMatrix.ARRAY_TYPE(3);
+      if (glMatrix.ARRAY_TYPE != Float32Array) {
+        out[0] = 0;
+        out[1] = 0;
+        out[2] = 0;
+      }
+      return out;
+    }
+    function clone(a) {
+      var out = new glMatrix.ARRAY_TYPE(3);
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = a[2];
+      return out;
+    }
+    function length(a) {
+      var x = a[0];
+      var y = a[1];
+      var z = a[2];
+      return Math.hypot(x, y, z);
+    }
+    function fromValues(x, y, z) {
+      var out = new glMatrix.ARRAY_TYPE(3);
+      out[0] = x;
+      out[1] = y;
+      out[2] = z;
+      return out;
+    }
+    function copy(out, a) {
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = a[2];
+      return out;
+    }
+    function set(out, x, y, z) {
+      out[0] = x;
+      out[1] = y;
+      out[2] = z;
+      return out;
+    }
+    function add(out, a, b) {
+      out[0] = a[0] + b[0];
+      out[1] = a[1] + b[1];
+      out[2] = a[2] + b[2];
+      return out;
+    }
+    function subtract(out, a, b) {
+      out[0] = a[0] - b[0];
+      out[1] = a[1] - b[1];
+      out[2] = a[2] - b[2];
+      return out;
+    }
+    function multiply(out, a, b) {
+      out[0] = a[0] * b[0];
+      out[1] = a[1] * b[1];
+      out[2] = a[2] * b[2];
+      return out;
+    }
+    function divide(out, a, b) {
+      out[0] = a[0] / b[0];
+      out[1] = a[1] / b[1];
+      out[2] = a[2] / b[2];
+      return out;
+    }
+    function ceil(out, a) {
+      out[0] = Math.ceil(a[0]);
+      out[1] = Math.ceil(a[1]);
+      out[2] = Math.ceil(a[2]);
+      return out;
+    }
+    function floor(out, a) {
+      out[0] = Math.floor(a[0]);
+      out[1] = Math.floor(a[1]);
+      out[2] = Math.floor(a[2]);
+      return out;
+    }
+    function min(out, a, b) {
+      out[0] = Math.min(a[0], b[0]);
+      out[1] = Math.min(a[1], b[1]);
+      out[2] = Math.min(a[2], b[2]);
+      return out;
+    }
+    function max2(out, a, b) {
+      out[0] = Math.max(a[0], b[0]);
+      out[1] = Math.max(a[1], b[1]);
+      out[2] = Math.max(a[2], b[2]);
+      return out;
+    }
+    function round(out, a) {
+      out[0] = Math.round(a[0]);
+      out[1] = Math.round(a[1]);
+      out[2] = Math.round(a[2]);
+      return out;
+    }
+    function scale(out, a, b) {
+      out[0] = a[0] * b;
+      out[1] = a[1] * b;
+      out[2] = a[2] * b;
+      return out;
+    }
+    function scaleAndAdd(out, a, b, scale2) {
+      out[0] = a[0] + b[0] * scale2;
+      out[1] = a[1] + b[1] * scale2;
+      out[2] = a[2] + b[2] * scale2;
+      return out;
+    }
+    function distance(a, b) {
+      var x = b[0] - a[0];
+      var y = b[1] - a[1];
+      var z = b[2] - a[2];
+      return Math.hypot(x, y, z);
+    }
+    function squaredDistance(a, b) {
+      var x = b[0] - a[0];
+      var y = b[1] - a[1];
+      var z = b[2] - a[2];
+      return x * x + y * y + z * z;
+    }
+    function squaredLength(a) {
+      var x = a[0];
+      var y = a[1];
+      var z = a[2];
+      return x * x + y * y + z * z;
+    }
+    function negate(out, a) {
+      out[0] = -a[0];
+      out[1] = -a[1];
+      out[2] = -a[2];
+      return out;
+    }
+    function inverse(out, a) {
+      out[0] = 1 / a[0];
+      out[1] = 1 / a[1];
+      out[2] = 1 / a[2];
+      return out;
+    }
+    function normalize(out, a) {
+      var x = a[0];
+      var y = a[1];
+      var z = a[2];
+      var len2 = x * x + y * y + z * z;
+      if (len2 > 0) {
+        len2 = 1 / Math.sqrt(len2);
+      }
+      out[0] = a[0] * len2;
+      out[1] = a[1] * len2;
+      out[2] = a[2] * len2;
+      return out;
+    }
+    function dot(a, b) {
+      return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+    }
+    function cross(out, a, b) {
+      var ax = a[0], ay = a[1], az = a[2];
+      var bx = b[0], by = b[1], bz = b[2];
+      out[0] = ay * bz - az * by;
+      out[1] = az * bx - ax * bz;
+      out[2] = ax * by - ay * bx;
+      return out;
+    }
+    function lerp2(out, a, b, t) {
+      var ax = a[0];
+      var ay = a[1];
+      var az = a[2];
+      out[0] = ax + t * (b[0] - ax);
+      out[1] = ay + t * (b[1] - ay);
+      out[2] = az + t * (b[2] - az);
+      return out;
+    }
+    function hermite(out, a, b, c, d, t) {
+      var factorTimes2 = t * t;
+      var factor1 = factorTimes2 * (2 * t - 3) + 1;
+      var factor2 = factorTimes2 * (t - 2) + t;
+      var factor3 = factorTimes2 * (t - 1);
+      var factor4 = factorTimes2 * (3 - 2 * t);
+      out[0] = a[0] * factor1 + b[0] * factor2 + c[0] * factor3 + d[0] * factor4;
+      out[1] = a[1] * factor1 + b[1] * factor2 + c[1] * factor3 + d[1] * factor4;
+      out[2] = a[2] * factor1 + b[2] * factor2 + c[2] * factor3 + d[2] * factor4;
+      return out;
+    }
+    function bezier(out, a, b, c, d, t) {
+      var inverseFactor = 1 - t;
+      var inverseFactorTimesTwo = inverseFactor * inverseFactor;
+      var factorTimes2 = t * t;
+      var factor1 = inverseFactorTimesTwo * inverseFactor;
+      var factor2 = 3 * t * inverseFactorTimesTwo;
+      var factor3 = 3 * factorTimes2 * inverseFactor;
+      var factor4 = factorTimes2 * t;
+      out[0] = a[0] * factor1 + b[0] * factor2 + c[0] * factor3 + d[0] * factor4;
+      out[1] = a[1] * factor1 + b[1] * factor2 + c[1] * factor3 + d[1] * factor4;
+      out[2] = a[2] * factor1 + b[2] * factor2 + c[2] * factor3 + d[2] * factor4;
+      return out;
+    }
+    function random(out, scale2) {
+      scale2 = scale2 || 1;
+      var r = glMatrix.RANDOM() * 2 * Math.PI;
+      var z = glMatrix.RANDOM() * 2 - 1;
+      var zScale = Math.sqrt(1 - z * z) * scale2;
+      out[0] = Math.cos(r) * zScale;
+      out[1] = Math.sin(r) * zScale;
+      out[2] = z * scale2;
+      return out;
+    }
+    function transformMat4(out, a, m) {
+      var x = a[0], y = a[1], z = a[2];
+      var w = m[3] * x + m[7] * y + m[11] * z + m[15];
+      w = w || 1;
+      out[0] = (m[0] * x + m[4] * y + m[8] * z + m[12]) / w;
+      out[1] = (m[1] * x + m[5] * y + m[9] * z + m[13]) / w;
+      out[2] = (m[2] * x + m[6] * y + m[10] * z + m[14]) / w;
+      return out;
+    }
+    function transformMat3(out, a, m) {
+      var x = a[0], y = a[1], z = a[2];
+      out[0] = x * m[0] + y * m[3] + z * m[6];
+      out[1] = x * m[1] + y * m[4] + z * m[7];
+      out[2] = x * m[2] + y * m[5] + z * m[8];
+      return out;
+    }
+    function transformQuat(out, a, q) {
+      var qx = q[0], qy = q[1], qz = q[2], qw = q[3];
+      var x = a[0], y = a[1], z = a[2];
+      var uvx = qy * z - qz * y, uvy = qz * x - qx * z, uvz = qx * y - qy * x;
+      var uuvx = qy * uvz - qz * uvy, uuvy = qz * uvx - qx * uvz, uuvz = qx * uvy - qy * uvx;
+      var w2 = qw * 2;
+      uvx *= w2;
+      uvy *= w2;
+      uvz *= w2;
+      uuvx *= 2;
+      uuvy *= 2;
+      uuvz *= 2;
+      out[0] = x + uvx + uuvx;
+      out[1] = y + uvy + uuvy;
+      out[2] = z + uvz + uuvz;
+      return out;
+    }
+    function rotateX(out, a, b, rad) {
+      var p = [], r = [];
+      p[0] = a[0] - b[0];
+      p[1] = a[1] - b[1];
+      p[2] = a[2] - b[2];
+      r[0] = p[0];
+      r[1] = p[1] * Math.cos(rad) - p[2] * Math.sin(rad);
+      r[2] = p[1] * Math.sin(rad) + p[2] * Math.cos(rad);
+      out[0] = r[0] + b[0];
+      out[1] = r[1] + b[1];
+      out[2] = r[2] + b[2];
+      return out;
+    }
+    function rotateY(out, a, b, rad) {
+      var p = [], r = [];
+      p[0] = a[0] - b[0];
+      p[1] = a[1] - b[1];
+      p[2] = a[2] - b[2];
+      r[0] = p[2] * Math.sin(rad) + p[0] * Math.cos(rad);
+      r[1] = p[1];
+      r[2] = p[2] * Math.cos(rad) - p[0] * Math.sin(rad);
+      out[0] = r[0] + b[0];
+      out[1] = r[1] + b[1];
+      out[2] = r[2] + b[2];
+      return out;
+    }
+    function rotateZ(out, a, b, rad) {
+      var p = [], r = [];
+      p[0] = a[0] - b[0];
+      p[1] = a[1] - b[1];
+      p[2] = a[2] - b[2];
+      r[0] = p[0] * Math.cos(rad) - p[1] * Math.sin(rad);
+      r[1] = p[0] * Math.sin(rad) + p[1] * Math.cos(rad);
+      r[2] = p[2];
+      out[0] = r[0] + b[0];
+      out[1] = r[1] + b[1];
+      out[2] = r[2] + b[2];
+      return out;
+    }
+    function angle(a, b) {
+      var ax = a[0], ay = a[1], az = a[2], bx = b[0], by = b[1], bz = b[2], mag1 = Math.sqrt(ax * ax + ay * ay + az * az), mag2 = Math.sqrt(bx * bx + by * by + bz * bz), mag = mag1 * mag2, cosine = mag && dot(a, b) / mag;
+      return Math.acos(Math.min(Math.max(cosine, -1), 1));
+    }
+    function zero(out) {
+      out[0] = 0;
+      out[1] = 0;
+      out[2] = 0;
+      return out;
+    }
+    function str(a) {
+      return "vec3(" + a[0] + ", " + a[1] + ", " + a[2] + ")";
+    }
+    function exactEquals(a, b) {
+      return a[0] === b[0] && a[1] === b[1] && a[2] === b[2];
+    }
+    function equals2(a, b) {
+      var a0 = a[0], a1 = a[1], a2 = a[2];
+      var b0 = b[0], b1 = b[1], b22 = b[2];
+      return Math.abs(a0 - b0) <= glMatrix.EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a1 - b1) <= glMatrix.EPSILON * Math.max(1, Math.abs(a1), Math.abs(b1)) && Math.abs(a2 - b22) <= glMatrix.EPSILON * Math.max(1, Math.abs(a2), Math.abs(b22));
+    }
+    var sub = subtract;
+    exports.sub = sub;
+    var mul = multiply;
+    exports.mul = mul;
+    var div = divide;
+    exports.div = div;
+    var dist = distance;
+    exports.dist = dist;
+    var sqrDist = squaredDistance;
+    exports.sqrDist = sqrDist;
+    var len = length;
+    exports.len = len;
+    var sqrLen = squaredLength;
+    exports.sqrLen = sqrLen;
+    var forEach = function() {
+      var vec = create();
+      return function(a, stride, offset, count, fn, arg) {
+        var i, l;
+        if (!stride) {
+          stride = 3;
+        }
+        if (!offset) {
+          offset = 0;
+        }
+        if (count) {
+          l = Math.min(count * stride + offset, a.length);
+        } else {
+          l = a.length;
+        }
+        for (i = offset; i < l; i += stride) {
+          vec[0] = a[i];
+          vec[1] = a[i + 1];
+          vec[2] = a[i + 2];
+          fn(vec, vec, arg);
+          a[i] = vec[0];
+          a[i + 1] = vec[1];
+          a[i + 2] = vec[2];
+        }
+        return a;
+      };
+    }();
+    exports.forEach = forEach;
+  }, { "./common.js": 20 }], 30: [function(require2, module, exports) {
+    "use strict";
+    function _typeof(obj) {
+      "@babel/helpers - typeof";
+      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        _typeof = function _typeof2(obj2) {
+          return typeof obj2;
+        };
+      } else {
+        _typeof = function _typeof2(obj2) {
+          return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+        };
+      }
+      return _typeof(obj);
+    }
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.create = create;
+    exports.clone = clone;
+    exports.fromValues = fromValues;
+    exports.copy = copy;
+    exports.set = set;
+    exports.add = add;
+    exports.subtract = subtract;
+    exports.multiply = multiply;
+    exports.divide = divide;
+    exports.ceil = ceil;
+    exports.floor = floor;
+    exports.min = min;
+    exports.max = max2;
+    exports.round = round;
+    exports.scale = scale;
+    exports.scaleAndAdd = scaleAndAdd;
+    exports.distance = distance;
+    exports.squaredDistance = squaredDistance;
+    exports.length = length;
+    exports.squaredLength = squaredLength;
+    exports.negate = negate;
+    exports.inverse = inverse;
+    exports.normalize = normalize;
+    exports.dot = dot;
+    exports.cross = cross;
+    exports.lerp = lerp2;
+    exports.random = random;
+    exports.transformMat4 = transformMat4;
+    exports.transformQuat = transformQuat;
+    exports.zero = zero;
+    exports.str = str;
+    exports.exactEquals = exactEquals;
+    exports.equals = equals2;
+    exports.forEach = exports.sqrLen = exports.len = exports.sqrDist = exports.dist = exports.div = exports.mul = exports.sub = void 0;
+    var glMatrix = _interopRequireWildcard(require2("./common.js"));
+    function _getRequireWildcardCache() {
+      if (typeof WeakMap !== "function")
+        return null;
+      var cache = new WeakMap();
+      _getRequireWildcardCache = function _getRequireWildcardCache2() {
+        return cache;
+      };
+      return cache;
+    }
+    function _interopRequireWildcard(obj) {
+      if (obj && obj.__esModule) {
+        return obj;
+      }
+      if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") {
+        return { "default": obj };
+      }
+      var cache = _getRequireWildcardCache();
+      if (cache && cache.has(obj)) {
+        return cache.get(obj);
+      }
+      var newObj = {};
+      var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+          if (desc && (desc.get || desc.set)) {
+            Object.defineProperty(newObj, key, desc);
+          } else {
+            newObj[key] = obj[key];
+          }
+        }
+      }
+      newObj["default"] = obj;
+      if (cache) {
+        cache.set(obj, newObj);
+      }
+      return newObj;
+    }
+    function create() {
+      var out = new glMatrix.ARRAY_TYPE(4);
+      if (glMatrix.ARRAY_TYPE != Float32Array) {
+        out[0] = 0;
+        out[1] = 0;
+        out[2] = 0;
+        out[3] = 0;
+      }
+      return out;
+    }
+    function clone(a) {
+      var out = new glMatrix.ARRAY_TYPE(4);
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = a[2];
+      out[3] = a[3];
+      return out;
+    }
+    function fromValues(x, y, z, w) {
+      var out = new glMatrix.ARRAY_TYPE(4);
+      out[0] = x;
+      out[1] = y;
+      out[2] = z;
+      out[3] = w;
+      return out;
+    }
+    function copy(out, a) {
+      out[0] = a[0];
+      out[1] = a[1];
+      out[2] = a[2];
+      out[3] = a[3];
+      return out;
+    }
+    function set(out, x, y, z, w) {
+      out[0] = x;
+      out[1] = y;
+      out[2] = z;
+      out[3] = w;
+      return out;
+    }
+    function add(out, a, b) {
+      out[0] = a[0] + b[0];
+      out[1] = a[1] + b[1];
+      out[2] = a[2] + b[2];
+      out[3] = a[3] + b[3];
+      return out;
+    }
+    function subtract(out, a, b) {
+      out[0] = a[0] - b[0];
+      out[1] = a[1] - b[1];
+      out[2] = a[2] - b[2];
+      out[3] = a[3] - b[3];
+      return out;
+    }
+    function multiply(out, a, b) {
+      out[0] = a[0] * b[0];
+      out[1] = a[1] * b[1];
+      out[2] = a[2] * b[2];
+      out[3] = a[3] * b[3];
+      return out;
+    }
+    function divide(out, a, b) {
+      out[0] = a[0] / b[0];
+      out[1] = a[1] / b[1];
+      out[2] = a[2] / b[2];
+      out[3] = a[3] / b[3];
+      return out;
+    }
+    function ceil(out, a) {
+      out[0] = Math.ceil(a[0]);
+      out[1] = Math.ceil(a[1]);
+      out[2] = Math.ceil(a[2]);
+      out[3] = Math.ceil(a[3]);
+      return out;
+    }
+    function floor(out, a) {
+      out[0] = Math.floor(a[0]);
+      out[1] = Math.floor(a[1]);
+      out[2] = Math.floor(a[2]);
+      out[3] = Math.floor(a[3]);
+      return out;
+    }
+    function min(out, a, b) {
+      out[0] = Math.min(a[0], b[0]);
+      out[1] = Math.min(a[1], b[1]);
+      out[2] = Math.min(a[2], b[2]);
+      out[3] = Math.min(a[3], b[3]);
+      return out;
+    }
+    function max2(out, a, b) {
+      out[0] = Math.max(a[0], b[0]);
+      out[1] = Math.max(a[1], b[1]);
+      out[2] = Math.max(a[2], b[2]);
+      out[3] = Math.max(a[3], b[3]);
+      return out;
+    }
+    function round(out, a) {
+      out[0] = Math.round(a[0]);
+      out[1] = Math.round(a[1]);
+      out[2] = Math.round(a[2]);
+      out[3] = Math.round(a[3]);
+      return out;
+    }
+    function scale(out, a, b) {
+      out[0] = a[0] * b;
+      out[1] = a[1] * b;
+      out[2] = a[2] * b;
+      out[3] = a[3] * b;
+      return out;
+    }
+    function scaleAndAdd(out, a, b, scale2) {
+      out[0] = a[0] + b[0] * scale2;
+      out[1] = a[1] + b[1] * scale2;
+      out[2] = a[2] + b[2] * scale2;
+      out[3] = a[3] + b[3] * scale2;
+      return out;
+    }
+    function distance(a, b) {
+      var x = b[0] - a[0];
+      var y = b[1] - a[1];
+      var z = b[2] - a[2];
+      var w = b[3] - a[3];
+      return Math.hypot(x, y, z, w);
+    }
+    function squaredDistance(a, b) {
+      var x = b[0] - a[0];
+      var y = b[1] - a[1];
+      var z = b[2] - a[2];
+      var w = b[3] - a[3];
+      return x * x + y * y + z * z + w * w;
+    }
+    function length(a) {
+      var x = a[0];
+      var y = a[1];
+      var z = a[2];
+      var w = a[3];
+      return Math.hypot(x, y, z, w);
+    }
+    function squaredLength(a) {
+      var x = a[0];
+      var y = a[1];
+      var z = a[2];
+      var w = a[3];
+      return x * x + y * y + z * z + w * w;
+    }
+    function negate(out, a) {
+      out[0] = -a[0];
+      out[1] = -a[1];
+      out[2] = -a[2];
+      out[3] = -a[3];
+      return out;
+    }
+    function inverse(out, a) {
+      out[0] = 1 / a[0];
+      out[1] = 1 / a[1];
+      out[2] = 1 / a[2];
+      out[3] = 1 / a[3];
+      return out;
+    }
+    function normalize(out, a) {
+      var x = a[0];
+      var y = a[1];
+      var z = a[2];
+      var w = a[3];
+      var len2 = x * x + y * y + z * z + w * w;
+      if (len2 > 0) {
+        len2 = 1 / Math.sqrt(len2);
+      }
+      out[0] = x * len2;
+      out[1] = y * len2;
+      out[2] = z * len2;
+      out[3] = w * len2;
+      return out;
+    }
+    function dot(a, b) {
+      return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+    }
+    function cross(out, u, v, w) {
+      var A = v[0] * w[1] - v[1] * w[0], B = v[0] * w[2] - v[2] * w[0], C = v[0] * w[3] - v[3] * w[0], D = v[1] * w[2] - v[2] * w[1], E = v[1] * w[3] - v[3] * w[1], F = v[2] * w[3] - v[3] * w[2];
+      var G = u[0];
+      var H = u[1];
+      var I = u[2];
+      var J = u[3];
+      out[0] = H * F - I * E + J * D;
+      out[1] = -(G * F) + I * C - J * B;
+      out[2] = G * E - H * C + J * A;
+      out[3] = -(G * D) + H * B - I * A;
+      return out;
+    }
+    function lerp2(out, a, b, t) {
+      var ax = a[0];
+      var ay = a[1];
+      var az = a[2];
+      var aw = a[3];
+      out[0] = ax + t * (b[0] - ax);
+      out[1] = ay + t * (b[1] - ay);
+      out[2] = az + t * (b[2] - az);
+      out[3] = aw + t * (b[3] - aw);
+      return out;
+    }
+    function random(out, scale2) {
+      scale2 = scale2 || 1;
+      var v1, v2, v3, v4;
+      var s1, s2;
+      do {
+        v1 = glMatrix.RANDOM() * 2 - 1;
+        v2 = glMatrix.RANDOM() * 2 - 1;
+        s1 = v1 * v1 + v2 * v2;
+      } while (s1 >= 1);
+      do {
+        v3 = glMatrix.RANDOM() * 2 - 1;
+        v4 = glMatrix.RANDOM() * 2 - 1;
+        s2 = v3 * v3 + v4 * v4;
+      } while (s2 >= 1);
+      var d = Math.sqrt((1 - s1) / s2);
+      out[0] = scale2 * v1;
+      out[1] = scale2 * v2;
+      out[2] = scale2 * v3 * d;
+      out[3] = scale2 * v4 * d;
+      return out;
+    }
+    function transformMat4(out, a, m) {
+      var x = a[0], y = a[1], z = a[2], w = a[3];
+      out[0] = m[0] * x + m[4] * y + m[8] * z + m[12] * w;
+      out[1] = m[1] * x + m[5] * y + m[9] * z + m[13] * w;
+      out[2] = m[2] * x + m[6] * y + m[10] * z + m[14] * w;
+      out[3] = m[3] * x + m[7] * y + m[11] * z + m[15] * w;
+      return out;
+    }
+    function transformQuat(out, a, q) {
+      var x = a[0], y = a[1], z = a[2];
+      var qx = q[0], qy = q[1], qz = q[2], qw = q[3];
+      var ix = qw * x + qy * z - qz * y;
+      var iy = qw * y + qz * x - qx * z;
+      var iz = qw * z + qx * y - qy * x;
+      var iw = -qx * x - qy * y - qz * z;
+      out[0] = ix * qw + iw * -qx + iy * -qz - iz * -qy;
+      out[1] = iy * qw + iw * -qy + iz * -qx - ix * -qz;
+      out[2] = iz * qw + iw * -qz + ix * -qy - iy * -qx;
+      out[3] = a[3];
+      return out;
+    }
+    function zero(out) {
+      out[0] = 0;
+      out[1] = 0;
+      out[2] = 0;
+      out[3] = 0;
+      return out;
+    }
+    function str(a) {
+      return "vec4(" + a[0] + ", " + a[1] + ", " + a[2] + ", " + a[3] + ")";
+    }
+    function exactEquals(a, b) {
+      return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3];
+    }
+    function equals2(a, b) {
+      var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
+      var b0 = b[0], b1 = b[1], b22 = b[2], b3 = b[3];
+      return Math.abs(a0 - b0) <= glMatrix.EPSILON * Math.max(1, Math.abs(a0), Math.abs(b0)) && Math.abs(a1 - b1) <= glMatrix.EPSILON * Math.max(1, Math.abs(a1), Math.abs(b1)) && Math.abs(a2 - b22) <= glMatrix.EPSILON * Math.max(1, Math.abs(a2), Math.abs(b22)) && Math.abs(a3 - b3) <= glMatrix.EPSILON * Math.max(1, Math.abs(a3), Math.abs(b3));
+    }
+    var sub = subtract;
+    exports.sub = sub;
+    var mul = multiply;
+    exports.mul = mul;
+    var div = divide;
+    exports.div = div;
+    var dist = distance;
+    exports.dist = dist;
+    var sqrDist = squaredDistance;
+    exports.sqrDist = sqrDist;
+    var len = length;
+    exports.len = len;
+    var sqrLen = squaredLength;
+    exports.sqrLen = sqrLen;
+    var forEach = function() {
+      var vec = create();
+      return function(a, stride, offset, count, fn, arg) {
+        var i, l;
+        if (!stride) {
+          stride = 4;
+        }
+        if (!offset) {
+          offset = 0;
+        }
+        if (count) {
+          l = Math.min(count * stride + offset, a.length);
+        } else {
+          l = a.length;
+        }
+        for (i = offset; i < l; i += stride) {
+          vec[0] = a[i];
+          vec[1] = a[i + 1];
+          vec[2] = a[i + 2];
+          vec[3] = a[i + 3];
+          fn(vec, vec, arg);
+          a[i] = vec[0];
+          a[i + 1] = vec[1];
+          a[i + 2] = vec[2];
+          a[i + 3] = vec[3];
+        }
+        return a;
+      };
+    }();
+    exports.forEach = forEach;
+  }, { "./common.js": 20 }], 31: [function(require2, module, exports) {
+    "use strict";
+    var R = typeof Reflect === "object" ? Reflect : null;
+    var ReflectApply = R && typeof R.apply === "function" ? R.apply : function ReflectApply2(target, receiver, args) {
+      return Function.prototype.apply.call(target, receiver, args);
+    };
+    var ReflectOwnKeys;
+    if (R && typeof R.ownKeys === "function") {
+      ReflectOwnKeys = R.ownKeys;
+    } else if (Object.getOwnPropertySymbols) {
+      ReflectOwnKeys = function ReflectOwnKeys2(target) {
+        return Object.getOwnPropertyNames(target).concat(Object.getOwnPropertySymbols(target));
+      };
+    } else {
+      ReflectOwnKeys = function ReflectOwnKeys2(target) {
+        return Object.getOwnPropertyNames(target);
+      };
+    }
+    function ProcessEmitWarning(warning) {
+      if (console && console.warn)
+        console.warn(warning);
+    }
+    var NumberIsNaN = Number.isNaN || function NumberIsNaN2(value) {
+      return value !== value;
+    };
+    function EventEmitter() {
+      EventEmitter.init.call(this);
+    }
+    module.exports = EventEmitter;
+    module.exports.once = once;
+    EventEmitter.EventEmitter = EventEmitter;
+    EventEmitter.prototype._events = void 0;
+    EventEmitter.prototype._eventsCount = 0;
+    EventEmitter.prototype._maxListeners = void 0;
+    var defaultMaxListeners = 10;
+    function checkListener(listener) {
+      if (typeof listener !== "function") {
+        throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+      }
+    }
+    Object.defineProperty(EventEmitter, "defaultMaxListeners", {
+      enumerable: true,
+      get: function() {
+        return defaultMaxListeners;
+      },
+      set: function(arg) {
+        if (typeof arg !== "number" || arg < 0 || NumberIsNaN(arg)) {
+          throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + ".");
+        }
+        defaultMaxListeners = arg;
+      }
+    });
+    EventEmitter.init = function() {
+      if (this._events === void 0 || this._events === Object.getPrototypeOf(this)._events) {
+        this._events = Object.create(null);
+        this._eventsCount = 0;
+      }
+      this._maxListeners = this._maxListeners || void 0;
+    };
+    EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
+      if (typeof n !== "number" || n < 0 || NumberIsNaN(n)) {
+        throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + ".");
+      }
+      this._maxListeners = n;
+      return this;
+    };
+    function _getMaxListeners(that) {
+      if (that._maxListeners === void 0)
+        return EventEmitter.defaultMaxListeners;
+      return that._maxListeners;
+    }
+    EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
+      return _getMaxListeners(this);
+    };
+    EventEmitter.prototype.emit = function emit(type) {
+      var args = [];
+      for (var i = 1; i < arguments.length; i++)
+        args.push(arguments[i]);
+      var doError = type === "error";
+      var events = this._events;
+      if (events !== void 0)
+        doError = doError && events.error === void 0;
+      else if (!doError)
+        return false;
+      if (doError) {
+        var er;
+        if (args.length > 0)
+          er = args[0];
+        if (er instanceof Error) {
+          throw er;
+        }
+        var err = new Error("Unhandled error." + (er ? " (" + er.message + ")" : ""));
+        err.context = er;
+        throw err;
+      }
+      var handler = events[type];
+      if (handler === void 0)
+        return false;
+      if (typeof handler === "function") {
+        ReflectApply(handler, this, args);
+      } else {
+        var len = handler.length;
+        var listeners = arrayClone(handler, len);
+        for (var i = 0; i < len; ++i)
+          ReflectApply(listeners[i], this, args);
+      }
+      return true;
+    };
+    function _addListener(target, type, listener, prepend) {
+      var m;
+      var events;
+      var existing;
+      checkListener(listener);
+      events = target._events;
+      if (events === void 0) {
+        events = target._events = Object.create(null);
+        target._eventsCount = 0;
+      } else {
+        if (events.newListener !== void 0) {
+          target.emit("newListener", type, listener.listener ? listener.listener : listener);
+          events = target._events;
+        }
+        existing = events[type];
+      }
+      if (existing === void 0) {
+        existing = events[type] = listener;
+        ++target._eventsCount;
+      } else {
+        if (typeof existing === "function") {
+          existing = events[type] = prepend ? [listener, existing] : [existing, listener];
+        } else if (prepend) {
+          existing.unshift(listener);
+        } else {
+          existing.push(listener);
+        }
+        m = _getMaxListeners(target);
+        if (m > 0 && existing.length > m && !existing.warned) {
+          existing.warned = true;
+          var w = new Error("Possible EventEmitter memory leak detected. " + existing.length + " " + String(type) + " listeners added. Use emitter.setMaxListeners() to increase limit");
+          w.name = "MaxListenersExceededWarning";
+          w.emitter = target;
+          w.type = type;
+          w.count = existing.length;
+          ProcessEmitWarning(w);
+        }
+      }
+      return target;
+    }
+    EventEmitter.prototype.addListener = function addListener(type, listener) {
+      return _addListener(this, type, listener, false);
+    };
+    EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+    EventEmitter.prototype.prependListener = function prependListener(type, listener) {
+      return _addListener(this, type, listener, true);
+    };
+    function onceWrapper() {
+      if (!this.fired) {
+        this.target.removeListener(this.type, this.wrapFn);
+        this.fired = true;
+        if (arguments.length === 0)
+          return this.listener.call(this.target);
+        return this.listener.apply(this.target, arguments);
+      }
+    }
+    function _onceWrap(target, type, listener) {
+      var state = { fired: false, wrapFn: void 0, target, type, listener };
+      var wrapped = onceWrapper.bind(state);
+      wrapped.listener = listener;
+      state.wrapFn = wrapped;
+      return wrapped;
+    }
+    EventEmitter.prototype.once = function once2(type, listener) {
+      checkListener(listener);
+      this.on(type, _onceWrap(this, type, listener));
+      return this;
+    };
+    EventEmitter.prototype.prependOnceListener = function prependOnceListener(type, listener) {
+      checkListener(listener);
+      this.prependListener(type, _onceWrap(this, type, listener));
+      return this;
+    };
+    EventEmitter.prototype.removeListener = function removeListener(type, listener) {
+      var list, events, position, i, originalListener;
+      checkListener(listener);
+      events = this._events;
+      if (events === void 0)
+        return this;
+      list = events[type];
+      if (list === void 0)
+        return this;
+      if (list === listener || list.listener === listener) {
+        if (--this._eventsCount === 0)
+          this._events = Object.create(null);
+        else {
+          delete events[type];
+          if (events.removeListener)
+            this.emit("removeListener", type, list.listener || listener);
+        }
+      } else if (typeof list !== "function") {
+        position = -1;
+        for (i = list.length - 1; i >= 0; i--) {
+          if (list[i] === listener || list[i].listener === listener) {
+            originalListener = list[i].listener;
+            position = i;
+            break;
+          }
+        }
+        if (position < 0)
+          return this;
+        if (position === 0)
+          list.shift();
+        else {
+          spliceOne(list, position);
+        }
+        if (list.length === 1)
+          events[type] = list[0];
+        if (events.removeListener !== void 0)
+          this.emit("removeListener", type, originalListener || listener);
+      }
+      return this;
+    };
+    EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+    EventEmitter.prototype.removeAllListeners = function removeAllListeners(type) {
+      var listeners, events, i;
+      events = this._events;
+      if (events === void 0)
+        return this;
+      if (events.removeListener === void 0) {
+        if (arguments.length === 0) {
+          this._events = Object.create(null);
+          this._eventsCount = 0;
+        } else if (events[type] !== void 0) {
+          if (--this._eventsCount === 0)
+            this._events = Object.create(null);
+          else
+            delete events[type];
+        }
+        return this;
+      }
+      if (arguments.length === 0) {
+        var keys = Object.keys(events);
+        var key;
+        for (i = 0; i < keys.length; ++i) {
+          key = keys[i];
+          if (key === "removeListener")
+            continue;
+          this.removeAllListeners(key);
+        }
+        this.removeAllListeners("removeListener");
+        this._events = Object.create(null);
+        this._eventsCount = 0;
+        return this;
+      }
+      listeners = events[type];
+      if (typeof listeners === "function") {
+        this.removeListener(type, listeners);
+      } else if (listeners !== void 0) {
+        for (i = listeners.length - 1; i >= 0; i--) {
+          this.removeListener(type, listeners[i]);
+        }
+      }
+      return this;
+    };
+    function _listeners(target, type, unwrap) {
+      var events = target._events;
+      if (events === void 0)
+        return [];
+      var evlistener = events[type];
+      if (evlistener === void 0)
+        return [];
+      if (typeof evlistener === "function")
+        return unwrap ? [evlistener.listener || evlistener] : [evlistener];
+      return unwrap ? unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
+    }
+    EventEmitter.prototype.listeners = function listeners(type) {
+      return _listeners(this, type, true);
+    };
+    EventEmitter.prototype.rawListeners = function rawListeners(type) {
+      return _listeners(this, type, false);
+    };
+    EventEmitter.listenerCount = function(emitter, type) {
+      if (typeof emitter.listenerCount === "function") {
+        return emitter.listenerCount(type);
+      } else {
+        return listenerCount.call(emitter, type);
+      }
+    };
+    EventEmitter.prototype.listenerCount = listenerCount;
+    function listenerCount(type) {
+      var events = this._events;
+      if (events !== void 0) {
+        var evlistener = events[type];
+        if (typeof evlistener === "function") {
+          return 1;
+        } else if (evlistener !== void 0) {
+          return evlistener.length;
+        }
+      }
+      return 0;
+    }
+    EventEmitter.prototype.eventNames = function eventNames() {
+      return this._eventsCount > 0 ? ReflectOwnKeys(this._events) : [];
+    };
+    function arrayClone(arr, n) {
+      var copy = new Array(n);
+      for (var i = 0; i < n; ++i)
+        copy[i] = arr[i];
+      return copy;
+    }
+    function spliceOne(list, index) {
+      for (; index + 1 < list.length; index++)
+        list[index] = list[index + 1];
+      list.pop();
+    }
+    function unwrapListeners(arr) {
+      var ret = new Array(arr.length);
+      for (var i = 0; i < ret.length; ++i) {
+        ret[i] = arr[i].listener || arr[i];
+      }
+      return ret;
+    }
+    function once(emitter, name) {
+      return new Promise(function(resolve, reject) {
+        function errorListener(err) {
+          emitter.removeListener(name, resolver);
+          reject(err);
+        }
+        function resolver() {
+          if (typeof emitter.removeListener === "function") {
+            emitter.removeListener("error", errorListener);
+          }
+          resolve([].slice.call(arguments));
+        }
+        ;
+        eventTargetAgnosticAddListener(emitter, name, resolver, { once: true });
+        if (name !== "error") {
+          addErrorHandlerIfEventEmitter(emitter, errorListener, { once: true });
+        }
+      });
+    }
+    function addErrorHandlerIfEventEmitter(emitter, handler, flags) {
+      if (typeof emitter.on === "function") {
+        eventTargetAgnosticAddListener(emitter, "error", handler, flags);
+      }
+    }
+    function eventTargetAgnosticAddListener(emitter, name, listener, flags) {
+      if (typeof emitter.on === "function") {
+        if (flags.once) {
+          emitter.once(name, listener);
+        } else {
+          emitter.on(name, listener);
+        }
+      } else if (typeof emitter.addEventListener === "function") {
+        emitter.addEventListener(name, function wrapListener(arg) {
+          if (flags.once) {
+            emitter.removeEventListener(name, wrapListener);
+          }
+          listener(arg);
+        });
+      } else {
+        throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof emitter);
+      }
+    }
+  }, {}], 32: [function(require2, module, exports) {
+    var process = module.exports = {};
+    var cachedSetTimeout;
+    var cachedClearTimeout;
+    function defaultSetTimout() {
+      throw new Error("setTimeout has not been defined");
+    }
+    function defaultClearTimeout() {
+      throw new Error("clearTimeout has not been defined");
+    }
+    (function() {
+      try {
+        if (typeof setTimeout === "function") {
+          cachedSetTimeout = setTimeout;
+        } else {
+          cachedSetTimeout = defaultSetTimout;
+        }
+      } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+      }
+      try {
+        if (typeof clearTimeout === "function") {
+          cachedClearTimeout = clearTimeout;
+        } else {
+          cachedClearTimeout = defaultClearTimeout;
+        }
+      } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+      }
+    })();
+    function runTimeout(fun) {
+      if (cachedSetTimeout === setTimeout) {
+        return setTimeout(fun, 0);
+      }
+      if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+      }
+      try {
+        return cachedSetTimeout(fun, 0);
+      } catch (e) {
+        try {
+          return cachedSetTimeout.call(null, fun, 0);
+        } catch (e2) {
+          return cachedSetTimeout.call(this, fun, 0);
+        }
+      }
+    }
+    function runClearTimeout(marker) {
+      if (cachedClearTimeout === clearTimeout) {
+        return clearTimeout(marker);
+      }
+      if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+      }
+      try {
+        return cachedClearTimeout(marker);
+      } catch (e) {
+        try {
+          return cachedClearTimeout.call(null, marker);
+        } catch (e2) {
+          return cachedClearTimeout.call(this, marker);
+        }
+      }
+    }
+    var queue = [];
+    var draining = false;
+    var currentQueue;
+    var queueIndex = -1;
+    function cleanUpNextTick() {
+      if (!draining || !currentQueue) {
+        return;
+      }
+      draining = false;
+      if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+      } else {
+        queueIndex = -1;
+      }
+      if (queue.length) {
+        drainQueue();
+      }
+    }
+    function drainQueue() {
+      if (draining) {
+        return;
+      }
+      var timeout = runTimeout(cleanUpNextTick);
+      draining = true;
+      var len = queue.length;
+      while (len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+          if (currentQueue) {
+            currentQueue[queueIndex].run();
+          }
+        }
+        queueIndex = -1;
+        len = queue.length;
+      }
+      currentQueue = null;
+      draining = false;
+      runClearTimeout(timeout);
+    }
+    process.nextTick = function(fun) {
+      var args = new Array(arguments.length - 1);
+      if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+          args[i - 1] = arguments[i];
+        }
+      }
+      queue.push(new Item(fun, args));
+      if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+      }
+    };
+    function Item(fun, array) {
+      this.fun = fun;
+      this.array = array;
+    }
+    Item.prototype.run = function() {
+      this.fun.apply(null, this.array);
+    };
+    process.title = "browser";
+    process.browser = true;
+    process.env = {};
+    process.argv = [];
+    process.version = "";
+    process.versions = {};
+    function noop() {
+    }
+    process.on = noop;
+    process.addListener = noop;
+    process.once = noop;
+    process.off = noop;
+    process.removeListener = noop;
+    process.removeAllListeners = noop;
+    process.emit = noop;
+    process.prependListener = noop;
+    process.prependOnceListener = noop;
+    process.listeners = function(name) {
+      return [];
+    };
+    process.binding = function(name) {
+      throw new Error("process.binding is not supported");
+    };
+    process.cwd = function() {
+      return "/";
+    };
+    process.chdir = function(dir) {
+      throw new Error("process.chdir is not supported");
+    };
+    process.umask = function() {
+      return 0;
+    };
+  }, {}], 33: [function(require2, module, exports) {
+    "use strict";
+    module.exports = function() {
+      throw new Error("ws does not work in the browser. Browser clients must use the native WebSocket object");
+    };
+  }, {}], 34: [function(require2, module, exports) {
+    if (typeof window !== "undefined") {
+      if (typeof window.requestAnimationFrame !== "function") {
+        window.requestAnimationFrame = window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
+          setTimeout(callback, 1e3 / 60);
+        };
+      }
+      window.Leap = require2("../lib/index");
+    } else {
+      Leap = require2("../lib/index");
+    }
+  }, { "../lib/index": 11 }] }, {}, [34]);
+
   // index.js
   var queryParams = new URLSearchParams(location.search);
   function map(v, a, b, c, d) {
@@ -50452,7 +56903,7 @@
   }
   var stats = new stats_module_default();
   document.body.append(stats.dom);
-  var NUM_POINTS = 1e3;
+  var NUM_POINTS = 500;
   var MainScene = class extends Scene3D {
     async preload() {
       this.assets = {
@@ -50463,80 +56914,137 @@
       };
     }
     async init() {
+      this.renderer.physicallyCorrectLights = true;
       this.state = window.state = Object.preventExtensions({
         player: null,
         points: null,
-        pointBodies: []
+        pointBodies: [],
+        color: new three_module_exports.Color("red"),
+        light: null,
+        palmPosition: null,
+        keys: {
+          KeyW: false,
+          KeyS: false,
+          KeyA: false,
+          KeyD: false,
+          KeyR: false,
+          KeyF: false
+        }
       });
     }
     async create() {
       window.scene = this;
-      const warp = await this.warpSpeed("-ground", "orbitControls", "-sky");
       this.camera.position.set(0, 0, 20);
       this.camera.rotation.set(0, 0, 0);
       const wallThickness = 0.5;
       const halfWallThickness = wallThickness / 2;
-      const doubleWallThickness = wallThickness * 2;
-      this.physics.add.box({ x: -1.5 - halfWallThickness, width: wallThickness, height: 4 + doubleWallThickness, depth: 2 + doubleWallThickness, collisionFlags: collisionFlags.static }, { lambert: { visible: true, wireframe: false } });
-      this.physics.add.box({ x: 1.5 + halfWallThickness, width: wallThickness, height: 4 + doubleWallThickness, depth: 2 + doubleWallThickness, collisionFlags: collisionFlags.static }, { lambert: { visible: true, wireframe: false } });
-      this.physics.add.box({ y: 2 + halfWallThickness, width: 3 + doubleWallThickness, height: wallThickness, depth: 2 + doubleWallThickness, collisionFlags: collisionFlags.static }, { lambert: { visible: true, wireframe: false } });
-      this.physics.add.box({ y: -2 - halfWallThickness, width: 3 + doubleWallThickness, height: wallThickness, depth: 2 + doubleWallThickness, collisionFlags: collisionFlags.static }, { lambert: { visible: true, wireframe: false } });
-      this.physics.add.box({ z: -1 - halfWallThickness, width: 3 + doubleWallThickness, height: 4 + doubleWallThickness, depth: wallThickness, collisionFlags: collisionFlags.static }, { lambert: { visible: true, wireframe: false } });
-      this.physics.add.box({ z: 1 + halfWallThickness, width: 3 + doubleWallThickness, height: 4 + doubleWallThickness, depth: wallThickness, collisionFlags: collisionFlags.static }, { lambert: { visible: false, wireframe: true } });
-      this.state.player = this.physics.add.sphere({ radius: 0.25 }, { standard: { color: "red" } });
-      const points = new three_module_exports.BufferGeometry();
-      points.setAttribute("position", new three_module_exports.BufferAttribute(new Float32Array(NUM_POINTS * 3), 3));
+      const overlap = wallThickness * 2;
+      let wall;
+      wall = this.physics.add.box({ x: -1.5 - halfWallThickness, width: wallThickness, height: 4 + overlap, depth: 2 + overlap, collisionFlags: collisionFlags.static }, { standard: { roughness: 1, metalness: 0, visible: true, wireframe: false } });
+      wall.receiveShadow = true;
+      wall.castShadow = false;
+      wall = this.physics.add.box({ x: 1.5 + halfWallThickness, width: wallThickness, height: 4 + overlap, depth: 2 + overlap, collisionFlags: collisionFlags.static }, { standard: { roughness: 1, metalness: 0, visible: true, wireframe: false } });
+      wall.receiveShadow = true;
+      wall.castShadow = false;
+      wall = this.physics.add.box({ y: 2 + halfWallThickness, width: 3 + overlap, height: wallThickness, depth: 2 + overlap, collisionFlags: collisionFlags.static }, { standard: { roughness: 1, metalness: 0, visible: true, wireframe: false } });
+      wall.receiveShadow = true;
+      wall.castShadow = false;
+      wall = this.physics.add.box({ y: -2 - halfWallThickness, width: 3 + overlap, height: wallThickness, depth: 2 + overlap, collisionFlags: collisionFlags.static }, { standard: { roughness: 1, metalness: 0, visible: true, wireframe: false } });
+      wall.receiveShadow = true;
+      wall.castShadow = false;
+      wall = this.physics.add.box({ z: -1 - halfWallThickness, width: 3 + overlap, height: 4 + overlap, depth: wallThickness, collisionFlags: collisionFlags.static }, { standard: { roughness: 1, metalness: 0, visible: true, wireframe: false } });
+      wall.receiveShadow = true;
+      wall.castShadow = false;
+      wall = this.physics.add.box({ z: 1 + halfWallThickness, width: 3 + overlap, height: 4 + overlap, depth: wallThickness, collisionFlags: collisionFlags.static }, { standard: { roughness: 1, metalness: 0, visible: false, wireframe: true } });
+      wall.receiveShadow = false;
+      wall.castShadow = false;
+      this.state.player = this.physics.add.sphere({ radius: 0.25, widthSegments: 64, heightSegments: 32 }, { standard: { emissive: "red", emissiveIntensity: 0.9, color: "red", metalness: 0, roughness: 1 } });
+      const pointLight = new three_module_exports.PointLight("red", 1, 0, 2);
+      pointLight.castShadow = true;
+      pointLight.shadow.radius = 10;
+      pointLight.shadow.mapSize.setScalar(1024);
+      this.state.player.add(pointLight);
+      this.state.light = pointLight;
+      const pointSize = 0.12;
+      const points = new three_module_exports.InstancedMesh(new three_module_exports.SphereGeometry(pointSize, 32, 16), new three_module_exports.MeshStandardMaterial({ metalness: 0, roughness: 0.3 }), NUM_POINTS);
+      points.castShadow = true;
+      points.receiveShadow = true;
+      this.scene.add(points);
       this.state.points = points;
-      this.scene.add(new three_module_exports.Points(points, new three_module_exports.PointsMaterial({
-        size: 0.5,
-        sizeAttenuation: true,
-        map: this.assets.textures.sprite,
-        transparent: false,
-        alphaTest: 0.5,
-        depthTest: true,
-        blending: three_module_exports.AdditiveBlending
-      })));
       const dummyObj = new three_module_exports.Object3D();
       let i = NUM_POINTS;
       while (i--) {
         dummyObj.hasBody = false;
         dummyObj.position.set(rand(-1, 1), rand(-1, 1), rand(-1, 1));
-        this.physics.add.existing(dummyObj, { shape: "sphere", radius: 0.1, mass: 0.01 });
+        this.physics.add.existing(dummyObj, { shape: "sphere", radius: pointSize, mass: 0.1 });
         const body = dummyObj.body;
         body.skipUpdate = true;
         this.state.pointBodies.push(body);
       }
+      Leap.loop((frame) => {
+        if (frame.hands.length && frame.hands[0].valid) {
+          this.state.player.body.setCollisionFlags(collisionFlags.kinematic);
+          this.state.palmPosition = frame.hands[0].palmPosition;
+        } else {
+          this.state.palmPosition = null;
+        }
+      });
+      const validKeys = Object.keys(this.state.keys);
+      window.addEventListener("keydown", (e) => {
+        if (!validKeys.includes(e.code))
+          return;
+        this.state.keys[e.code] = true;
+      });
+      window.addEventListener("keyup", (e) => {
+        if (!validKeys.includes(e.code))
+          return;
+        this.state.keys[e.code] = false;
+      });
     }
     update = (() => {
       const transform = new Ammo.btTransform();
-      return () => {
+      const matrix = new three_module_exports.Matrix4();
+      const leapScale = 1 / 50;
+      const leapOffset = [0, -5, 0];
+      return (time, delta) => {
         stats.update();
-        const gamepad = getGamepad(0);
-        if (gamepad) {
-          const ax = deadzone(gamepad.axes[0]);
-          const ay = deadzone(gamepad.axes[1]);
-          const by = -deadzone(gamepad.axes[3]);
+        const deltaSecs = delta / 1e3;
+        if (this.state.palmPosition) {
+          const [x, y, z] = this.state.palmPosition;
+          this.state.player.position.set(x * leapScale + leapOffset[0], y * leapScale + leapOffset[1], z * leapScale + leapOffset[2]);
+          this.state.player.body.needUpdate = true;
+        } else {
+          const gamepad = getGamepad(0);
           const scale = 20;
-          this.state.player.body.applyCentralForce(scale * ax, scale * by, scale * ay);
+          if (gamepad) {
+            const ax = deadzone(gamepad.axes[0]);
+            const ay = deadzone(gamepad.axes[1]);
+            const by = -deadzone(gamepad.axes[3]);
+            this.state.player.body.applyCentralForce(scale * ax, scale * by, scale * ay);
+          } else {
+            const ax = this.state.keys.KeyA ? -1 : this.state.keys.KeyD ? 1 : 0;
+            const ay = this.state.keys.KeyS ? 1 : this.state.keys.KeyW ? -1 : 0;
+            const by = this.state.keys.KeyF ? -1 : this.state.keys.KeyR ? 1 : 0;
+            this.state.player.body.applyCentralForce(scale * ax, scale * by, scale * ay);
+          }
         }
-        const attr = this.state.points.attributes.position;
         let i = NUM_POINTS;
         while (i--) {
           const motionState = this.state.pointBodies[i].ammo.getMotionState();
           motionState.getWorldTransform(transform);
-          if (transform) {
-            const origin = transform.getOrigin();
-            attr.array[i * 3 + 0] = origin.x();
-            attr.array[i * 3 + 1] = origin.y();
-            attr.array[i * 3 + 2] = origin.z();
-          }
+          const origin = transform.getOrigin();
+          matrix.makeTranslation(origin.x(), origin.y(), origin.z());
+          this.state.points.setMatrixAt(i, matrix);
         }
-        attr.needsUpdate = true;
+        this.state.points.instanceMatrix.needsUpdate = true;
+        this.state.color.offsetHSL(0.1 * deltaSecs, 0, 0);
+        this.state.player.material.color.copy(this.state.color);
+        this.state.player.material.emissive.copy(this.state.color);
+        this.state.light.color.copy(this.state.color);
       };
     })();
   };
   var renderer = window.renderer = new Renderer({ disableFullscreenUi: queryParams.has("2d") });
-  renderer.renderQuilt = true;
   renderer.render2d = queryParams.has("2d");
   renderer.setSize = (width, height) => {
     return renderer.webglRenderer.setSize(width, height);
@@ -50611,6 +57119,14 @@ fflate - fast JavaScript compression/decompression
 Licensed under MIT. https://github.com/101arrowz/fflate/blob/master/LICENSE
 version 0.6.9
 */
+/*!                                                              
+ * LeapJS v1.1.1                                                  
+ * http://github.com/leapmotion/leapjs/                                        
+ *                                                                             
+ * Copyright 2021 Ultraleap, Inc. and other contributors                       
+ * Released under the Apache-2.0 license                                       
+ * http://github.com/leapmotion/leapjs/blob/master/LICENSE                     
+ */
 /*! (c) Andrea Giammarchi - ISC */
 /**
  * @author       Evan Wallace (http://madebyevan.com/))

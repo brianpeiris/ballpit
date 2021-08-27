@@ -8,6 +8,7 @@
     "enable3d": "^0.23.0",
     "esbuild": "^0.12.22",
     "eslint": "^7.32.0",
-    "holoplay": "^1.0.3"
+    "holoplay": "^1.0.3",
+    "leapjs": "^1.1.1"
   }
 }

@@ -1,8 +1,10 @@
+/*globals Ammo, Leap */
 import "./global";
 import { Project, Scene3D, PhysicsLoader, THREE } from "enable3d";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Stats from "three/examples/jsm/libs/stats.module";
 import { Camera, Renderer } from "holoplay";
+import "leapjs/leap-1.1.1";
 
 const queryParams = new URLSearchParams(location.search);
 
@@ -39,6 +41,7 @@ const loadTexture = (() => {
   };
 })();
 
+// eslint-disable-next-line no-unused-vars
 const loadModel = (() => {
   const gltfLoader = new GLTFLoader();
   return (model) => {
@@ -63,7 +66,7 @@ function getGamepad(i) {
 const stats = new Stats();
 document.body.append(stats.dom);
 
-const NUM_POINTS = 1000;
+const NUM_POINTS = 500;
 
 class MainScene extends Scene3D {
   async preload() {
@@ -77,91 +80,162 @@ class MainScene extends Scene3D {
   }
 
   async init() {
+    this.renderer.physicallyCorrectLights = true;
     this.state = window.state = Object.preventExtensions({
       player: null,
       points: null,
       pointBodies: [],
+      color: new THREE.Color('red'),
+      light: null,
+      palmPosition: null,
+      keys: {
+        KeyW: false,
+        KeyS: false,
+        KeyA: false,
+        KeyD: false,
+        KeyR: false,
+        KeyF: false,
+      },
     });
     // this.physics.debug.enable();
   }
 
   async create() {
     window.scene = this;
-    const warp = await this.warpSpeed("-ground", "orbitControls", "-sky");
+    //const warp = await this.warpSpeed("-ground", "-light", "orbitControls", "-sky");
     this.camera.position.set(0, 0, 20);
     this.camera.rotation.set(0, 0, 0);
     //warp.orbitControls.update();
+
+
+    //this.scene.add(new THREE.AmbientLight('white', 0.2));
+
     // const volume = this.add.box({width: 3, height: 4, depth: 2});
     // volume.scale.setScalar(0.99);
+    
     const wallThickness = 0.5;
     const halfWallThickness = wallThickness / 2;
-    const doubleWallThickness = wallThickness * 2;
-    this.physics.add.box({x: -1.5 - halfWallThickness, width: wallThickness, height: 4 + doubleWallThickness, depth: 2 + doubleWallThickness, collisionFlags: collisionFlags.static}, {lambert: {visible: true, wireframe: false}});
-    this.physics.add.box({x: +1.5 + halfWallThickness, width: wallThickness, height: 4 + doubleWallThickness, depth: 2 + doubleWallThickness, collisionFlags: collisionFlags.static}, {lambert: {visible: true, wireframe: false}});
-    this.physics.add.box({y: +2.0 + halfWallThickness, width: 3 + doubleWallThickness, height: wallThickness, depth: 2 + doubleWallThickness, collisionFlags: collisionFlags.static}, {lambert: {visible: true, wireframe: false}});
-    this.physics.add.box({y: -2.0 - halfWallThickness, width: 3 + doubleWallThickness, height: wallThickness, depth: 2 + doubleWallThickness, collisionFlags: collisionFlags.static}, {lambert: {visible: true, wireframe: false}});
-    this.physics.add.box({z: -1.0 - halfWallThickness, width: 3 + doubleWallThickness, height: 4 + doubleWallThickness, depth: wallThickness, collisionFlags: collisionFlags.static}, {lambert: {visible: true, wireframe: false}});
-    this.physics.add.box({z: +1.0 + halfWallThickness, width: 3 + doubleWallThickness, height: 4 + doubleWallThickness, depth: wallThickness, collisionFlags: collisionFlags.static}, {lambert: {visible: false, wireframe: true}});
-    this.state.player = this.physics.add.sphere({radius: 0.25}, {standard: {color: 'red'}});
+    const overlap = wallThickness * 2;
+    let wall;
+    wall = this.physics.add.box({x: -1.5 - halfWallThickness, width: wallThickness, height: 4 + overlap, depth: 2 + overlap, collisionFlags: collisionFlags.static}, {standard: {roughness: 1.0, metalness: 0, visible: true, wireframe: false}});
+    wall.receiveShadow = true;
+    wall.castShadow = false;
+    wall = this.physics.add.box({x: +1.5 + halfWallThickness, width: wallThickness, height: 4 + overlap, depth: 2 + overlap, collisionFlags: collisionFlags.static}, {standard: {roughness: 1.0, metalness: 0, visible: true, wireframe: false}});
+    wall.receiveShadow = true;
+    wall.castShadow = false;
+    wall = this.physics.add.box({y: +2.0 + halfWallThickness, width: 3 + overlap, height: wallThickness, depth: 2 + overlap, collisionFlags: collisionFlags.static}, {standard: {roughness: 1.0, metalness: 0, visible: true, wireframe: false}});
+    wall.receiveShadow = true;
+    wall.castShadow = false;
+    wall = this.physics.add.box({y: -2.0 - halfWallThickness, width: 3 + overlap, height: wallThickness, depth: 2 + overlap, collisionFlags: collisionFlags.static}, {standard: {roughness: 1.0, metalness: 0, visible: true, wireframe: false}});
+    wall.receiveShadow = true;
+    wall.castShadow = false;
+    wall = this.physics.add.box({z: -1.0 - halfWallThickness, width: 3 + overlap, height: 4 + overlap, depth: wallThickness, collisionFlags: collisionFlags.static}, {standard: {roughness: 1.0, metalness: 0, visible: true, wireframe: false}});
+    wall.receiveShadow = true;
+    wall.castShadow = false;
+    wall = this.physics.add.box({z: +1.0 + halfWallThickness, width: 3 + overlap, height: 4 + overlap, depth: wallThickness, collisionFlags: collisionFlags.static}, {standard: {roughness: 1.0, metalness: 0, visible: false, wireframe: true}});
+    wall.receiveShadow = false;
+    wall.castShadow = false;
 
-    const points = new THREE.BufferGeometry();
-    points.setAttribute("position", new THREE.BufferAttribute(new Float32Array(NUM_POINTS * 3), 3));
+    this.state.player = this.physics.add.sphere({radius: 0.25, widthSegments: 64, heightSegments: 32}, {standard: {emissive: 'red', emissiveIntensity: 0.9, color: 'red', metalness: 0, roughness: 1}});
+    const pointLight = new THREE.PointLight('red', 1, 0, 2);
+    pointLight.castShadow = true;
+    pointLight.shadow.radius = 10;
+    pointLight.shadow.mapSize.setScalar(1024);
+    this.state.player.add(pointLight);
+    this.state.light = pointLight;
+
+    const pointSize = 0.12
+    const points = new THREE.InstancedMesh(new THREE.SphereGeometry(pointSize, 32, 16), new THREE.MeshStandardMaterial({metalness: 0, roughness: 0.3}), NUM_POINTS);
+    points.castShadow= true;
+    points.receiveShadow= true;
+    this.scene.add(points);
     this.state.points = points;
-    this.scene.add(new THREE.Points(points, new THREE.PointsMaterial({
-      size: 0.5,
-      sizeAttenuation: true,
-      map: this.assets.textures.sprite,
-      transparent: false,
-      alphaTest: 0.5,
-      depthTest: true,
-      blending: THREE.AdditiveBlending
-    })));
 
     const dummyObj = new THREE.Object3D();
     let i = NUM_POINTS;
     while(i--) {
       dummyObj.hasBody = false;
       dummyObj.position.set(rand(-1, 1), rand(-1, 1), rand(-1, 1));
-      this.physics.add.existing(dummyObj, {shape: "sphere", radius: 0.1, mass: 0.01});
+      this.physics.add.existing(dummyObj, {shape: "sphere", radius: pointSize, mass: 0.1});
       const body = dummyObj.body;
       body.skipUpdate = true;
       this.state.pointBodies.push(body);
     }
+
+    Leap.loop(frame => {
+      if (frame.hands.length && frame.hands[0].valid) {
+        this.state.player.body.setCollisionFlags(collisionFlags.kinematic);
+        this.state.palmPosition = frame.hands[0].palmPosition;
+      } else {
+        this.state.palmPosition = null;
+      }
+    });
+
+    const validKeys = Object.keys(this.state.keys);
+    window.addEventListener("keydown", e => {
+      if (!validKeys.includes(e.code)) return;
+      this.state.keys[e.code] = true;
+    });
+    window.addEventListener("keyup", e => {
+      if (!validKeys.includes(e.code)) return;
+      this.state.keys[e.code] = false;
+    });
   }
 
   update = (() => {
     const transform = new Ammo.btTransform();
-    return () => {
+    const matrix = new THREE.Matrix4();
+    const leapScale = 1/50;
+    const leapOffset = [0, -5, 0];
+    return (time, delta) => {
       stats.update();
 
-      const gamepad = getGamepad(0);
-      if (gamepad) {
-        const ax = deadzone(gamepad.axes[0]);
-        const ay = deadzone(gamepad.axes[1]);
-        const by = -deadzone(gamepad.axes[3]);
+      const deltaSecs = delta / 1000;
+
+      if (this.state.palmPosition) {
+        const [x, y, z] = this.state.palmPosition;
+        this.state.player.position.set(
+          x * leapScale + leapOffset[0],
+          y * leapScale + leapOffset[1],
+          z * leapScale + leapOffset[2],
+        );
+        this.state.player.body.needUpdate = true;
+      } else {
+        const gamepad = getGamepad(0);
         const scale = 20;
-        this.state.player.body.applyCentralForce(scale * ax, scale * by, scale * ay, );
+        if (gamepad) {
+          const ax = deadzone(gamepad.axes[0]);
+          const ay = deadzone(gamepad.axes[1]);
+          const by = -deadzone(gamepad.axes[3]);
+          this.state.player.body.applyCentralForce(scale * ax, scale * by, scale * ay);
+        } else {
+          const ax = this.state.keys.KeyA ? -1 : this.state.keys.KeyD ? 1 : 0;
+          const ay = this.state.keys.KeyS ? 1 : this.state.keys.KeyW ? -1 : 0;
+          const by = this.state.keys.KeyF ? -1 : this.state.keys.KeyR ? 1 : 0;
+          this.state.player.body.applyCentralForce(scale * ax, scale * by, scale * ay);
+        }
       }
 
-      const attr = this.state.points.attributes.position;
       let i = NUM_POINTS;
       while(i--) {
         const motionState = this.state.pointBodies[i].ammo.getMotionState();
         motionState.getWorldTransform(transform);
-        if (transform) {
-          const origin = transform.getOrigin();
-          attr.array[i * 3 + 0] = origin.x();
-          attr.array[i * 3 + 1] = origin.y();
-          attr.array[i * 3 + 2] = origin.z();
-        }
+        const origin = transform.getOrigin();
+        matrix.makeTranslation(origin.x(), origin.y(), origin.z());
+        this.state.points.setMatrixAt(i, matrix);
       }
-      attr.needsUpdate = true;
+      this.state.points.instanceMatrix.needsUpdate = true;
+
+      this.state.color.offsetHSL(0.1 * deltaSecs, 0, 0);
+      this.state.player.material.color.copy(this.state.color);
+      this.state.player.material.emissive.copy(this.state.color);
+      this.state.light.color.copy(this.state.color);
     };
   })();
 }
 
 const renderer = window.renderer = new Renderer({ disableFullscreenUi: queryParams.has("2d") });
-renderer.renderQuilt = true;
+//renderer.renderQuilt = true;
 renderer.render2d = queryParams.has("2d");
 renderer.setSize = (width, height) => {
   return renderer.webglRenderer.setSize(width, height);
